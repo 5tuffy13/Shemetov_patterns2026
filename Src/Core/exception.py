@@ -5,12 +5,20 @@ class argument_exception(Exception):
 
     def __init__(self, field: str = "", message: str = "", stack_trace: str = ""):
         """
-        Инициализация исключения с информацией о поле, сообщении и стеке
+        Инициализация исключения с поддержкой как сообщения, так и пары (поле, сообщение)
         """
-        self.__field = str(field).strip()
-        self.__message = str(message).strip()
+        if message:
+            self.__field = str(field).strip()
+            self.__message = str(message).strip()
+        else:
+            self.__field = ""
+            self.__message = str(field).strip()
+
         self.__stack_trace = str(stack_trace).strip()
-        super().__init__(f"Ошибка аргумента '{self.__field}': {self.__message}")
+        if self.__field:
+            super().__init__(f"Ошибка аргумента '{self.__field}': {self.__message}")
+        else:
+            super().__init__(f"Ошибка аргумента: {self.__message}")
 
     @property
     def field(self) -> str:
