@@ -1,0 +1,3 @@
+from Src.Models.nomenclature_group_model import nomenclature_group_model
+
+group_model = nomenclature_group_model
