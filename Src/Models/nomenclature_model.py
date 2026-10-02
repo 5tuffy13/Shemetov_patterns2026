@@ -1,5 +1,5 @@
 from Src.Core.abstract_reference import abstract_reference
-from Src.Core.exception import argument_exception
+from Src.Core.validator import validator
 from Src.Models.range_model import range_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 
@@ -37,15 +37,8 @@ class nomenclature_model(abstract_reference):
         """
         Сеттер полного наименования с ограничением до 255 символов
         """
-        if not isinstance(new_name, str):
-            raise argument_exception("full_name", "Ошибка: Имя должно иметь строковый тип данных!")
-        new_name = new_name.strip()
-        if new_name == "":
-            raise argument_exception("full_name", "Ошибка: Некорректно передан параметр!")
-        if len(new_name) > 255:
-            raise argument_exception("full_name", "Ошибка: Длина имени не должна превышать 255 символов!")
-
-        self.__full_name = new_name
+        validator.validate(new_name, str, 255, field_name="full_name")
+        self.__full_name = new_name.strip()
 
     @property
     def group(self) -> nomenclature_group_model:
@@ -59,9 +52,7 @@ class nomenclature_model(abstract_reference):
         """
         Сеттер группы номенклатуры
         """
-        if not isinstance(new_group, nomenclature_group_model):
-            raise argument_exception("group", "Ошибка: Неверный тип аргумента!")
-
+        validator.validate(new_group, nomenclature_group_model, field_name="group")
         self.__group = new_group
 
     @property
@@ -76,6 +67,5 @@ class nomenclature_model(abstract_reference):
         """
         Сеттер единицы измерения номенклатуры
         """
-        if not isinstance(new_range, range_model):
-            raise argument_exception("range", "Ошибка: Неверный тип аргумента!")
+        validator.validate(new_range, range_model, field_name="range")
         self.__range = new_range

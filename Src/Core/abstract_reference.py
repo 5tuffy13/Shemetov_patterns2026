@@ -1,6 +1,7 @@
 from abc import ABC
 import uuid
 from Src.Core.exception import argument_exception
+from Src.Core.validator import validator
 
 
 class abstract_reference(ABC):
@@ -31,15 +32,8 @@ class abstract_reference(ABC):
         """
         Сеттер названия с валидацией по типу данных и количеству символов (до 50)
         """
-        if not isinstance(new_name, str):
-            raise argument_exception("name", "Ошибка: Имя должно иметь строковый тип данных!")
-        new_name = new_name.strip()
-        if new_name == "":
-            raise argument_exception("name", "Некорректно передан параметр!")
-        if len(new_name) > 50:
-            raise argument_exception("name", "Ошибка: Длина имени не должна превышать 50 символов!")
-
-        self.__name = new_name
+        validator.validate(new_name, str, 50, field_name="name")
+        self.__name = new_name.strip()
 
     @property
     def id(self) -> str:
@@ -53,11 +47,8 @@ class abstract_reference(ABC):
         """
         Сеттер id с проверкой строкового типа и непустой строки
         """
-        if not isinstance(new_id, str):
-            raise argument_exception("id", "Ошибка: id должен иметь строковый тип данных!")
-        if new_id.strip() == "":
-            raise argument_exception("id", "Некорректно передан параметр")
-        self.__id = new_id
+        validator.validate(new_id, str, field_name="id")
+        self.__id = new_id.strip()
 
     def __eq__(self, value) -> bool:
         """

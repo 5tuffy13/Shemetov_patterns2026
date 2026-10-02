@@ -1,5 +1,5 @@
 from Src.Core.abstract_reference import abstract_reference
-from Src.Core.exception import argument_exception
+from Src.Core.validator import validator
 
 
 class range_model(abstract_reference):
@@ -32,8 +32,7 @@ class range_model(abstract_reference):
         """
         Сеттер базовой единицы измерения
         """
-        if not isinstance(new_range, range_model):
-            raise argument_exception("base_range", "Ошибка: Неверный тип переменной!")
+        validator.validate_type(new_range, range_model, field_name="base_range")
         self.__base_range = new_range
 
     @property
@@ -48,8 +47,5 @@ class range_model(abstract_reference):
         """
         Сеттер коэффициента пересчета с валидацией типа и положительного значения
         """
-        if not isinstance(new_coeff, (int, float)):
-            raise argument_exception("coeff", "Ошибка: Коэффициент должен иметь числовой тип данных!")
-        if new_coeff <= 0:
-            raise argument_exception("coeff", "Ошибка: Коэффициент не может быть меньше или равен нулю!")
+        validator.validate_number(new_coeff, positive_only=True, field_name="coeff")
         self.__coeff = new_coeff
