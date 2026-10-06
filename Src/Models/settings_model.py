@@ -13,6 +13,19 @@ class settings_model(abstract_reference):
         self.__company: organization_model | None = None
         self.__boss_name: str = ""
         self.__account_name: str = ""
+        self.__is_first_start: bool = True
+
+    @property
+    def is_first_start(self) -> bool:
+        """
+        Флаг первого запуска системы
+        """
+        return self.__is_first_start
+
+    @is_first_start.setter
+    def is_first_start(self, value: bool) -> None:
+        validator.validate_type(value, bool, field_name="is_first_start")
+        self.__is_first_start = value
 
     @property
     def company(self) -> organization_model | None:

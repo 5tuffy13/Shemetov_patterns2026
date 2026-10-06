@@ -3,7 +3,6 @@
 **Автор:** Alexander  
 **Проект:** Информационная система ресторанной сети «Ромашка»  
 **Паттерны проектирования:** Singleton, Registry, Static Factory Method, Centralized Validator  
-**Кандидат:** Candidate 1 — Direct Registry Storage & Static Seed Factory  
 
 ---
 

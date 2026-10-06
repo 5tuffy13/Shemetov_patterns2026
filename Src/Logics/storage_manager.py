@@ -1,6 +1,5 @@
 """
 Модуль менеджера хранения данных (storage_manager)
-Кандидат 1: Direct Registry Storage & Static Seed Factory
 Автор: Alexander
 """
 
@@ -8,8 +7,8 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Type
 
-# Добавление корня репозитория в sys.path для корректного импорта модулей
-repo_root = Path("/opt/data/vault/study/assignments/patterns/Shemetov_patterns2026")
+# Динамическое определение корня репозитория (переносимо для локального запуска, Docker и CI/CD)
+repo_root = Path(__file__).resolve().parent.parent.parent
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 

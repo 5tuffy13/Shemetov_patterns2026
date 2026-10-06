@@ -7,5 +7,6 @@
     "ownership_form": "ООО"
   },
   "boss_name": "Иванов Иван Иванович",
-  "account_name": "Петрова Анна Сергеевна"
+  "account_name": "Петрова Анна Сергеевна",
+  "is_first_start": true
 }

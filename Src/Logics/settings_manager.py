@@ -97,6 +97,9 @@ class settings_manager(abstract_manager):
             if accountant is not None:
                 self.__settings.account_name = str(accountant)
 
+            if "is_first_start" in self._data:
+                self.__settings.is_first_start = bool(self._data["is_first_start"])
+
             return True
         except Exception as ex:
             raise operation_exception(f"Ошибка при конвертации настроек: {ex}")

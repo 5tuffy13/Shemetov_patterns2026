@@ -1,6 +1,5 @@
 """
 Модульные тесты для менеджера хранения данных (storage_manager)
-Кандидат 1: Direct Registry Storage & Static Seed Factory
 Автор: Alexander
 """
 
@@ -8,14 +7,10 @@ import sys
 import pytest
 from pathlib import Path
 
-# Добавление путей для запуска тестов
-repo_root = Path("/opt/data/vault/study/assignments/patterns/Shemetov_patterns2026")
+# Добавление корня репозитория в sys.path
+repo_root = Path(__file__).resolve().parent.parent
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
-
-candidate_dir = Path("/tmp/arena-caching/candidate-1")
-if str(candidate_dir) not in sys.path:
-    sys.path.insert(0, str(candidate_dir))
 
 from Src.Logics.storage_manager import storage_manager
 from Src.Core.validator import argument_exception, operation_exception
