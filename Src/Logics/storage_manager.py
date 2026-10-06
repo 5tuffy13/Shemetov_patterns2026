@@ -19,6 +19,7 @@ from Src.Models.storage_model import storage_model
 from Src.Models.range_model import range_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
+from Src.Models.settings_model import settings_model
 from Src.Logics.settings_manager import settings_manager
 
 
@@ -39,33 +40,29 @@ class storage_manager(abstract_manager):
             cls.__instance = super(storage_manager, cls).__new__(cls)
         return cls.__instance
 
-    def __init__(self):
+    def __init__(self, settings: Optional[settings_model] = None):
         """
         Инициализация менеджера хранения данных.
-        Если экземпляр уже инициализирован, повторная инициализация пропускается.
+        Поддерживает как работу без параметров, так и передачу настроек settings_model.
         """
         if getattr(self, "_initialized", False):
+            if settings is not None:
+                self._settings = settings
             return
 
         super().__init__()
 
-        # Флаг первого старта приложения
-        self.__is_first_start: bool = True
+        self._settings: Optional[settings_model] = settings
+        self.__is_first_start: bool = settings.first_start if settings is not None else True
 
         # Основное хранилище по категориям: category_key -> {id: entity}
         self._data: Dict[str, Dict[str, abstract_reference]] = {
-            self.storage_key(): {},
-            self.range_key(): {},
-            self.group_key(): {},
-            self.nomenclature_key(): {},
+            key: {} for key in self.keys()
         }
 
         # Вторичный индекс для мгновенного поиска по наименованию: category_key -> {name: id}
         self._name_index: Dict[str, Dict[str, str]] = {
-            self.storage_key(): {},
-            self.range_key(): {},
-            self.group_key(): {},
-            self.nomenclature_key(): {},
+            key: {} for key in self.keys()
         }
 
         self._initialized = True
@@ -79,28 +76,44 @@ class storage_manager(abstract_manager):
         """
         Ключ категории складов
         """
-        return "storage"
+        return "storage_key"
 
     @staticmethod
     def range_key() -> str:
         """
         Ключ категории единиц измерения
         """
-        return "range"
+        return "range_model"
 
     @staticmethod
     def group_key() -> str:
         """
         Ключ категории групп номенклатуры
         """
-        return "group"
+        return "group_model"
 
     @staticmethod
     def nomenclature_key() -> str:
         """
         Ключ категории номенклатуры
         """
-        return "nomenclature"
+        return "nomenclature_model"
+
+    @staticmethod
+    def keys() -> list:
+        """
+        Получить список всех ключей категорий хранилища
+        """
+        result = []
+        methods = [
+            method for method in dir(storage_manager)
+            if callable(getattr(storage_manager, method)) and method.endswith('_key')
+        ]
+        for method in methods:
+            key = getattr(storage_manager, method)()
+            result.append(key)
+        return result
+
 
     # -------------------------------------------------------------------------
     # Свойства доступа к флагам и данным
@@ -122,11 +135,20 @@ class storage_manager(abstract_manager):
         self.__is_first_start = value
 
     @property
-    def data(self) -> Dict[str, Dict[str, abstract_reference]]:
+    def data(self) -> Dict[str, Any]:
         """
-        Словарь прямого доступа к реестрам хранилища
+        Набор данных хранилища со списками сущностей по категориям.
         """
-        return self._data
+        return {
+            self.storage_key(): self.storages,
+            self.range_key(): self.ranges,
+            self.group_key(): self.groups,
+            self.nomenclature_key(): self.nomenclatures,
+            "storage": self._data.get(self.storage_key(), {}),
+            "range": self._data.get(self.range_key(), {}),
+            "group": self._data.get(self.group_key(), {}),
+            "nomenclature": self._data.get(self.nomenclature_key(), {}),
+        }
 
     @property
     def storages(self) -> List[storage_model]:
@@ -200,10 +222,10 @@ class storage_manager(abstract_manager):
         """
         # 1. Единицы измерения
         unit_piece = range_model("штука", 1)
-        unit_gram = range_model("грамм", 1)
-        unit_kg = range_model("килограмм", 1000, unit_gram)
-        unit_ml = range_model("миллилитр", 1)
-        unit_liter = range_model("литр", 1000, unit_ml)
+        unit_kg = range_model.create_kilogramm()
+        unit_gram = unit_kg.base_range
+        unit_liter = range_model.create_liter()
+        unit_ml = unit_liter.base_range
 
         ranges_seed = [unit_piece, unit_gram, unit_kg, unit_ml, unit_liter]
 
@@ -400,6 +422,18 @@ class storage_manager(abstract_manager):
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
     # -------------------------------------------------------------------------
+
+
+    def build(self) -> bool:
+        """
+        Генерация первичных данных при первом старте.
+        """
+        first_start_flag = self._settings.first_start if getattr(self, "_settings", None) is not None else self.__is_first_start
+        if not first_start_flag or self.is_loaded:
+            return False
+
+        self.first_start()
+        return True
 
     def first_start(self) -> None:
         """

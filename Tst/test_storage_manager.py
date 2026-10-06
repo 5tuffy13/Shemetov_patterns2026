@@ -19,6 +19,7 @@ from Src.Models.range_model import range_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Logics.settings_manager import settings_manager
+from Src.Models.settings_model import settings_model
 
 
 @pytest.fixture(autouse=True)
@@ -367,3 +368,67 @@ def test_success_storage_manager_recipe_ingredients_present():
         assert item.name == item_name
         assert item.group is not None
         assert item.range is not None
+
+
+# =============================================================================
+# Тесты методов первого старта и структуры данных
+# =============================================================================
+
+def test_not_raise_storage_manager_build():
+    """
+    Проверить создание storage_manager и вызов build: отсутствие исключений
+    """
+    # Подготовка
+    settings = settings_model()
+    manager = storage_manager(settings)
+
+    # Действие и Проверки
+    try:
+        manager.build()
+        assert True
+    except operation_exception:
+        assert False
+    except Exception:
+        assert False
+
+
+def test_contains_data_storage_manager_build():
+    """
+    Проверить генерацию данных при первом старте (first_start = True)
+    """
+    # Подготовка
+    settings = settings_model()
+    settings.first_start = True
+    manager = storage_manager(settings)
+
+    # Действие
+    result = manager.build()
+
+    # Проверки
+    assert result is True
+    assert manager.data is not None
+    assert len(manager.data) > 0
+    assert len(manager.data[storage_manager.nomenclature_key()]) > 0
+    assert len(manager.data[storage_manager.range_key()]) > 0
+    assert len(manager.data[storage_manager.group_key()]) > 0
+
+
+def test_not_contains_data_storage_manager_build():
+    """
+    Проверить отсутствие генерации данных, если первый старт отключен (first_start = False)
+    """
+    # Подготовка
+    settings = settings_model()
+    settings.first_start = False
+    manager = storage_manager(settings)
+
+    # Действие
+    result = manager.build()
+
+    # Проверки
+    assert result is False
+    assert manager.data is not None
+    assert len(manager.data) > 0
+    assert len(manager.data[storage_manager.nomenclature_key()]) == 0
+    assert len(manager.data[storage_manager.range_key()]) == 0
+    assert len(manager.data[storage_manager.group_key()]) == 0

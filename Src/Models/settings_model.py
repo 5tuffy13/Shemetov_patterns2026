@@ -16,16 +16,27 @@ class settings_model(abstract_reference):
         self.__is_first_start: bool = True
 
     @property
-    def is_first_start(self) -> bool:
+    def first_start(self) -> bool:
         """
         Флаг первого запуска системы
         """
         return self.__is_first_start
 
+    @first_start.setter
+    def first_start(self, value: bool) -> None:
+        validator.validate_type(value, bool, field_name="first_start")
+        self.__is_first_start = value
+
+    @property
+    def is_first_start(self) -> bool:
+        """
+        Алиас для флага первого запуска системы
+        """
+        return self.first_start
+
     @is_first_start.setter
     def is_first_start(self, value: bool) -> None:
-        validator.validate_type(value, bool, field_name="is_first_start")
-        self.__is_first_start = value
+        self.first_start = value
 
     @property
     def company(self) -> organization_model | None:

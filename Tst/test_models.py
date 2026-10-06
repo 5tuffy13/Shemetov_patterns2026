@@ -58,6 +58,44 @@ def test_success_range_model_conversion_demo():
     assert weight_in_base_grams == 2500.0
 
 
+def test_success_range_model_create_kilogramm():
+    """
+    <summary>
+    Проверка фабричного метода создания килограмма и алиасов base/value.
+    </summary>
+    """
+    # Подготовка и Действие
+    kg = range_model.create_kilogramm()
+    kg_alias = range_model.create_killogramm()
+
+    # Проверка
+    assert kg.name == "килограмм"
+    assert kg.coeff == 1000
+    assert kg.value == 1000
+    assert kg.base_range.name == "грамм"
+    assert kg.base.name == "грамм"
+    assert kg.base_range.coeff == 1
+    assert kg_alias.coeff == 1000
+
+
+def test_success_range_model_create_liter():
+    """
+    <summary>
+    Проверка фабричного метода создания литра.
+    </summary>
+    """
+    # Подготовка и Действие
+    liter = range_model.create_liter()
+
+    # Проверка
+    assert liter.name == "литр"
+    assert liter.coeff == 1000
+    assert liter.base_range.name == "миллилитр"
+    assert liter.base_range.coeff == 1
+
+
+
+
 def test_success_range_model_setters():
     """
     <summary>

@@ -27,6 +27,12 @@ class abstract_manager(ABC):
         """
         return False
 
+    def build(self) -> bool:
+        """
+        Обработать и подготовить данные
+        """
+        return self.convert()
+
     @property
     def is_loaded(self) -> bool:
         """

@@ -36,6 +36,20 @@ class range_model(abstract_reference):
         self.__base_range = new_range
 
     @property
+    def base(self) -> "range_model":
+        """
+        Базовая единица измерения
+        """
+        return self.base_range
+
+    @base.setter
+    def base(self, new_range: "range_model"):
+        """
+        Сеттер базовой единицы измерения
+        """
+        self.base_range = new_range
+
+    @property
     def coeff(self) -> int | float:
         """
         Коэффициент пересчета относительно базовой единицы
@@ -49,3 +63,40 @@ class range_model(abstract_reference):
         """
         validator.validate_number(new_coeff, positive_only=True, field_name="coeff")
         self.__coeff = new_coeff
+
+    @property
+    def value(self) -> int | float:
+        """
+        Коэффициент пересчета
+        """
+        return self.coeff
+
+    @value.setter
+    def value(self, new_value: int | float):
+        """
+        Сеттер коэффициента пересчета
+        """
+        self.coeff = new_value
+
+    @staticmethod
+    def create_kilogramm() -> "range_model":
+        """
+        Фабричный метод создания килограмма
+        """
+        gramm = range_model("грамм", 1)
+        return range_model("килограмм", 1000, gramm)
+
+    @staticmethod
+    def create_killogramm() -> "range_model":
+        """
+        Фабричный метод создания килограмма
+        """
+        return range_model.create_kilogramm()
+
+    @staticmethod
+    def create_liter() -> "range_model":
+        """
+        Фабричный метод создания литра
+        """
+        ml = range_model("миллилитр", 1)
+        return range_model("литр", 1000, ml)
