@@ -20,6 +20,8 @@ from Src.Models.range_model import range_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.settings_model import settings_model
+from Src.Models.receipt_row_model import receipt_row_model
+from Src.Models.receipt_model import receipt_model
 from Src.Logics.settings_manager import settings_manager
 
 
@@ -100,6 +102,13 @@ class storage_manager(abstract_manager):
         return "nomenclature_model"
 
     @staticmethod
+    def receipt_key() -> str:
+        """
+        Ключ категории технологических карт
+        """
+        return "receipt_model"
+
+    @staticmethod
     def keys() -> list:
         """
         Получить список всех ключей категорий хранилища
@@ -144,10 +153,12 @@ class storage_manager(abstract_manager):
             self.range_key(): self.ranges,
             self.group_key(): self.groups,
             self.nomenclature_key(): self.nomenclatures,
+            self.receipt_key(): self.receipts,
             "storage": self._data.get(self.storage_key(), {}),
             "range": self._data.get(self.range_key(), {}),
             "group": self._data.get(self.group_key(), {}),
             "nomenclature": self._data.get(self.nomenclature_key(), {}),
+            "receipt": self._data.get(self.receipt_key(), {}),
         }
 
     @property
@@ -191,6 +202,20 @@ class storage_manager(abstract_manager):
         Словарь групп номенклатуры с индексацией по id (O(1) доступ)
         """
         return self._data[self.group_key()]
+
+    @property
+    def receipts(self) -> List[receipt_model]:
+        """
+        Список зарегистрированных технологических карт
+        """
+        return list(self._data[self.receipt_key()].values())
+
+    @property
+    def receipts_dict(self) -> Dict[str, receipt_model]:
+        """
+        Словарь технологических карт с доступом по id
+        """
+        return self._data[self.receipt_key()]
 
     @property
     def nomenclatures(self) -> List[nomenclature_model]:
@@ -298,11 +323,28 @@ class storage_manager(abstract_manager):
             nom_waffle,
         ]
 
+        # 5. Технологическая карта «Вафли хрустящие в вафельнице»
+        row_flour = receipt_row_model(nom_flour, gross=100, net=100, range=unit_gram)
+        row_sugar = receipt_row_model(nom_sugar, gross=80, net=80, range=unit_gram)
+        row_butter = receipt_row_model(nom_butter, gross=70, net=70, range=unit_gram)
+        row_egg = receipt_row_model(nom_egg, gross=50, net=43, range=unit_piece)
+        row_vanilla = receipt_row_model(nom_vanilla, gross=5, net=5, range=unit_gram)
+
+        waffle_receipt = receipt_model(
+            name="Вафли хрустящие в вафельнице",
+            portions=10,
+            cooking_time=20,
+            rows=[row_flour, row_sugar, row_butter, row_egg, row_vanilla],
+        )
+
+        receipts_seed = [waffle_receipt]
+
         return {
             storage_manager.range_key(): ranges_seed,
             storage_manager.storage_key(): storages_seed,
             storage_manager.group_key(): groups_seed,
             storage_manager.nomenclature_key(): nomenclatures_seed,
+            storage_manager.receipt_key(): receipts_seed,
         }
 
     # -------------------------------------------------------------------------
@@ -372,6 +414,12 @@ class storage_manager(abstract_manager):
         """
         self._register_item(self.nomenclature_key(), item, nomenclature_model)
 
+    def add_receipt(self, item: receipt_model) -> None:
+        """
+        Добавить технологическую карту в хранилище с проверкой уникальности
+        """
+        self._register_item(self.receipt_key(), item, receipt_model)
+
     # -------------------------------------------------------------------------
     # Быстрый поиск за O(1) по id и наименованию
     # -------------------------------------------------------------------------
@@ -419,6 +467,12 @@ class storage_manager(abstract_manager):
         """
         return self.get_by_id(self.nomenclature_key(), identifier) or self.get_by_name(self.nomenclature_key(), identifier)
 
+    def get_receipt(self, identifier: str) -> Optional[receipt_model]:
+        """
+        Поиск технологической карты по id или наименованию за O(1)
+        """
+        return self.get_by_id(self.receipt_key(), identifier) or self.get_by_name(self.receipt_key(), identifier)
+
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
     # -------------------------------------------------------------------------
@@ -451,6 +505,8 @@ class storage_manager(abstract_manager):
                     self.add_group(item)
                 elif category == self.nomenclature_key():
                     self.add_nomenclature(item)
+                elif category == self.receipt_key():
+                    self.add_receipt(item)
 
         self.is_first_start = False
         self.is_loaded = True

@@ -4,6 +4,8 @@ from Src.Models.storage_model import storage_model
 from Src.Models.organization_model import organization_model
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.settings_model import settings_model
+from Src.Models.receipt_row_model import receipt_row_model
+from Src.Models.receipt_model import receipt_model
 
 __all__ = [
     "range_model",
@@ -12,4 +14,6 @@ __all__ = [
     "organization_model",
     "nomenclature_model",
     "settings_model",
+    "receipt_row_model",
+    "receipt_model",
 ]
