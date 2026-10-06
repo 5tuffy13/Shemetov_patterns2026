@@ -13,6 +13,14 @@ class validator:
     Набор проверок корректности данных с акцентом на устойчивость и краевые случаи
     """
 
+    def __new__(cls, *args, **kwargs):
+        """
+        Позволяет использовать класс как вызываемую функцию: validator(val, type_, len_)
+        """
+        if args or kwargs:
+            return cls.validate(*args, **kwargs)
+        return super().__new__(cls)
+
     @staticmethod
     def _flatten_types(target_type: Any):
         """
