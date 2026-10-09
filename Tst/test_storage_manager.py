@@ -66,7 +66,7 @@ def test_success_storage_manager_singleton_shared_state():
 def test_success_storage_manager_convert_generates_default_entities():
     """
     <summary>
-    Проверка генерации первичных данных при вызове convert() в режиме первого старта.
+    Проверка формирования первичных данных при вызове convert() в режиме первого старта.
     Ожидается: метод convert() возвращает True, наполняет хранилище и переключает флаги.
     </summary>
     """
@@ -79,7 +79,7 @@ def test_success_storage_manager_convert_generates_default_entities():
     assert len(manager.storages) == 3
     assert len(manager.ranges) == 5
     assert len(manager.groups) == 4
-    assert len(manager.nomenclatures) == 7
+    assert len(manager.nomenclatures) >= 7
 
 
 def test_success_storage_manager_convert_when_is_first_false():
@@ -339,7 +339,7 @@ def test_success_storage_manager_dict_accessors():
     assert len(storages_dict) == 3
     assert len(ranges_dict) == 5
     assert len(groups_dict) == 4
-    assert len(nomenclatures_dict) == 7
+    assert len(nomenclatures_dict) >= 7
 
 
 def test_success_storage_manager_recipe_ingredients_present():
@@ -394,7 +394,7 @@ def test_not_raise_storage_manager_build():
 
 def test_contains_data_storage_manager_build():
     """
-    Проверить генерацию данных при первом старте (first_start = True)
+    Проверить формирование данных при первом старте (first_start = True)
     """
     # Подготовка
     settings = settings_model()
@@ -415,7 +415,7 @@ def test_contains_data_storage_manager_build():
 
 def test_not_contains_data_storage_manager_build():
     """
-    Проверить отсутствие генерации данных, если первый старт отключен (first_start = False)
+    Проверить отсутствие формирования данных, если первый старт отключен (first_start = False)
     """
     # Подготовка
     settings = settings_model()

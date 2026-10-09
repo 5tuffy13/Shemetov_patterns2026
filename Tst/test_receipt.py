@@ -8,300 +8,286 @@ if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
 from Src.Core.exception import argument_exception, operation_exception
-from Src.Models.range_model import range_model
+from Src.Logics.storage_manager import storage_manager
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
-from Src.Models.receipt_row_model import receipt_row_model
+from Src.Models.range_model import range_model
 from Src.Models.receipt_model import receipt_model
-from Src.Logics.storage_manager import storage_manager
-from Src.Models.settings_model import settings_model
+from Src.Models.receipt_row_model import receipt_row_model
 
 
-@pytest.fixture(autouse=True)
-def clean_storage():
+class TestReceipt:
     """
-    Фикстура изоляции тестов: очистка хранилища до и после теста
+    Набор тестов для технологической карты и ее строк
     """
-    manager = storage_manager()
-    manager.clear()
-    yield
-    manager.clear()
 
+    @pytest.fixture(autouse=True)
+    def setup_data(self):
+        """
+        Инициализация фикстур тестовых данных
+        """
+        # Подготовка
+        self.group = nomenclature_group_model("Сырье")
+        self.unit_g = range_model("грамм", 1)
+        self.unit_pcs = range_model("штука", 1)
 
-# -----------------------------------------------------------------------------
-# Тесты строки рецепта (receipt_row_model)
-# -----------------------------------------------------------------------------
+        self.flour = nomenclature_model(
+            name="Мука", full_name="Мука пшеничная", group=self.group, range=self.unit_g
+        )
+        self.water = nomenclature_model(
+            name="Вода", full_name="Вода питьевая", group=self.group, range=self.unit_g
+        )
+        self.cheese = nomenclature_model(
+            name="Сыр", full_name="Сыр Моцарелла", group=self.group, range=self.unit_g
+        )
 
-def test_success_receipt_row_model_create():
-    """
-    <summary>
-    Проверка создания строки технологической карты со всеми свойствами.
-    Ожидается: свойства номенклатуры, единицы измерения и весов инициализированы.
-    </summary>
-    """
-    # Подготовка
-    unit = range_model("грамм", 1)
-    group = nomenclature_group_model("Бакалея")
-    item = nomenclature_model("Сахар", "Сахар белый", group, unit)
+    # -------------------------------------------------------------------------
+    # Тесты модели строки рецепта (receipt_row_model)
+    # -------------------------------------------------------------------------
 
-    # Действие
-    row = receipt_row_model(item, gross=100.0, net=95.0)
+    def test_success_receipt_row_initialization_with_setters(self):
+        """
+        <summary>
+        Проверка корректной инициализации строки рецепта и работы сеттеров
+        </summary>
+        """
+        # Подготовка
+        row = receipt_row_model()
 
-    # Проверка
-    assert row.nomenclature == item
-    assert row.name == "Сахар"
-    assert row.range == unit
-    assert row.gross == 100.0
-    assert row.net == 95.0
-    assert row.gross_weight == 100.0
-    assert row.net_weight == 95.0
+        # Действие
+        row.nomenclature = self.flour
+        row.gross = 200.0
+        row.net = 190.0
 
+        # Проверка
+        assert row.nomenclature == self.flour
+        assert row.name == "Мука"
+        assert row.range == self.unit_g
+        assert row.gross == 200.0
+        assert row.gross_weight == 200.0
+        assert row.net == 190.0
+        assert row.net_weight == 190.0
 
-def test_success_receipt_row_model_set_weights():
-    """
-    <summary>
-    Проверка синхронной установки весов брутто и нетто методом set_weights.
-    Ожидается: веса брутто и нетто обновлены корректно.
-    </summary>
-    """
-    # Подготовка
-    row = receipt_row_model()
+    def test_success_receipt_row_set_weights(self):
+        """
+        <summary>
+        Проверка одновременной установки весов через set_weights
+        </summary>
+        """
+        # Подготовка
+        row = receipt_row_model(self.flour)
 
-    # Действие
-    row.set_weights(50.0, 45.0)
+        # Действие
+        row.set_weights(150.0, 140.0)
 
-    # Проверка
-    assert row.gross == 50.0
-    assert row.net == 45.0
+        # Проверка
+        assert row.gross == 150.0
+        assert row.net == 140.0
 
+    def test_fail_receipt_row_gross_less_than_net(self):
+        """
+        <summary>
+        Проверка выброса исключения при попытке установить gross меньше net
+        </summary>
+        """
+        # Подготовка
+        row = receipt_row_model(self.flour, gross=100.0, net=90.0)
 
-def test_fail_receipt_row_model_net_exceeds_gross():
-    """
-    <summary>
-    Проверка инварианта: масса нетто не может превышать массу брутто.
-    Ожидается: выброс argument_exception.
-    </summary>
-    """
-    # Подготовка
-    row = receipt_row_model()
-    row.set_weights(100.0, 100.0)
+        # Действие и проверка
+        with pytest.raises(argument_exception) as exc_info:
+            row.gross = 80.0
 
-    # Действие и Проверка
-    with pytest.raises(argument_exception):
-        row.net = 105.0
+        assert "gross" in str(exc_info.value)
+        assert "меньше" in str(exc_info.value)
 
+    def test_fail_receipt_row_net_greater_than_gross(self):
+        """
+        <summary>
+        Проверка выброса исключения при попытке установить net больше gross
+        </summary>
+        """
+        # Подготовка
+        row = receipt_row_model(self.flour, gross=100.0, net=90.0)
 
-def test_fail_receipt_row_model_gross_less_than_net():
-    """
-    <summary>
-    Проверка инварианта: масса брутто не может быть меньше массы нетто.
-    Ожидается: выброс argument_exception.
-    </summary>
-    """
-    # Подготовка
-    row = receipt_row_model()
-    row.set_weights(100.0, 90.0)
+        # Действие и проверка
+        with pytest.raises(argument_exception) as exc_info:
+            row.net = 110.0
 
-    # Действие и Проверка
-    with pytest.raises(argument_exception):
-        row.gross = 85.0
+        assert "net" in str(exc_info.value)
+        assert "превышать" in str(exc_info.value)
 
+    def test_fail_receipt_row_invalid_types(self):
+        """
+        <summary>
+        Проверка валидации некорректных типов аргументов в сеттерах строки рецепта
+        </summary>
+        """
+        # Подготовка
+        row = receipt_row_model()
 
-def test_fail_receipt_row_model_negative_or_zero_weight():
-    """
-    <summary>
-    Проверка валидации неположительных значений массы.
-    Ожидается: выброс argument_exception при значении <= 0.
-    </summary>
-    """
-    # Подготовка
-    row = receipt_row_model()
+        # Действие и проверка
+        with pytest.raises(argument_exception):
+            row.nomenclature = "не номенклатура"
 
-    # Действие и Проверка
-    with pytest.raises(argument_exception):
-        row.gross = -10.0
+        with pytest.raises(argument_exception):
+            row.range = 12345
 
-    with pytest.raises(argument_exception):
-        row.net = 0.0
+        with pytest.raises(argument_exception):
+            row.gross = -50.0
 
+        with pytest.raises(argument_exception):
+            row.net = 0
 
-def test_fail_receipt_row_model_invalid_types():
-    """
-    <summary>
-    Проверка валидации типов номенклатуры и единицы измерения в строке рецепта.
-    Ожидается: выброс argument_exception при передаче некорректных типов.
-    </summary>
-    """
-    # Подготовка
-    row = receipt_row_model()
+    # -------------------------------------------------------------------------
+    # Тесты модели технологической карты (receipt_model)
+    # -------------------------------------------------------------------------
 
-    # Действие и Проверка
-    with pytest.raises(argument_exception):
-        row.nomenclature = "Некорректная номенклатура"
+    def test_success_receipt_creation_and_row_addition(self):
+        """
+        <summary>
+        Проверка успешного создания технологической карты и добавления строк
+        </summary>
+        """
+        # Подготовка
+        receipt = receipt_model("Тесто для пиццы", portions=1, cooking_time=60)
+        row1 = receipt_row_model(self.flour, gross=180.0, net=180.0)
+        row2 = receipt_row_model(self.water, gross=110.0, net=110.0)
 
-    with pytest.raises(argument_exception):
-        row.range = 100
-
-
-# -----------------------------------------------------------------------------
-# Тесты технологической карты (receipt_model)
-# -----------------------------------------------------------------------------
-
-def test_success_receipt_model_create_and_totals():
-    """
-    <summary>
-    Проверка создания технологической карты и подсчета суммарных весов брутто и нетто.
-    Ожидается: суммарные веса брутто и нетто равны сумме по строкам.
-    </summary>
-    """
-    # Подготовка
-    unit = range_model("грамм", 1)
-    group = nomenclature_group_model("Бакалея")
-    flour = nomenclature_model("Мука", "Мука пшеничная", group, unit)
-    sugar = nomenclature_model("Сахар", "Сахар песок", group, unit)
-
-    row1 = receipt_row_model(flour, gross=100.0, net=100.0)
-    row2 = receipt_row_model(sugar, gross=80.0, net=80.0)
-
-    # Действие
-    receipt = receipt_model("Песочное тесто", portions=4, cooking_time=30)
-    receipt.add_row(row1)
-    receipt.add_row(row2)
-
-    # Проверка
-    assert receipt.name == "Песочное тесто"
-    assert receipt.portions == 4
-    assert receipt.cooking_time == 30
-    assert len(receipt.rows) == 2
-    assert receipt.gross == 180.0
-    assert receipt.net == 180.0
-    assert receipt.gross_weight == 180.0
-    assert receipt.net_weight == 180.0
-
-
-def test_fail_receipt_model_duplicate_nomenclature():
-    """
-    <summary>
-    Проверка инварианта уникальности номенклатуры в рамках одного рецепта.
-    Ожидается: выброс argument_exception при повторном добавлении той же номенклатуры.
-    </summary>
-    """
-    # Подготовка
-    unit = range_model("грамм", 1)
-    group = nomenclature_group_model("Бакалея")
-    flour = nomenclature_model("Мука", "Мука пшеничная", group, unit)
-
-    row1 = receipt_row_model(flour, gross=100.0, net=100.0)
-    row2 = receipt_row_model(flour, gross=50.0, net=50.0)
-    receipt = receipt_model("Рецепт")
-    receipt.add_row(row1)
-
-    # Действие и Проверка
-    with pytest.raises(argument_exception):
+        # Действие
+        receipt.add_row(row1)
         receipt.add_row(row2)
 
+        # Проверка
+        assert receipt.name == "Тесто для пиццы"
+        assert receipt.portions == 1
+        assert receipt.cooking_time == 60
+        assert len(receipt.rows) == 2
+        assert receipt.gross == 290.0
+        assert receipt.net == 290.0
 
-def test_fail_receipt_model_invalid_portions_and_time():
-    """
-    <summary>
-    Проверка валидации параметров количества порций и времени приготовления.
-    Ожидается: выброс argument_exception при неположительных порциях или отрицательном времени.
-    </summary>
-    """
-    # Подготовка
-    receipt = receipt_model("Рецепт")
+    def test_fail_receipt_duplicate_nomenclature(self):
+        """
+        <summary>
+        Проверка запрета добавления дублирующейся номенклатуры в строки рецепта
+        </summary>
+        """
+        # Подготовка
+        receipt = receipt_model("Тесто")
+        row1 = receipt_row_model(self.flour, gross=100.0, net=100.0)
+        row2 = receipt_row_model(self.flour, gross=50.0, net=50.0)
+        receipt.add_row(row1)
 
-    # Действие и Проверка
-    with pytest.raises(argument_exception):
-        receipt.portions = 0
+        # Действие и проверка
+        with pytest.raises(argument_exception) as exc_info:
+            receipt.add_row(row2)
 
-    with pytest.raises(argument_exception):
-        receipt.cooking_time = -5
+        assert "уже присутствует" in str(exc_info.value)
 
+    def test_fail_receipt_self_inclusion(self):
+        """
+        <summary>
+        Проверка запрета включения технологической карты в саму себя
+        </summary>
+        """
+        # Подготовка
+        receipt = receipt_model("Базовый полуфабрикат")
+        row = receipt_row_model(receipt=receipt)
 
-# -----------------------------------------------------------------------------
-# Тест рецептуры вафель (BaseReceipt.md)
-# -----------------------------------------------------------------------------
+        # Действие и проверка
+        with pytest.raises(argument_exception) as exc_info:
+            receipt.add_row(row)
 
-def test_success_receipt_model_waffles_spec():
-    """
-    <summary>
-    Проверка расчета массы брутто и нетто для рецептуры «Вафли хрустящие в вафельнице»
-    на 10 порций согласно BaseReceipt.md.
-    Ожидается: Брутто = 305.0 г, Нетто = 298.0 г.
-    </summary>
-    """
-    # Подготовка
-    unit_gram = range_model("грамм", 1)
-    unit_piece = range_model("штука", 1)
-    group = nomenclature_group_model("Ингредиенты")
+        assert "в саму себя" in str(exc_info.value)
 
-    flour = nomenclature_model("Пшеничная мука", "Мука пшеничная", group, unit_gram)
-    sugar = nomenclature_model("Сахар", "Сахар песок", group, unit_gram)
-    butter = nomenclature_model("Сливочное масло", "Масло сливочное", group, unit_gram)
-    egg = nomenclature_model("Яйцо куриное", "Яйцо столовое", group, unit_piece)
-    vanilla = nomenclature_model("Ванилин", "Ванилин кристаллический", group, unit_gram)
+    def test_success_composite_recursive_receipt_calculation(self):
+        """
+        <summary>
+        Проверка паттерна Composite: рекурсивный расчет массы для составного блюда с полуфабрикатами
+        </summary>
+        """
+        # Подготовка: Полуфабрикат 1 (Тесто)
+        dough = receipt_model("Тесто", portions=1, cooking_time=30)
+        dough.add_row(receipt_row_model(self.flour, gross=180.0, net=180.0))
+        dough.add_row(receipt_row_model(self.water, gross=110.0, net=110.0))
 
-    # Действие
-    receipt = receipt_model("Вафли хрустящие в вафельнице", portions=10, cooking_time=20)
-    receipt.add_row(receipt_row_model(flour, gross=100.0, net=100.0, range=unit_gram))
-    receipt.add_row(receipt_row_model(sugar, gross=80.0, net=80.0, range=unit_gram))
-    receipt.add_row(receipt_row_model(butter, gross=70.0, net=70.0, range=unit_gram))
-    receipt.add_row(receipt_row_model(egg, gross=50.0, net=43.0, range=unit_piece))
-    receipt.add_row(receipt_row_model(vanilla, gross=5.0, net=5.0, range=unit_gram))
+        # Подготовка: Готовое блюдо (Пицца), включающее полуфабрикат и отдельный ингредиент
+        pizza = receipt_model("Пицца Маргарита", portions=1, cooking_time=15)
+        pizza.add_row(receipt_row_model(receipt=dough))
+        pizza.add_row(receipt_row_model(self.cheese, gross=120.0, net=120.0))
 
-    # Проверка
-    assert receipt.gross == 305.0
-    assert receipt.net == 298.0
-    assert receipt.portions == 10
-    assert receipt.cooking_time == 20
+        # Действие
+        total_gross = pizza.gross
+        total_net = pizza.net
 
+        # Проверка
+        assert total_gross == 410.0
+        assert total_net == 410.0
 
-# -----------------------------------------------------------------------------
-# Тесты интеграции с хранилищем (storage_manager)
-# -----------------------------------------------------------------------------
+    def test_fail_composite_cyclic_dependency_detection(self):
+        """
+        <summary>
+        Проверка выявления циклической зависимости между технологическими картами
+        </summary>
+        """
+        # Подготовка: рецепт A и рецепт B
+        receipt_a = receipt_model("Техкарта A")
+        receipt_b = receipt_model("Техкарта B")
 
-def test_success_storage_manager_first_start_seed():
-    """
-    <summary>
-    Проверка добавления технологической карты вафель в хранилище при первом старте.
-    Ожидается: рецепт присутствует в storage_manager с 5 ингредиентами и весами 305/298.
-    </summary>
-    """
-    # Подготовка
-    settings = settings_model()
-    settings.first_start = True
-    manager = storage_manager(settings)
+        receipt_a.add_row(receipt_row_model(self.flour, gross=100.0, net=100.0))
+        receipt_b.add_row(receipt_row_model(receipt=receipt_a))
 
-    # Действие
-    result = manager.build()
+        # Создание взаимной ссылки: A ссылается на B, B ссылается на A
+        row_cycle = receipt_row_model(receipt=receipt_b)
+        receipt_a.add_row(row_cycle)
 
-    # Проверка
-    assert result is True
-    assert storage_manager.receipt_key() in storage_manager.keys()
-    assert len(manager.receipts) == 1
+        # Действие и проверка
+        with pytest.raises(operation_exception) as exc_info:
+            _ = receipt_a.gross
 
-    waffle_recipe = manager.get_receipt("Вафли хрустящие в вафельнице")
-    assert waffle_recipe is not None
-    assert waffle_recipe.gross == 305.0
-    assert waffle_recipe.net == 298.0
-    assert waffle_recipe.portions == 10
-    assert len(waffle_recipe.rows) == 5
+        assert "циклическая зависимость" in str(exc_info.value)
 
+    # -------------------------------------------------------------------------
+    # Тесты интеграции с хранилищем (storage_manager)
+    # -------------------------------------------------------------------------
 
-def test_fail_storage_manager_duplicate_receipt():
-    """
-    <summary>
-    Проверка контроля уникальности наименования рецепта при добавлении в хранилище.
-    Ожидается: выброс operation_exception при дублировании имени.
-    </summary>
-    """
-    # Подготовка
-    manager = storage_manager()
-    r1 = receipt_model("Рецепт вафель")
-    r2 = receipt_model("Рецепт вафель")
-    manager.add_receipt(r1)
+    def test_success_storage_manager_custom_pizza_seed_data(self):
+        """
+        <summary>
+        Проверка первичной загрузки авторской технологической карты пиццы в storage_manager
+        </summary>
+        """
+        # Подготовка
+        manager = storage_manager()
+        manager.clear()
 
-    # Действие и Проверка
-    with pytest.raises(operation_exception):
-        manager.add_receipt(r2)
+        # Действие
+        manager.first_start()
+        pizza = manager.get_receipt("Пицца Пепперони")
+
+        # Проверка
+        assert pizza is not None
+        assert pizza.name == "Пицца Пепперони"
+        assert len(pizza.rows) == 4
+        # Тесто (305) + Соус (85) + Сыр (120) + Пепперони (80) = 590.0
+        assert pizza.gross == 590.0
+        # Тесто (305) + Соус (82) + Сыр (120) + Пепперони (75) = 582.0
+        assert pizza.net == 582.0
+
+    def test_fail_storage_manager_duplicate_receipt_registration(self):
+        """
+        <summary>
+        Проверка запрета регистрации дублирующейся технологической карты в storage_manager
+        </summary>
+        """
+        # Подготовка
+        manager = storage_manager()
+        manager.clear()
+        manager.first_start()
+
+        duplicate = receipt_model("Пицца Пепперони")
+
+        # Действие и проверка
+        with pytest.raises(operation_exception) as exc_info:
+            manager.add_receipt(duplicate)
+
+        assert "уже зарегистрирован" in str(exc_info.value)

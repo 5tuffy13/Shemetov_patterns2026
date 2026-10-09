@@ -8,7 +8,7 @@ from Src.Models.range_model import range_model
 
 class receipt_row_model(abstract_reference):
     """
-    Модель строки ингредиента технологической карты
+    Модель строки ингредиента или полуфабриката технологической карты
     """
 
     def __init__(
@@ -17,6 +17,7 @@ class receipt_row_model(abstract_reference):
         gross: int | float = 0,
         net: int | float = 0,
         range: Optional[range_model] = None,
+        receipt: Optional[abstract_reference] = None,
     ):
         """
         Инициализация строки технологической карты
@@ -24,29 +25,20 @@ class receipt_row_model(abstract_reference):
         super().__init__()
 
         self.__nomenclature: Optional[nomenclature_model] = None
+        self.__receipt: Optional[abstract_reference] = None
         self.__range: Optional[range_model] = None
         self.__gross: float = 0.0
         self.__net: float = 0.0
 
         if nomenclature is not None:
             self.nomenclature = nomenclature
-            if range is None:
-                self.range = nomenclature.range
-            else:
-                self.range = range
-        elif range is not None:
+        if receipt is not None:
+            self.receipt = receipt
+        if range is not None:
             self.range = range
-
-        if gross < 0:
-            validator.validate_number(gross, positive_only=True, field_name="gross")
-        if net < 0:
-            validator.validate_number(net, positive_only=True, field_name="net")
-
-        if gross > 0 and net > 0:
-            self.set_weights(gross, net)
-        elif gross > 0:
+        if gross > 0:
             self.gross = gross
-        elif net > 0:
+        if net > 0:
             self.net = net
 
     @property
@@ -68,6 +60,23 @@ class receipt_row_model(abstract_reference):
             self.__range = value.range
 
     @property
+    def receipt(self) -> Optional[abstract_reference]:
+        """
+        Вложенная технологическая карта полуфабриката
+        """
+        return self.__receipt
+
+    @receipt.setter
+    def receipt(self, value: abstract_reference):
+        """
+        Сеттер вложенной технологической карты
+        """
+        validator.validate_type(value, abstract_reference, field_name="receipt")
+        self.__receipt = value
+        if hasattr(value, "name") and value.name:
+            self.name = value.name
+
+    @property
     def range(self) -> Optional[range_model]:
         """
         Единица измерения расхода ингредиента
@@ -85,8 +94,10 @@ class receipt_row_model(abstract_reference):
     @property
     def gross(self) -> float:
         """
-        Масса брутто
+        Масса брутто ингредиента или вложенного полуфабриката
         """
+        if self.__receipt is not None and hasattr(self.__receipt, "gross"):
+            return float(self.__receipt.gross)
         return self.__gross
 
     @gross.setter
@@ -117,8 +128,10 @@ class receipt_row_model(abstract_reference):
     @property
     def net(self) -> float:
         """
-        Масса нетто
+        Масса нетто ингредиента или вложенного полуфабриката
         """
+        if self.__receipt is not None and hasattr(self.__receipt, "net"):
+            return float(self.__receipt.net)
         return self.__net
 
     @net.setter
@@ -150,11 +163,5 @@ class receipt_row_model(abstract_reference):
         """
         Одновременная установка значений массы брутто и нетто
         """
-        validator.validate_number(gross, positive_only=True, field_name="gross")
-        validator.validate_number(net, positive_only=True, field_name="net")
-        g = float(gross)
-        n = float(net)
-        if g < n:
-            raise argument_exception("gross", "Масса брутто не может быть меньше массы нетто!")
-        self.__gross = g
-        self.__net = n
+        self.gross = gross
+        self.net = net

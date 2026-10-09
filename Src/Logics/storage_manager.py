@@ -239,8 +239,8 @@ class storage_manager(abstract_manager):
     def create_seed_data() -> Dict[str, List[abstract_reference]]:
         """
         Статическая фабрика создания первичных данных для первого запуска системы.
-        Формирует базовый набор складов, единиц измерения, групп номенклатуры
-        и ингредиентов для технологической карты рецепта «Вафли хрустящие».
+        Формирует базовый набор складов, единиц измерения, групп номенклатуры,
+        ингредиентов и технологических карт.
 
         Returns:
             Dict[str, List[abstract_reference]]: Словарь списков сущностей по категориям
@@ -269,7 +269,7 @@ class storage_manager(abstract_manager):
 
         groups_seed = [group_grocery, group_dairy, group_semi, group_dishes]
 
-        # 4. Номенклатура для рецепта «Вафли хрустящие»
+        # 4. Базовая номенклатура
         nom_flour = nomenclature_model(
             name="Мука пшеничная",
             full_name="Мука пшеничная хлебопекарная высший сорт",
@@ -313,6 +313,80 @@ class storage_manager(abstract_manager):
             range=unit_piece,
         )
 
+        # Номенклатура для авторской технологической карты «Пицца Пепперони»
+        nom_water = nomenclature_model(
+            name="Вода питьевая",
+            full_name="Вода питьевая очищенная",
+            group=group_grocery,
+            range=unit_ml,
+        )
+        nom_olive_oil = nomenclature_model(
+            name="Масло оливковое",
+            full_name="Масло оливковое нерафинированное Extra Virgin",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_yeast = nomenclature_model(
+            name="Дрожжи сухие",
+            full_name="Дрожжи хлебопекарные сухие инстантные",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_salt = nomenclature_model(
+            name="Соль пищевая",
+            full_name="Соль поваренная пищевая выварочная",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_tomatoes = nomenclature_model(
+            name="Томаты протертые",
+            full_name="Томаты протертые консервированные",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_garlic = nomenclature_model(
+            name="Чеснок свежий",
+            full_name="Чеснок свежий урожай",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_basil = nomenclature_model(
+            name="Базилик сушеный",
+            full_name="Базилик сушеный измельченный",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_mozzarella = nomenclature_model(
+            name="Сыр Моцарелла",
+            full_name="Сыр Моцарелла для пиццы 45%",
+            group=group_dairy,
+            range=unit_gram,
+        )
+        nom_pepperoni = nomenclature_model(
+            name="Колбаски Пепперони",
+            full_name="Колбаски сырокопченые Пепперони острые",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_dough = nomenclature_model(
+            name="Тесто для пиццы",
+            full_name="Тесто дрожжевое для пиццы порционное",
+            group=group_semi,
+            range=unit_piece,
+        )
+        nom_sauce = nomenclature_model(
+            name="Соус томатный фирменный",
+            full_name="Соус томатный фирменный для пиццы",
+            group=group_semi,
+            range=unit_gram,
+        )
+        nom_pizza = nomenclature_model(
+            name="Пицца Пепперони",
+            full_name="Пицца Пепперони 30 см традиционное тесто",
+            group=group_dishes,
+            range=unit_piece,
+        )
+
         nomenclatures_seed = [
             nom_flour,
             nom_sugar,
@@ -321,23 +395,59 @@ class storage_manager(abstract_manager):
             nom_milk,
             nom_vanilla,
             nom_waffle,
+            nom_water,
+            nom_olive_oil,
+            nom_yeast,
+            nom_salt,
+            nom_tomatoes,
+            nom_garlic,
+            nom_basil,
+            nom_mozzarella,
+            nom_pepperoni,
+            nom_dough,
+            nom_sauce,
+            nom_pizza,
         ]
 
-        # 5. Технологическая карта «Вафли хрустящие в вафельнице»
-        row_flour = receipt_row_model(nom_flour, gross=100, net=100, range=unit_gram)
-        row_sugar = receipt_row_model(nom_sugar, gross=80, net=80, range=unit_gram)
-        row_butter = receipt_row_model(nom_butter, gross=70, net=70, range=unit_gram)
-        row_egg = receipt_row_model(nom_egg, gross=50, net=43, range=unit_piece)
-        row_vanilla = receipt_row_model(nom_vanilla, gross=5, net=5, range=unit_gram)
-
-        waffle_receipt = receipt_model(
-            name="Вафли хрустящие в вафельнице",
-            portions=10,
-            cooking_time=20,
-            rows=[row_flour, row_sugar, row_butter, row_egg, row_vanilla],
+        # 5. Технологические карты (составные рецепты)
+        receipt_dough = receipt_model(
+            name="Тесто для пиццы",
+            portions=1,
+            cooking_time=60,
+            rows=[
+                receipt_row_model(nom_flour, gross=180, net=180, range=unit_gram),
+                receipt_row_model(nom_water, gross=110, net=110, range=unit_ml),
+                receipt_row_model(nom_olive_oil, gross=10, net=10, range=unit_gram),
+                receipt_row_model(nom_yeast, gross=3, net=3, range=unit_gram),
+                receipt_row_model(nom_salt, gross=2, net=2, range=unit_gram),
+            ],
         )
 
-        receipts_seed = [waffle_receipt]
+        receipt_sauce = receipt_model(
+            name="Соус томатный фирменный",
+            portions=1,
+            cooking_time=15,
+            rows=[
+                receipt_row_model(nom_tomatoes, gross=70, net=70, range=unit_gram),
+                receipt_row_model(nom_garlic, gross=8, net=5, range=unit_gram),
+                receipt_row_model(nom_olive_oil, gross=5, net=5, range=unit_gram),
+                receipt_row_model(nom_basil, gross=2, net=2, range=unit_gram),
+            ],
+        )
+
+        receipt_pizza = receipt_model(
+            name="Пицца Пепперони",
+            portions=1,
+            cooking_time=15,
+            rows=[
+                receipt_row_model(nomenclature=nom_dough, receipt=receipt_dough),
+                receipt_row_model(nomenclature=nom_sauce, receipt=receipt_sauce),
+                receipt_row_model(nom_mozzarella, gross=120, net=120, range=unit_gram),
+                receipt_row_model(nom_pepperoni, gross=80, net=75, range=unit_gram),
+            ],
+        )
+
+        receipts_seed = [receipt_dough, receipt_sauce, receipt_pizza]
 
         return {
             storage_manager.range_key(): ranges_seed,
@@ -480,7 +590,7 @@ class storage_manager(abstract_manager):
 
     def build(self) -> bool:
         """
-        Генерация первичных данных при первом старте.
+        Формирование первичных данных при первом старте.
         """
         first_start_flag = self._settings.first_start if getattr(self, "_settings", None) is not None else self.__is_first_start
         if not first_start_flag or self.is_loaded:
