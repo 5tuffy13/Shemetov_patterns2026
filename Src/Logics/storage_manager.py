@@ -20,6 +20,8 @@ from Src.Models.range_model import range_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.settings_model import settings_model
+from Src.Models.receipt_row_model import receipt_row_model
+from Src.Models.receipt_model import receipt_model
 from Src.Logics.settings_manager import settings_manager
 
 
@@ -100,6 +102,13 @@ class storage_manager(abstract_manager):
         return "nomenclature_model"
 
     @staticmethod
+    def receipt_key() -> str:
+        """
+        Ключ категории технологических карт
+        """
+        return "receipt_model"
+
+    @staticmethod
     def keys() -> list:
         """
         Получить список всех ключей категорий хранилища
@@ -144,10 +153,12 @@ class storage_manager(abstract_manager):
             self.range_key(): self.ranges,
             self.group_key(): self.groups,
             self.nomenclature_key(): self.nomenclatures,
+            self.receipt_key(): self.receipts,
             "storage": self._data.get(self.storage_key(), {}),
             "range": self._data.get(self.range_key(), {}),
             "group": self._data.get(self.group_key(), {}),
             "nomenclature": self._data.get(self.nomenclature_key(), {}),
+            "receipt": self._data.get(self.receipt_key(), {}),
         }
 
     @property
@@ -193,6 +204,20 @@ class storage_manager(abstract_manager):
         return self._data[self.group_key()]
 
     @property
+    def receipts(self) -> List[receipt_model]:
+        """
+        Список зарегистрированных технологических карт
+        """
+        return list(self._data[self.receipt_key()].values())
+
+    @property
+    def receipts_dict(self) -> Dict[str, receipt_model]:
+        """
+        Словарь технологических карт с доступом по id
+        """
+        return self._data[self.receipt_key()]
+
+    @property
     def nomenclatures(self) -> List[nomenclature_model]:
         """
         Список всей зарегистрированной номенклатуры
@@ -214,8 +239,8 @@ class storage_manager(abstract_manager):
     def create_seed_data() -> Dict[str, List[abstract_reference]]:
         """
         Статическая фабрика создания первичных данных для первого запуска системы.
-        Формирует базовый набор складов, единиц измерения, групп номенклатуры
-        и ингредиентов для технологической карты рецепта «Вафли хрустящие».
+        Формирует базовый набор складов, единиц измерения, групп номенклатуры,
+        ингредиентов и технологических карт.
 
         Returns:
             Dict[str, List[abstract_reference]]: Словарь списков сущностей по категориям
@@ -244,7 +269,7 @@ class storage_manager(abstract_manager):
 
         groups_seed = [group_grocery, group_dairy, group_semi, group_dishes]
 
-        # 4. Номенклатура для рецепта «Вафли хрустящие»
+        # 4. Базовая номенклатура
         nom_flour = nomenclature_model(
             name="Мука пшеничная",
             full_name="Мука пшеничная хлебопекарная высший сорт",
@@ -288,6 +313,80 @@ class storage_manager(abstract_manager):
             range=unit_piece,
         )
 
+        # Номенклатура для авторской технологической карты «Пицца Пепперони»
+        nom_water = nomenclature_model(
+            name="Вода питьевая",
+            full_name="Вода питьевая очищенная",
+            group=group_grocery,
+            range=unit_ml,
+        )
+        nom_olive_oil = nomenclature_model(
+            name="Масло оливковое",
+            full_name="Масло оливковое нерафинированное Extra Virgin",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_yeast = nomenclature_model(
+            name="Дрожжи сухие",
+            full_name="Дрожжи хлебопекарные сухие инстантные",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_salt = nomenclature_model(
+            name="Соль пищевая",
+            full_name="Соль поваренная пищевая выварочная",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_tomatoes = nomenclature_model(
+            name="Томаты протертые",
+            full_name="Томаты протертые консервированные",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_garlic = nomenclature_model(
+            name="Чеснок свежий",
+            full_name="Чеснок свежий урожай",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_basil = nomenclature_model(
+            name="Базилик сушеный",
+            full_name="Базилик сушеный измельченный",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_mozzarella = nomenclature_model(
+            name="Сыр Моцарелла",
+            full_name="Сыр Моцарелла для пиццы 45%",
+            group=group_dairy,
+            range=unit_gram,
+        )
+        nom_pepperoni = nomenclature_model(
+            name="Колбаски Пепперони",
+            full_name="Колбаски сырокопченые Пепперони острые",
+            group=group_grocery,
+            range=unit_gram,
+        )
+        nom_dough = nomenclature_model(
+            name="Тесто для пиццы",
+            full_name="Тесто дрожжевое для пиццы порционное",
+            group=group_semi,
+            range=unit_piece,
+        )
+        nom_sauce = nomenclature_model(
+            name="Соус томатный фирменный",
+            full_name="Соус томатный фирменный для пиццы",
+            group=group_semi,
+            range=unit_gram,
+        )
+        nom_pizza = nomenclature_model(
+            name="Пицца Пепперони",
+            full_name="Пицца Пепперони 30 см традиционное тесто",
+            group=group_dishes,
+            range=unit_piece,
+        )
+
         nomenclatures_seed = [
             nom_flour,
             nom_sugar,
@@ -296,13 +395,66 @@ class storage_manager(abstract_manager):
             nom_milk,
             nom_vanilla,
             nom_waffle,
+            nom_water,
+            nom_olive_oil,
+            nom_yeast,
+            nom_salt,
+            nom_tomatoes,
+            nom_garlic,
+            nom_basil,
+            nom_mozzarella,
+            nom_pepperoni,
+            nom_dough,
+            nom_sauce,
+            nom_pizza,
         ]
+
+        # 5. Технологические карты (составные рецепты)
+        receipt_dough = receipt_model(
+            name="Тесто для пиццы",
+            portions=1,
+            cooking_time=60,
+            rows=[
+                receipt_row_model(nom_flour, gross=180, net=180, range=unit_gram),
+                receipt_row_model(nom_water, gross=110, net=110, range=unit_ml),
+                receipt_row_model(nom_olive_oil, gross=10, net=10, range=unit_gram),
+                receipt_row_model(nom_yeast, gross=3, net=3, range=unit_gram),
+                receipt_row_model(nom_salt, gross=2, net=2, range=unit_gram),
+            ],
+        )
+
+        receipt_sauce = receipt_model(
+            name="Соус томатный фирменный",
+            portions=1,
+            cooking_time=15,
+            rows=[
+                receipt_row_model(nom_tomatoes, gross=70, net=70, range=unit_gram),
+                receipt_row_model(nom_garlic, gross=8, net=5, range=unit_gram),
+                receipt_row_model(nom_olive_oil, gross=5, net=5, range=unit_gram),
+                receipt_row_model(nom_basil, gross=2, net=2, range=unit_gram),
+            ],
+        )
+
+        receipt_pizza = receipt_model(
+            name="Пицца Пепперони",
+            portions=1,
+            cooking_time=15,
+            rows=[
+                receipt_row_model(nomenclature=nom_dough, receipt=receipt_dough),
+                receipt_row_model(nomenclature=nom_sauce, receipt=receipt_sauce),
+                receipt_row_model(nom_mozzarella, gross=120, net=120, range=unit_gram),
+                receipt_row_model(nom_pepperoni, gross=80, net=75, range=unit_gram),
+            ],
+        )
+
+        receipts_seed = [receipt_dough, receipt_sauce, receipt_pizza]
 
         return {
             storage_manager.range_key(): ranges_seed,
             storage_manager.storage_key(): storages_seed,
             storage_manager.group_key(): groups_seed,
             storage_manager.nomenclature_key(): nomenclatures_seed,
+            storage_manager.receipt_key(): receipts_seed,
         }
 
     # -------------------------------------------------------------------------
@@ -372,6 +524,12 @@ class storage_manager(abstract_manager):
         """
         self._register_item(self.nomenclature_key(), item, nomenclature_model)
 
+    def add_receipt(self, item: receipt_model) -> None:
+        """
+        Добавить технологическую карту в хранилище с проверкой уникальности
+        """
+        self._register_item(self.receipt_key(), item, receipt_model)
+
     # -------------------------------------------------------------------------
     # Быстрый поиск за O(1) по id и наименованию
     # -------------------------------------------------------------------------
@@ -419,6 +577,12 @@ class storage_manager(abstract_manager):
         """
         return self.get_by_id(self.nomenclature_key(), identifier) or self.get_by_name(self.nomenclature_key(), identifier)
 
+    def get_receipt(self, identifier: str) -> Optional[receipt_model]:
+        """
+        Поиск технологической карты по id или наименованию за O(1)
+        """
+        return self.get_by_id(self.receipt_key(), identifier) or self.get_by_name(self.receipt_key(), identifier)
+
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
     # -------------------------------------------------------------------------
@@ -426,7 +590,7 @@ class storage_manager(abstract_manager):
 
     def build(self) -> bool:
         """
-        Генерация первичных данных при первом старте.
+        Формирование первичных данных при первом старте.
         """
         first_start_flag = self._settings.first_start if getattr(self, "_settings", None) is not None else self.__is_first_start
         if not first_start_flag or self.is_loaded:
@@ -451,6 +615,8 @@ class storage_manager(abstract_manager):
                     self.add_group(item)
                 elif category == self.nomenclature_key():
                     self.add_nomenclature(item)
+                elif category == self.receipt_key():
+                    self.add_receipt(item)
 
         self.is_first_start = False
         self.is_loaded = True
