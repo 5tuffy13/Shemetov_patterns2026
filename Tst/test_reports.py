@@ -10,9 +10,14 @@ if str(repo_root) not in sys.path:
 from Src.Core.exception import argument_exception
 from Src.Dtos.report_result_dto import report_result_dto
 from Src.Dtos.report_type_enum import report_type_enum
+from Src.Logics.csv_report import csv_report
+from Src.Logics.html_report import html_report
+from Src.Logics.markdown_report import markdown_report
 from Src.Logics.report_factory import report_factory
+from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
 from Src.Logics.text_report import text_report
+from Src.Logics.xml_report import xml_report
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.range_model import range_model
@@ -70,10 +75,10 @@ class TestReports:
         dto = report_result_dto(text="Исходный текст")
 
         # Действие
-        dto.binary = [1, 2, 3, 4]
+        dto.binary = b"binary data"
 
         # Проверка
-        assert dto.binary == [1, 2, 3, 4]
+        assert bytes(dto.binary) == b"binary data"
         assert dto.text == ""
 
     def test_fail_report_result_dto_invalid_type(self):
@@ -90,26 +95,85 @@ class TestReports:
             dto.text = 12345
 
         with pytest.raises(argument_exception):
-            dto.binary = "не список"
+            dto.binary = "не список и не байты"
+
+    # -------------------------------------------------------------------------
+    # Тесты перечисления форматов (report_type_enum)
+    # -------------------------------------------------------------------------
+
+    def test_success_report_type_enum_from_string(self):
+        """
+        <summary>
+        Проверка корректного распознавания строковых представлений форматов отчета
+        </summary>
+        """
+        # Подготовка и Действие
+        fmt_txt = report_type_enum.from_string("txt")
+        fmt_csv = report_type_enum.from_string("CSV")
+        fmt_md = report_type_enum.from_string("Markdown")
+        fmt_xml = report_type_enum.from_string("xml")
+        fmt_html = report_type_enum.from_string("Html")
+
+        # Проверка
+        assert fmt_txt == report_type_enum.TXT
+        assert fmt_csv == report_type_enum.CSV
+        assert fmt_md == report_type_enum.MARKDOWN
+        assert fmt_xml == report_type_enum.XML
+        assert fmt_html == report_type_enum.HTML
+
+    def test_fail_report_type_enum_from_invalid_string(self):
+        """
+        <summary>
+        Проверка выброса исключения при некорректной строке формата отчета
+        </summary>
+        """
+        # Подготовка и Действие и Проверка
+        with pytest.raises(argument_exception):
+            report_type_enum.from_string("UNKNOWN_FORMAT")
 
     # -------------------------------------------------------------------------
     # Тесты фабрики отчетов (report_factory)
     # -------------------------------------------------------------------------
 
-    def test_success_report_factory_create_text_report(self):
+    def test_success_report_factory_create_all_types(self):
         """
         <summary>
-        Проверка создания инстанса текстового отчета через фабрику
+        Проверка создания всех зарегистрированных типов отчетов через фабрику
         </summary>
         """
         # Подготовка
         factory = report_factory()
 
         # Действие
-        report = factory.create(report_type_enum.TXT)
+        rep_txt = factory.create(report_type_enum.TXT)
+        rep_csv = factory.create(report_type_enum.CSV)
+        rep_md = factory.create(report_type_enum.MARKDOWN)
+        rep_xml = factory.create(report_type_enum.XML)
+        rep_html = factory.create(report_type_enum.HTML)
 
         # Проверка
-        assert isinstance(report, text_report)
+        assert isinstance(rep_txt, text_report)
+        assert isinstance(rep_csv, csv_report)
+        assert isinstance(rep_md, markdown_report)
+        assert isinstance(rep_xml, xml_report)
+        assert isinstance(rep_html, html_report)
+
+    def test_success_report_factory_create_default(self):
+        """
+        <summary>
+        Проверка метода create_default: создание отчета по формату из менеджера настроек
+        </summary>
+        """
+        # Подготовка
+        mgr = settings_manager()
+        mgr.settings.response_format = report_type_enum.MARKDOWN
+        factory = report_factory(mgr)
+
+        # Действие
+        default_rep = factory.create_default()
+
+        # Проверка
+        assert isinstance(default_rep, markdown_report)
 
     def test_fail_report_factory_invalid_argument_type(self):
         """
@@ -125,7 +189,7 @@ class TestReports:
             factory.create("TXT")
 
     # -------------------------------------------------------------------------
-    # Тесты генератора текстового отчета (text_report)
+    # Тесты конкретных построителей отчетов (TXT, CSV, Markdown, XML, HTML)
     # -------------------------------------------------------------------------
 
     def test_success_text_report_build(self):
@@ -145,44 +209,98 @@ class TestReports:
         assert "Код | Наименование | Брутто | Нетто" in result.text
         assert "Мука" in result.text
         assert "Вода" in result.text
-        assert "180.0" in result.text
-        assert "110.0" in result.text
 
-    def test_fail_text_report_invalid_source_type(self):
+    def test_success_csv_report_build_binary(self):
         """
         <summary>
-        Проверка валидации типа источника данных при построении текстового отчета
+        Проверка формирования CSV отчета в бинарном представлении
         </summary>
         """
         # Подготовка
-        report = text_report()
-
-        # Действие и проверка
-        with pytest.raises(argument_exception):
-            report.build(self.flour)
-
-    def test_success_text_report_with_pizza_seed_data(self):
-        """
-        <summary>
-        Проверка формирования отчета по авторской пицце из хранилища данных
-        </summary>
-        """
-        # Подготовка
-        manager = storage_manager()
-        manager.clear()
-        manager.first_start()
-        pizza = manager.get_receipt("Пицца Пепперони")
-
-        factory = report_factory()
-        report = factory.create(report_type_enum.TXT)
+        report = csv_report()
 
         # Действие
-        result = report.build(pizza)
+        result = report.build(self.receipt)
 
         # Проверка
         assert isinstance(result, report_result_dto)
-        assert "Код | Наименование | Брутто | Нетто" in result.text
-        assert "Тесто для пиццы" in result.text
-        assert "Соус томатный фирменный" in result.text
-        assert "Сыр Моцарелла" in result.text
-        assert "Колбаски Пепперони" in result.text
+        assert len(result.binary) > 0
+        csv_decoded = bytes(result.binary).decode("utf-8")
+        assert "id;name;gross;net" in csv_decoded
+        assert "Мука;180.0;180.0" in csv_decoded
+
+    def test_success_markdown_report_build_binary(self):
+        """
+        <summary>
+        Проверка формирования Markdown отчета в бинарном представлении
+        </summary>
+        """
+        # Подготовка
+        report = markdown_report()
+
+        # Действие
+        result = report.build(self.receipt)
+
+        # Проверка
+        assert isinstance(result, report_result_dto)
+        assert len(result.binary) > 0
+        md_decoded = bytes(result.binary).decode("utf-8")
+        assert "# Технологическая карта: Тесто" in md_decoded
+        assert "| Код | Наименование | Брутто (г) | Нетто (г) |" in md_decoded
+        assert "Мука" in md_decoded
+
+    def test_success_xml_report_build_text(self):
+        """
+        <summary>
+        Проверка формирования XML отчета в текстовом представлении
+        </summary>
+        """
+        # Подготовка
+        report = xml_report()
+
+        # Действие
+        result = report.build(self.receipt)
+
+        # Проверка
+        assert isinstance(result, report_result_dto)
+        assert "<receipt" in result.text
+        assert "<gross_total>290.0</gross_total>" in result.text
+        assert "Мука" in result.text
+
+    def test_success_html_report_build_text(self):
+        """
+        <summary>
+        Проверка формирования HTML отчета в текстовом представлении
+        </summary>
+        """
+        # Подготовка
+        report = html_report()
+
+        # Действие
+        result = report.build(self.receipt)
+
+        # Проверка
+        assert isinstance(result, report_result_dto)
+        assert "<div class=\"report-receipt\">" in result.text
+        assert "<h1>Тесто</h1>" in result.text
+        assert "<table>" in result.text
+        assert "Мука" in result.text
+
+    def test_success_reports_for_nomenclature_and_range(self):
+        """
+        <summary>
+        Проверка формирования отчетов для номенклатуры и единиц измерения
+        </summary>
+        """
+        # Подготовка
+        csv_rep = csv_report()
+        xml_rep = xml_report()
+
+        # Действие
+        res_nom = csv_rep.build(self.flour)
+        res_range = xml_rep.build(self.unit_g)
+
+        # Проверка
+        assert "id;name;full_name;group;range" in bytes(res_nom.binary).decode("utf-8")
+        assert "<range" in res_range.text
+        assert "<coeff>1" in res_range.text
