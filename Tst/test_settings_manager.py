@@ -136,3 +136,31 @@ def test_success_settings_manager_data_values(tmp_path):
     assert manager.settings.boss_name == "Петров Пётр"
     assert manager.settings.account_name == "Сидорова Анна"
     assert manager.settings.is_first_start is True
+
+
+def test_success_settings_manager_response_format(tmp_path):
+    """
+    <summary>
+    Проверка корректной загрузки формата отчета по умолчанию из настроек
+    </summary>
+    """
+    # Подготовка
+    from Src.Dtos.report_type_enum import report_type_enum
+    test_json = tmp_path / "format_settings.json"
+    test_json.write_text("""{
+        "company": {
+            "name": "Тест",
+            "inn": "1234567890",
+            "bik": "123456789",
+            "account": "12345678901",
+            "ownership_form": "ООО"
+        },
+        "response_format": "Markdown"
+    }""", encoding="utf-8")
+    manager = settings_manager()
+
+    # Действие
+    manager.load(str(test_json))
+
+    # Проверка
+    assert manager.settings.response_format == report_type_enum.MARKDOWN

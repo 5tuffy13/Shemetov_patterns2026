@@ -1,6 +1,7 @@
 from Src.Core.abstract_reference import abstract_reference
-from Src.Models.organization_model import organization_model
 from Src.Core.validator import validator
+from Src.Dtos.report_type_enum import report_type_enum
+from Src.Models.organization_model import organization_model
 
 
 class settings_model(abstract_reference):
@@ -14,6 +15,7 @@ class settings_model(abstract_reference):
         self.__boss_name: str = ""
         self.__account_name: str = ""
         self.__is_first_start: bool = True
+        self.__response_format: report_type_enum = report_type_enum.TXT
 
     @property
     def first_start(self) -> bool:
@@ -84,3 +86,20 @@ class settings_model(abstract_reference):
     def account_name(self, value: str) -> None:
         validator.validate(value, str, 255, field_name="account_name")
         self.__account_name = value.strip()
+
+    @property
+    def response_format(self) -> report_type_enum:
+        """
+        Формат отчета по умолчанию
+        """
+        return self.__response_format
+
+    @response_format.setter
+    def response_format(self, value: report_type_enum | str) -> None:
+        """
+        Сеттер формата отчета по умолчанию
+        """
+        if isinstance(value, str):
+            value = report_type_enum.from_string(value)
+        validator.validate_type(value, report_type_enum, field_name="response_format")
+        self.__response_format = value

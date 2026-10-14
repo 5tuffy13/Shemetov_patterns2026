@@ -37,9 +37,9 @@ class settings_manager(abstract_manager):
 
         # Корень репозитория (Src/Logics -> ../..)
         repo_root = Path(__file__).resolve().parent.parent.parent
-        candidate = repo_root / file_name
-        if candidate.is_file():
-            return candidate
+        target_path = repo_root / file_name
+        if target_path.is_file():
+            return target_path
 
         return path
 
@@ -99,6 +99,10 @@ class settings_manager(abstract_manager):
 
             if "is_first_start" in self._data:
                 self.__settings.is_first_start = bool(self._data["is_first_start"])
+
+            if "response_format" in self._data:
+                fmt_raw = self._data["response_format"]
+                self.__settings.response_format = fmt_raw
 
             return True
         except Exception as ex:
