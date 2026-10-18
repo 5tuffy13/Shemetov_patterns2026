@@ -9,7 +9,7 @@ class abstract_report_factory(ABC):
     """
 
     @abstractmethod
-    def create(self, report_type: report_type_enum) -> abstract_report:
+    def create(self, report_type: report_type_enum, entity_type: str = "") -> abstract_report:
         """
         Подобрать и создать экземпляр нужного отчета
         """

@@ -110,6 +110,39 @@ class TestApi:
         assert "<div class=\"report-receipt\">" in content
         assert "Пицца Пепперони" in content
 
+    def test_success_get_report_nomenclature_csv_download(self):
+        """
+        <summary>
+        Проверка выгрузки CSV-отчета для номенклатуры в виде скачиваемого файла
+        </summary>
+        """
+        # Подготовка и Действие
+        response = self.client.get("/api/report/nomenclature/Мука пшеничная?format=CSV")
+
+        # Проверка
+        assert response.status_code == 200
+        assert "attachment" in response.headers.get("Content-Disposition", "")
+        assert ".csv" in response.headers.get("Content-Disposition", "")
+        content = response.data.decode("utf-8")
+        assert "id;name;full_name;group;range" in content
+        assert "Мука пшеничная" in content
+
+    def test_success_get_report_range_xml_text(self):
+        """
+        <summary>
+        Проверка выгрузки XML-отчета для единицы измерения
+        </summary>
+        """
+        # Подготовка и Действие
+        response = self.client.get("/api/report/range/грамм?format=XML")
+
+        # Проверка
+        assert response.status_code == 200
+        assert "application/xml" in response.headers.get("Content-Type", "")
+        content = response.data.decode("utf-8")
+        assert "<range" in content
+        assert "грамм" in content
+
     def test_success_get_report_default_endpoint(self):
         """
         <summary>

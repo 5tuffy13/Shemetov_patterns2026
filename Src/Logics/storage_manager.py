@@ -583,6 +583,28 @@ class storage_manager(abstract_manager):
         """
         return self.get_by_id(self.receipt_key(), identifier) or self.get_by_name(self.receipt_key(), identifier)
 
+    def resolve_category(self, entity_type: str) -> Optional[str]:
+        """
+        Разрешение наименования типа сущности в ключ категории хранилища
+        """
+        if not isinstance(entity_type, str):
+            return None
+        normalized = entity_type.strip().lower()
+        for key in self.keys():
+            clean_key = key.lower().replace("_model", "").replace("_key", "")
+            if normalized == key.lower() or normalized == clean_key:
+                return key
+        return None
+
+    def get_by_type_and_id(self, entity_type: str, identifier: str) -> Optional[abstract_reference]:
+        """
+        Полиморфный поиск сущности в хранилище по ее типу и идентификатору или наименованию за O(1)
+        """
+        category_key = self.resolve_category(entity_type)
+        if not category_key:
+            return None
+        return self.get_by_id(category_key, identifier) or self.get_by_name(category_key, identifier)
+
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
     # -------------------------------------------------------------------------
