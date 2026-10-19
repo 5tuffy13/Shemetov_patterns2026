@@ -183,3 +183,65 @@ class TestApi:
 
         # Проверка
         assert response.status_code == 400
+
+
+    def test_success_get_entities(self):
+        """
+        <summary>
+        Проверка эндпоинта /api/get_entities: получение списка доменных категорий
+        </summary>
+        """
+        # Подготовка и Действие
+        response = self.client.get("/api/get_entities")
+
+        # Проверка
+        assert response.status_code == 200
+        content = response.data.decode("utf-8")
+        assert "receipt_model" in content
+        assert "nomenclature_model" in content
+        assert "range_model" in content
+
+    def test_success_get_formats(self):
+        """
+        <summary>
+        Проверка эндпоинта /api/get_formats: получение списка форматов отчетов
+        </summary>
+        """
+        # Подготовка и Действие
+        response = self.client.get("/api/get_formats")
+
+        # Проверка
+        assert response.status_code == 200
+        content = response.data.decode("utf-8")
+        assert "CSV" in content
+        assert "MARKDOWN" in content
+        assert "TXT" in content
+
+    def test_success_get_default_report_query_params(self):
+        """
+        <summary>
+        Проверка эндпоинта /api/get_default_report с query-параметрами entity и unique_code
+        </summary>
+        """
+        # Подготовка
+        self.settings.settings.response_format = report_type_enum.MARKDOWN
+
+        # Действие
+        response = self.client.get("/api/get_default_report?entity=receipt_model&unique_code=Пицца Пепперони")
+
+        # Проверка
+        assert response.status_code == 200
+        assert "attachment" in response.headers.get("Content-Disposition", "")
+        assert ".md" in response.headers.get("Content-Disposition", "")
+
+    def test_fail_get_default_report_missing_params(self):
+        """
+        <summary>
+        Проверка возврата ошибки 400 при отсутствии обязательных параметров в /api/get_default_report
+        </summary>
+        """
+        # Подготовка и Действие
+        response = self.client.get("/api/get_default_report")
+
+        # Проверка
+        assert response.status_code == 400

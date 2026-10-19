@@ -109,19 +109,31 @@ class storage_manager(abstract_manager):
         return "receipt_model"
 
     @staticmethod
+    def domains() -> dict:
+        """
+        Словарь всех зарегистрированных категорий сущностей и их описаний.
+        Ключ — наименование категории (например, "nomenclature_model").
+        Значение — описание категории из docstring статического метода.
+        """
+        result = {}
+        method_names = [
+            name for name in dir(storage_manager)
+            if callable(getattr(storage_manager, name)) and name.endswith('_key')
+        ]
+        for name in method_names:
+            method = getattr(storage_manager, name)
+            key_val = method()
+            doc = method.__doc__
+            desc = doc.strip().split('\n')[0] if doc else name
+            result[key_val] = desc
+        return result
+
+    @staticmethod
     def keys() -> list:
         """
         Получить список всех ключей категорий хранилища
         """
-        result = []
-        methods = [
-            method for method in dir(storage_manager)
-            if callable(getattr(storage_manager, method)) and method.endswith('_key')
-        ]
-        for method in methods:
-            key = getattr(storage_manager, method)()
-            result.append(key)
-        return result
+        return list(storage_manager.domains().keys())
 
 
     # -------------------------------------------------------------------------

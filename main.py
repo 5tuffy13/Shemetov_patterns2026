@@ -33,6 +33,44 @@ def get_report():
     return "success"
 
 
+@app.route("/api/get_entities", methods=["GET"])
+def get_entities():
+    """
+    Получить перечень зарегистрированных доменных категорий хранилища
+    """
+    domain_keys = list(storage_manager.domains().keys())
+    return ",".join(domain_keys), 200, {"Content-Type": "text/plain; charset=utf-8"}
+
+
+@app.route("/api/get_formats", methods=["GET"])
+def get_formats():
+    """
+    Получить перечень поддерживаемых форматов отчетов
+    """
+    formats = [item.name for item in report_type_enum]
+    return ",".join(formats), 200, {"Content-Type": "text/plain; charset=utf-8"}
+
+
+@app.route("/api/get_default_report", methods=["GET"])
+def get_default_report():
+    """
+    Получить отчет в формате по умолчанию по query-параметрам entity и unique_code
+    """
+    entity_type = request.args.get("entity", "").strip()
+    identifier = request.args.get("unique_code", "").strip() or request.args.get("id", "").strip()
+
+    if not entity_type or not identifier:
+        return jsonify({"error": "Необходимо указать параметры entity и unique_code"}), 400
+
+    entity = storage.get_by_type_and_id(entity_type, identifier)
+    if not entity:
+        return jsonify({"error": f"Сущность типа '{entity_type}' с идентификатором '{identifier}' не найдена"}), 404
+
+    report = factory.create_default(entity_type)
+    result_dto = report.build(entity)
+    return report.create_response(result_dto, f"{entity_type}_{identifier}_default")
+
+
 @app.route("/api/report/<entity_type>/<entity_id>", methods=["GET"])
 def get_entity_report(entity_type: str, entity_id: str):
     """
@@ -56,7 +94,7 @@ def get_entity_report(entity_type: str, entity_id: str):
 @app.route("/api/report/default/<entity_type>/<entity_id>", methods=["GET"])
 def get_default_entity_report(entity_type: str, entity_id: str):
     """
-    Формирование отчета с использованием формата по умолчанию (create_default)
+    Формирование отчета с использованием формата по умолчанию (REST-стиль)
     """
     entity = storage.get_by_type_and_id(entity_type, entity_id)
     if not entity:

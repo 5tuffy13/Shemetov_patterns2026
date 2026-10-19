@@ -8,18 +8,21 @@ class report_result_dto(abstract_reference):
     Модель передачи данных (DTO) для хранения результата формирования отчета
     """
 
-    def __init__(self, text: str = "", binary: Union[List[int], bytes, None] = None):
+    def __init__(self, text: str = "", binary: Union[List[int], bytes, None] = None, format: str = ""):
         """
         Инициализация DTO результата отчета
         """
         super().__init__()
         self.__text: str = ""
         self.__binary: list = []
+        self.__format: str = "text/plain"
 
         if text:
             self.text = text
         if binary is not None:
             self.binary = binary
+        if format:
+            self.format = format
 
     @property
     def text(self) -> str:
@@ -55,3 +58,18 @@ class report_result_dto(abstract_reference):
         if len(value) > 0:
             self.__text = ""
             self.__binary = value
+
+    @property
+    def format(self) -> str:
+        """
+        MIME-тип представления отчета
+        """
+        return self.__format
+
+    @format.setter
+    def format(self, value: str) -> None:
+        """
+        Сеттер MIME-типа представления отчета
+        """
+        validator.validate_type(value, str, field_name="format")
+        self.__format = value.strip()
