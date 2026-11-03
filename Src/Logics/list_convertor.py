@@ -1,4 +1,5 @@
 from typing import Any, List, Optional
+from Src.Core.abstract_convert_factory import abstract_convert_factory
 from Src.Core.abstract_convertor import abstract_convertor
 from Src.Core.exception import argument_exception
 
@@ -8,15 +9,15 @@ class list_convertor(abstract_convertor):
     Конвертер коллекций (списков, кортежей, множеств)
     """
 
-    def __init__(self, factory: Optional[Any] = None):
+    def __init__(self, factory: Optional[abstract_convert_factory] = None):
         self.__factory = factory
 
     @property
-    def factory(self) -> Optional[Any]:
+    def factory(self) -> Optional[abstract_convert_factory]:
         return self.__factory
 
     @factory.setter
-    def factory(self, value: Any) -> None:
+    def factory(self, value: abstract_convert_factory) -> None:
         self.__factory = value
 
     def convert(self, source: Any) -> List[Any]:
@@ -46,7 +47,7 @@ class list_convertor(abstract_convertor):
             if item is None:
                 result.append(None)
             else:
-                conv = self.__factory.create_by_object(item)
-                result.append(conv.convert(item))
+                convertor = self.__factory.create(type(item))
+                result.append(convertor.convert(item))
 
         return result

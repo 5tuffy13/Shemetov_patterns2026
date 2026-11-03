@@ -1,4 +1,5 @@
 from typing import Any, Dict, Optional, Set
+from Src.Core.abstract_convert_factory import abstract_convert_factory
 from Src.Core.abstract_convertor import abstract_convertor
 from Src.Core.abstract_reference import abstract_reference
 from Src.Core.common import common
@@ -10,16 +11,19 @@ class reference_convertor(abstract_convertor):
     Конвертер доменных сущностей (наследников abstract_reference) в словарь
     """
 
-    def __init__(self, factory: Optional[Any] = None):
+    # Список псевдонимов свойств, исключаемых во избежание дублирования в JSON
+    IGNORE_ALIASES = {"base", "value", "gross_weight", "net_weight"}
+
+    def __init__(self, factory: Optional[abstract_convert_factory] = None):
         self.__factory = factory
         self.__visited: Set[int] = set()
 
     @property
-    def factory(self) -> Optional[Any]:
+    def factory(self) -> Optional[abstract_convert_factory]:
         return self.__factory
 
     @factory.setter
-    def factory(self, value: Any) -> None:
+    def factory(self, value: abstract_convert_factory) -> None:
         self.__factory = value
 
     def convert(self, source: Any) -> Dict[str, Any]:
@@ -43,10 +47,7 @@ class reference_convertor(abstract_convertor):
 
         source_obj_id = id(source)
         if source_obj_id in self.__visited:
-            return {
-                "id": getattr(source, "id", ""),
-                "name": getattr(source, "name", ""),
-            }
+            return None
 
         self.__visited.add(source_obj_id)
         result: Dict[str, Any] = {}
@@ -54,27 +55,26 @@ class reference_convertor(abstract_convertor):
         try:
             field_names = common.get_fields(source, is_common=False)
 
-            for field_name in field_names:
+            for field_name in sorted(field_names):
+                if field_name in self.IGNORE_ALIASES:
+                    continue
+
                 try:
                     raw_value = getattr(source, field_name)
                 except Exception:
                     continue
 
-                if raw_value is None:
+                # Базовая единица измерения ссылается сама на себя или пуста
+                if raw_value is None or raw_value is source:
                     result[field_name] = None
                 elif self.__factory is not None:
-                    conv = self.__factory.create_by_object(raw_value)
-                    result[field_name] = conv.convert(raw_value)
+                    convertor = self.__factory.create(type(raw_value))
+                    result[field_name] = convertor.convert(raw_value)
                 else:
                     if isinstance(raw_value, (int, float, str, bool)):
                         result[field_name] = raw_value
                     elif isinstance(raw_value, abstract_reference):
                         result[field_name] = self.convert(raw_value)
-                    elif isinstance(raw_value, (list, tuple, set)):
-                        result[field_name] = [
-                            self.convert(item) if isinstance(item, abstract_reference) else item
-                            for item in raw_value
-                        ]
                     else:
                         result[field_name] = str(raw_value)
         finally:

@@ -7,7 +7,7 @@ class test_entity(abstract_reference):
     """
     Тестовый класс для проверки абстрактной сущности
     """
-    pass
+    __test__ = False
 
 
 def test_success_abstract_model_id_not_null():

@@ -1,148 +1,19 @@
 {
-  "storage_key": [
-    {
-      "address": "г. Красноярск, ул. Ленина, д. 1",
-      "id": "225ff288-912a-4f84-b688-c260bb0d8866",
-      "name": "Главный склад"
-    },
-    {
-      "address": "г. Красноярск, пр. Мира, д. 82",
-      "id": "89bd046c-8f89-4cee-8423-4253cc0272ee",
-      "name": "Производственный цех"
-    },
-    {
-      "address": "г. Красноярск, ул. Маркса, д. 45",
-      "id": "cc59ba62-0e30-4ba6-85f7-6e3cf657a8d8",
-      "name": "Склад ресторана №1"
-    }
-  ],
-  "range_model": [
-    {
-      "base": {
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука"
-      },
-      "base_range": {
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука"
-      },
-      "coeff": 1,
-      "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-      "name": "штука",
-      "value": 1
-    },
-    {
-      "base": {
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм"
-      },
-      "base_range": {
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм"
-      },
-      "coeff": 1,
-      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-      "name": "грамм",
-      "value": 1
-    },
-    {
-      "base": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      },
-      "base_range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      },
-      "coeff": 1000,
-      "id": "a83bb3f1-7668-4e44-8999-35621bcfc401",
-      "name": "килограмм",
-      "value": 1000
-    },
-    {
-      "base": {
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр"
-      },
-      "base_range": {
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр"
-      },
-      "coeff": 1,
-      "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-      "name": "миллилитр",
-      "value": 1
-    },
-    {
-      "base": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
-      },
-      "base_range": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
-      },
-      "coeff": 1000,
-      "id": "4b097299-acb6-4ff4-8c8c-0ceb55b3ad6b",
-      "name": "литр",
-      "value": 1000
-    }
-  ],
   "group_model": [
     {
-      "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+      "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
       "name": "Сырье и бакалея"
     },
     {
-      "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
+      "id": "869c6d49-3b31-4a34-b0d8-d1f687772b6e",
       "name": "Молочная продукция"
     },
     {
-      "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
+      "id": "a70d7346-b970-4b65-84cb-fff58cea449c",
       "name": "Полуфабрикаты"
     },
     {
-      "id": "61ac9041-13b4-4243-b38a-2fc44b6f1da2",
+      "id": "bad2ece9-3ff7-411d-9b93-3e3d54a82b55",
       "name": "Готовая продукция"
     }
   ],
@@ -150,679 +21,477 @@
     {
       "full_name": "Мука пшеничная хлебопекарная высший сорт",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "b0b94922-8669-42dc-b4be-80cad539cfbe",
+      "id": "28fd07ee-5691-4aa7-b5bf-043c14c93187",
       "name": "Мука пшеничная",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Сахар белый кристаллический свекловичный",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "fd596aa6-c0dd-40f9-955b-ddcff7fb9e8f",
+      "id": "b5c4f299-0f61-4dbb-8d8f-b0d5f356137c",
       "name": "Сахар",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Масло сливочное крестьянское 82.5% ГОСТ",
       "group": {
-        "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
+        "id": "869c6d49-3b31-4a34-b0d8-d1f687772b6e",
         "name": "Молочная продукция"
       },
-      "id": "403ecfa8-0479-423f-b004-b3e86cba1c3a",
+      "id": "df971421-135c-42ca-8f91-10f74ea143d5",
       "name": "Сливочное масло",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Яйцо куриное столовое пищевое категории С0",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "b18e6546-b497-4666-8e94-a2bb2137dee7",
+      "id": "852af521-d11b-41c9-9eff-f9f0d3869200",
       "name": "Яйцо куриное",
       "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
+        "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+        "name": "штука"
       }
     },
     {
       "full_name": "Молоко пастеризованное питьевое 3.2%",
       "group": {
-        "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
+        "id": "869c6d49-3b31-4a34-b0d8-d1f687772b6e",
         "name": "Молочная продукция"
       },
-      "id": "0ab65e9d-a279-4f46-b8bb-4c8e4ae88fe6",
+      "id": "f4cffc89-59b6-4e2c-b9d6-6d326517c8dd",
       "name": "Молоко",
       "range": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
+        "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+        "name": "миллилитр"
       }
     },
     {
       "full_name": "Ванилин пищевой ароматический кристаллический",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "cef3a2ad-a188-4a67-9bd7-aba79c31a578",
+      "id": "26b0cc41-4f37-4a7d-a211-6e7f232d85a6",
       "name": "Ванилин",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Вафли венские хрустящие классические порционные",
       "group": {
-        "id": "61ac9041-13b4-4243-b38a-2fc44b6f1da2",
+        "id": "bad2ece9-3ff7-411d-9b93-3e3d54a82b55",
         "name": "Готовая продукция"
       },
-      "id": "19fb73e4-a648-47a2-992d-b0f96814924a",
+      "id": "1ae8aa24-384a-41ab-97ce-947b425f6e35",
       "name": "Вафли хрустящие",
       "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
+        "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+        "name": "штука"
       }
     },
     {
       "full_name": "Вода питьевая очищенная",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "b1a2ac45-5940-4e50-9e5a-66490ad6ae65",
+      "id": "a1695812-2878-41f6-aca4-b7a947f233f3",
       "name": "Вода питьевая",
       "range": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
+        "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+        "name": "миллилитр"
       }
     },
     {
       "full_name": "Масло оливковое нерафинированное Extra Virgin",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
+      "id": "426222e8-8a48-49a0-9454-9a91e07ac53f",
       "name": "Масло оливковое",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Дрожжи хлебопекарные сухие инстантные",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "843548eb-4a93-42a2-9a24-58d68d95adad",
+      "id": "bfcff5f2-f197-476b-8d69-12a20b6eadb9",
       "name": "Дрожжи сухие",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Соль поваренная пищевая выварочная",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "f6344188-1027-41cf-9057-4e273baed8b9",
+      "id": "43fc0b9a-ccc8-439c-91ad-76e86a14e0fa",
       "name": "Соль пищевая",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Томаты протертые консервированные",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "46d51906-0a7c-43ec-8e82-1096fcca80fa",
+      "id": "5e812a1e-6590-4512-8ecb-2a652e34b927",
       "name": "Томаты протертые",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Чеснок свежий урожай",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "c0a4b4eb-170f-4715-8e8f-9267ae6644ae",
+      "id": "933e2e91-56be-4373-853f-e09a90c4a3dc",
       "name": "Чеснок свежий",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Базилик сушеный измельченный",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "14163b4d-38e5-4de8-a2b8-71943fabfe04",
+      "id": "4949e61d-abfc-4bc3-a3c3-0f003af1c413",
       "name": "Базилик сушеный",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Сыр Моцарелла для пиццы 45%",
       "group": {
-        "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
+        "id": "869c6d49-3b31-4a34-b0d8-d1f687772b6e",
         "name": "Молочная продукция"
       },
-      "id": "a5bc51e9-dee2-4a31-bde6-9a6db134805d",
+      "id": "2d480b0d-097c-462c-a887-bb829ef36649",
       "name": "Сыр Моцарелла",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Колбаски сырокопченые Пепперони острые",
       "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+        "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
         "name": "Сырье и бакалея"
       },
-      "id": "85f80699-7f24-4e36-be40-1bd712c655f2",
+      "id": "a92fae89-ccdf-46ae-ac6d-34b76d4c68d0",
       "name": "Колбаски Пепперони",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Тесто дрожжевое для пиццы порционное",
       "group": {
-        "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
+        "id": "a70d7346-b970-4b65-84cb-fff58cea449c",
         "name": "Полуфабрикаты"
       },
-      "id": "94f87eda-72c7-42db-a716-66a7a0563fe6",
+      "id": "7b9271da-2840-4451-8f08-c1d59d3e77fd",
       "name": "Тесто для пиццы",
       "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
+        "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+        "name": "штука"
       }
     },
     {
       "full_name": "Соус томатный фирменный для пиццы",
       "group": {
-        "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
+        "id": "a70d7346-b970-4b65-84cb-fff58cea449c",
         "name": "Полуфабрикаты"
       },
-      "id": "985b2a27-b742-47dc-a9a2-39660fd12480",
+      "id": "8bce5dc9-1185-49f9-bb38-601076b1da52",
       "name": "Соус томатный фирменный",
       "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
       }
     },
     {
       "full_name": "Пицца Пепперони 30 см традиционное тесто",
       "group": {
-        "id": "61ac9041-13b4-4243-b38a-2fc44b6f1da2",
+        "id": "bad2ece9-3ff7-411d-9b93-3e3d54a82b55",
         "name": "Готовая продукция"
       },
-      "id": "f03befd6-6ac8-49a4-afe8-a10b27d101e0",
+      "id": "b5b6bab7-f09b-4723-b4eb-193744652d48",
       "name": "Пицца Пепперони",
       "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
+        "base_range": null,
         "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
+        "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+        "name": "штука"
       }
+    }
+  ],
+  "range_model": [
+    {
+      "base_range": null,
+      "coeff": 1,
+      "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+      "name": "штука"
+    },
+    {
+      "base_range": null,
+      "coeff": 1,
+      "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+      "name": "грамм"
+    },
+    {
+      "base_range": {
+        "base_range": null,
+        "coeff": 1,
+        "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+        "name": "грамм"
+      },
+      "coeff": 1000,
+      "id": "c2f6363c-6c72-465b-8ed6-76516a7232b8",
+      "name": "килограмм"
+    },
+    {
+      "base_range": null,
+      "coeff": 1,
+      "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+      "name": "миллилитр"
+    },
+    {
+      "base_range": {
+        "base_range": null,
+        "coeff": 1,
+        "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+        "name": "миллилитр"
+      },
+      "coeff": 1000,
+      "id": "461bbb3d-8ef1-42c1-bc10-2401ac5cd999",
+      "name": "литр"
     }
   ],
   "receipt_model": [
     {
       "cooking_time": 60,
       "gross": 305.0,
-      "gross_weight": 305.0,
-      "id": "7dea686a-48a9-4391-9a44-d89bf51b03e8",
+      "id": "2cfe95d4-dfbe-4f93-a1ef-7e3ae4d75449",
       "name": "Тесто для пиццы",
       "net": 305.0,
-      "net_weight": 305.0,
       "portions": 1,
       "rows": [
         {
           "gross": 180.0,
-          "gross_weight": 180.0,
-          "id": "555593e3-a1e6-466a-878e-c1d0085b8ae3",
+          "id": "001efe52-052d-4e35-86a2-5b31b755d5d1",
           "name": "Мука пшеничная",
           "net": 180.0,
-          "net_weight": 180.0,
           "nomenclature": {
             "full_name": "Мука пшеничная хлебопекарная высший сорт",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "b0b94922-8669-42dc-b4be-80cad539cfbe",
+            "id": "28fd07ee-5691-4aa7-b5bf-043c14c93187",
             "name": "Мука пшеничная",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 110.0,
-          "gross_weight": 110.0,
-          "id": "8dec2d72-7f48-468f-b6b2-092e3ec37bfe",
+          "id": "4e0b0c3a-121f-45db-9ce2-763b568bdc4e",
           "name": "Вода питьевая",
           "net": 110.0,
-          "net_weight": 110.0,
           "nomenclature": {
             "full_name": "Вода питьевая очищенная",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "b1a2ac45-5940-4e50-9e5a-66490ad6ae65",
+            "id": "a1695812-2878-41f6-aca4-b7a947f233f3",
             "name": "Вода питьевая",
             "range": {
-              "base": {
-                "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                "name": "миллилитр"
-              },
-              "base_range": {
-                "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                "name": "миллилитр"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-              "name": "миллилитр",
-              "value": 1
+              "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+              "name": "миллилитр"
             }
           },
           "range": {
-            "base": {
-              "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-              "name": "миллилитр"
-            },
-            "base_range": {
-              "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-              "name": "миллилитр"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-            "name": "миллилитр",
-            "value": 1
+            "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+            "name": "миллилитр"
           },
           "receipt": null
         },
         {
           "gross": 10.0,
-          "gross_weight": 10.0,
-          "id": "ef7be65a-c55c-4711-b8dd-4dc2da06a661",
+          "id": "26525fa5-b13f-4ef0-ae64-4e10dbe1ee2c",
           "name": "Масло оливковое",
           "net": 10.0,
-          "net_weight": 10.0,
           "nomenclature": {
             "full_name": "Масло оливковое нерафинированное Extra Virgin",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
+            "id": "426222e8-8a48-49a0-9454-9a91e07ac53f",
             "name": "Масло оливковое",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 3.0,
-          "gross_weight": 3.0,
-          "id": "fa7bf178-76a4-4896-9305-ac1e6ce4eceb",
+          "id": "6a445e1c-b6f6-4e10-ba9c-dc2d2e6e2362",
           "name": "Дрожжи сухие",
           "net": 3.0,
-          "net_weight": 3.0,
           "nomenclature": {
             "full_name": "Дрожжи хлебопекарные сухие инстантные",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "843548eb-4a93-42a2-9a24-58d68d95adad",
+            "id": "bfcff5f2-f197-476b-8d69-12a20b6eadb9",
             "name": "Дрожжи сухие",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 2.0,
-          "gross_weight": 2.0,
-          "id": "5220d32f-176b-4d97-aea8-906912c4f219",
+          "id": "defe5468-f5cc-4e28-95ca-4c0291021cc3",
           "name": "Соль пищевая",
           "net": 2.0,
-          "net_weight": 2.0,
           "nomenclature": {
             "full_name": "Соль поваренная пищевая выварочная",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "f6344188-1027-41cf-9057-4e273baed8b9",
+            "id": "43fc0b9a-ccc8-439c-91ad-76e86a14e0fa",
             "name": "Соль пищевая",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         }
@@ -831,194 +500,120 @@
     {
       "cooking_time": 15,
       "gross": 85.0,
-      "gross_weight": 85.0,
-      "id": "f5a83088-9690-45e0-a66c-d4cc075ef52b",
+      "id": "4bf021b4-1d80-4ded-a80e-96cd25f99713",
       "name": "Соус томатный фирменный",
       "net": 82.0,
-      "net_weight": 82.0,
       "portions": 1,
       "rows": [
         {
           "gross": 70.0,
-          "gross_weight": 70.0,
-          "id": "e99bae55-5f0f-4a4d-b4f4-44c91e82debc",
+          "id": "422d0a2e-d9a1-464a-be5e-5d76ce92dc58",
           "name": "Томаты протертые",
           "net": 70.0,
-          "net_weight": 70.0,
           "nomenclature": {
             "full_name": "Томаты протертые консервированные",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "46d51906-0a7c-43ec-8e82-1096fcca80fa",
+            "id": "5e812a1e-6590-4512-8ecb-2a652e34b927",
             "name": "Томаты протертые",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 8.0,
-          "gross_weight": 8.0,
-          "id": "0b867fde-b34c-44bc-a60d-a60f14b96830",
+          "id": "e4409d97-5a78-46d5-8903-0b2512ef86fa",
           "name": "Чеснок свежий",
           "net": 5.0,
-          "net_weight": 5.0,
           "nomenclature": {
             "full_name": "Чеснок свежий урожай",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "c0a4b4eb-170f-4715-8e8f-9267ae6644ae",
+            "id": "933e2e91-56be-4373-853f-e09a90c4a3dc",
             "name": "Чеснок свежий",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 5.0,
-          "gross_weight": 5.0,
-          "id": "95d52f7b-ccf5-4e69-b1a2-7195fc4d9ec7",
+          "id": "6305be7c-1c4b-490f-9d4a-16df0be791a8",
           "name": "Масло оливковое",
           "net": 5.0,
-          "net_weight": 5.0,
           "nomenclature": {
             "full_name": "Масло оливковое нерафинированное Extra Virgin",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
+            "id": "426222e8-8a48-49a0-9454-9a91e07ac53f",
             "name": "Масло оливковое",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 2.0,
-          "gross_weight": 2.0,
-          "id": "2a024574-c5a7-4703-815a-ae5f38d228d5",
+          "id": "a01c4cfc-7bec-45e7-8f25-55d383a1bf11",
           "name": "Базилик сушеный",
           "net": 2.0,
-          "net_weight": 2.0,
           "nomenclature": {
             "full_name": "Базилик сушеный измельченный",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "14163b4d-38e5-4de8-a2b8-71943fabfe04",
+            "id": "4949e61d-abfc-4bc3-a3c3-0f003af1c413",
             "name": "Базилик сушеный",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         }
@@ -1027,294 +622,182 @@
     {
       "cooking_time": 15,
       "gross": 590.0,
-      "gross_weight": 590.0,
-      "id": "58b406aa-58b6-4b4c-a283-8cdb42d630f1",
+      "id": "729c9910-8d7a-4b65-95d2-3df5af24aad6",
       "name": "Пицца Пепперони",
       "net": 582.0,
-      "net_weight": 582.0,
       "portions": 1,
       "rows": [
         {
           "gross": 305.0,
-          "gross_weight": 305.0,
-          "id": "37d7cb56-22ac-431c-a214-078f76a9e10b",
+          "id": "120a94fc-bafb-45c5-b076-4374d9b51972",
           "name": "Тесто для пиццы",
           "net": 305.0,
-          "net_weight": 305.0,
           "nomenclature": {
             "full_name": "Тесто дрожжевое для пиццы порционное",
             "group": {
-              "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
+              "id": "a70d7346-b970-4b65-84cb-fff58cea449c",
               "name": "Полуфабрикаты"
             },
-            "id": "94f87eda-72c7-42db-a716-66a7a0563fe6",
+            "id": "7b9271da-2840-4451-8f08-c1d59d3e77fd",
             "name": "Тесто для пиццы",
             "range": {
-              "base": {
-                "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-                "name": "штука"
-              },
-              "base_range": {
-                "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-                "name": "штука"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-              "name": "штука",
-              "value": 1
+              "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+              "name": "штука"
             }
           },
           "range": {
-            "base": {
-              "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-              "name": "штука"
-            },
-            "base_range": {
-              "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-              "name": "штука"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-            "name": "штука",
-            "value": 1
+            "id": "770c0d41-14fa-4dd8-b614-b140ecddeed3",
+            "name": "штука"
           },
           "receipt": {
             "cooking_time": 60,
             "gross": 305.0,
-            "gross_weight": 305.0,
-            "id": "7dea686a-48a9-4391-9a44-d89bf51b03e8",
+            "id": "2cfe95d4-dfbe-4f93-a1ef-7e3ae4d75449",
             "name": "Тесто для пиццы",
             "net": 305.0,
-            "net_weight": 305.0,
             "portions": 1,
             "rows": [
               {
                 "gross": 180.0,
-                "gross_weight": 180.0,
-                "id": "555593e3-a1e6-466a-878e-c1d0085b8ae3",
+                "id": "001efe52-052d-4e35-86a2-5b31b755d5d1",
                 "name": "Мука пшеничная",
                 "net": 180.0,
-                "net_weight": 180.0,
                 "nomenclature": {
                   "full_name": "Мука пшеничная хлебопекарная высший сорт",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "b0b94922-8669-42dc-b4be-80cad539cfbe",
+                  "id": "28fd07ee-5691-4aa7-b5bf-043c14c93187",
                   "name": "Мука пшеничная",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               },
               {
                 "gross": 110.0,
-                "gross_weight": 110.0,
-                "id": "8dec2d72-7f48-468f-b6b2-092e3ec37bfe",
+                "id": "4e0b0c3a-121f-45db-9ce2-763b568bdc4e",
                 "name": "Вода питьевая",
                 "net": 110.0,
-                "net_weight": 110.0,
                 "nomenclature": {
                   "full_name": "Вода питьевая очищенная",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "b1a2ac45-5940-4e50-9e5a-66490ad6ae65",
+                  "id": "a1695812-2878-41f6-aca4-b7a947f233f3",
                   "name": "Вода питьевая",
                   "range": {
-                    "base": {
-                      "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                      "name": "миллилитр"
-                    },
-                    "base_range": {
-                      "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                      "name": "миллилитр"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                    "name": "миллилитр",
-                    "value": 1
+                    "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+                    "name": "миллилитр"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                    "name": "миллилитр"
-                  },
-                  "base_range": {
-                    "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                    "name": "миллилитр"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                  "name": "миллилитр",
-                  "value": 1
+                  "id": "def5ff42-bc5a-4aaa-96bf-c86dac8cc1ac",
+                  "name": "миллилитр"
                 },
                 "receipt": null
               },
               {
                 "gross": 10.0,
-                "gross_weight": 10.0,
-                "id": "ef7be65a-c55c-4711-b8dd-4dc2da06a661",
+                "id": "26525fa5-b13f-4ef0-ae64-4e10dbe1ee2c",
                 "name": "Масло оливковое",
                 "net": 10.0,
-                "net_weight": 10.0,
                 "nomenclature": {
                   "full_name": "Масло оливковое нерафинированное Extra Virgin",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
+                  "id": "426222e8-8a48-49a0-9454-9a91e07ac53f",
                   "name": "Масло оливковое",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               },
               {
                 "gross": 3.0,
-                "gross_weight": 3.0,
-                "id": "fa7bf178-76a4-4896-9305-ac1e6ce4eceb",
+                "id": "6a445e1c-b6f6-4e10-ba9c-dc2d2e6e2362",
                 "name": "Дрожжи сухие",
                 "net": 3.0,
-                "net_weight": 3.0,
                 "nomenclature": {
                   "full_name": "Дрожжи хлебопекарные сухие инстантные",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "843548eb-4a93-42a2-9a24-58d68d95adad",
+                  "id": "bfcff5f2-f197-476b-8d69-12a20b6eadb9",
                   "name": "Дрожжи сухие",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               },
               {
                 "gross": 2.0,
-                "gross_weight": 2.0,
-                "id": "5220d32f-176b-4d97-aea8-906912c4f219",
+                "id": "defe5468-f5cc-4e28-95ca-4c0291021cc3",
                 "name": "Соль пищевая",
                 "net": 2.0,
-                "net_weight": 2.0,
                 "nomenclature": {
                   "full_name": "Соль поваренная пищевая выварочная",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "f6344188-1027-41cf-9057-4e273baed8b9",
+                  "id": "43fc0b9a-ccc8-439c-91ad-76e86a14e0fa",
                   "name": "Соль пищевая",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               }
@@ -1323,239 +806,147 @@
         },
         {
           "gross": 85.0,
-          "gross_weight": 85.0,
-          "id": "3676aa9e-4253-498c-a09f-4c54fb4a3ef7",
+          "id": "5b42cde5-b7a0-41b5-b18a-78f6309a8832",
           "name": "Соус томатный фирменный",
           "net": 82.0,
-          "net_weight": 82.0,
           "nomenclature": {
             "full_name": "Соус томатный фирменный для пиццы",
             "group": {
-              "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
+              "id": "a70d7346-b970-4b65-84cb-fff58cea449c",
               "name": "Полуфабрикаты"
             },
-            "id": "985b2a27-b742-47dc-a9a2-39660fd12480",
+            "id": "8bce5dc9-1185-49f9-bb38-601076b1da52",
             "name": "Соус томатный фирменный",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": {
             "cooking_time": 15,
             "gross": 85.0,
-            "gross_weight": 85.0,
-            "id": "f5a83088-9690-45e0-a66c-d4cc075ef52b",
+            "id": "4bf021b4-1d80-4ded-a80e-96cd25f99713",
             "name": "Соус томатный фирменный",
             "net": 82.0,
-            "net_weight": 82.0,
             "portions": 1,
             "rows": [
               {
                 "gross": 70.0,
-                "gross_weight": 70.0,
-                "id": "e99bae55-5f0f-4a4d-b4f4-44c91e82debc",
+                "id": "422d0a2e-d9a1-464a-be5e-5d76ce92dc58",
                 "name": "Томаты протертые",
                 "net": 70.0,
-                "net_weight": 70.0,
                 "nomenclature": {
                   "full_name": "Томаты протертые консервированные",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "46d51906-0a7c-43ec-8e82-1096fcca80fa",
+                  "id": "5e812a1e-6590-4512-8ecb-2a652e34b927",
                   "name": "Томаты протертые",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               },
               {
                 "gross": 8.0,
-                "gross_weight": 8.0,
-                "id": "0b867fde-b34c-44bc-a60d-a60f14b96830",
+                "id": "e4409d97-5a78-46d5-8903-0b2512ef86fa",
                 "name": "Чеснок свежий",
                 "net": 5.0,
-                "net_weight": 5.0,
                 "nomenclature": {
                   "full_name": "Чеснок свежий урожай",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "c0a4b4eb-170f-4715-8e8f-9267ae6644ae",
+                  "id": "933e2e91-56be-4373-853f-e09a90c4a3dc",
                   "name": "Чеснок свежий",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               },
               {
                 "gross": 5.0,
-                "gross_weight": 5.0,
-                "id": "95d52f7b-ccf5-4e69-b1a2-7195fc4d9ec7",
+                "id": "6305be7c-1c4b-490f-9d4a-16df0be791a8",
                 "name": "Масло оливковое",
                 "net": 5.0,
-                "net_weight": 5.0,
                 "nomenclature": {
                   "full_name": "Масло оливковое нерафинированное Extra Virgin",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
+                  "id": "426222e8-8a48-49a0-9454-9a91e07ac53f",
                   "name": "Масло оливковое",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               },
               {
                 "gross": 2.0,
-                "gross_weight": 2.0,
-                "id": "2a024574-c5a7-4703-815a-ae5f38d228d5",
+                "id": "a01c4cfc-7bec-45e7-8f25-55d383a1bf11",
                 "name": "Базилик сушеный",
                 "net": 2.0,
-                "net_weight": 2.0,
                 "nomenclature": {
                   "full_name": "Базилик сушеный измельченный",
                   "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+                    "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
                     "name": "Сырье и бакалея"
                   },
-                  "id": "14163b4d-38e5-4de8-a2b8-71943fabfe04",
+                  "id": "4949e61d-abfc-4bc3-a3c3-0f003af1c413",
                   "name": "Базилик сушеный",
                   "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
+                    "base_range": null,
                     "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
+                    "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                    "name": "грамм"
                   }
                 },
                 "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
+                  "base_range": null,
                   "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
+                  "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+                  "name": "грамм"
                 },
                 "receipt": null
               }
@@ -1564,1755 +955,78 @@
         },
         {
           "gross": 120.0,
-          "gross_weight": 120.0,
-          "id": "9289d12f-04a0-4a5f-a264-17e9d462329d",
+          "id": "9c1dd350-1c7a-4f5b-8d40-96d5991ad96f",
           "name": "Сыр Моцарелла",
           "net": 120.0,
-          "net_weight": 120.0,
           "nomenclature": {
             "full_name": "Сыр Моцарелла для пиццы 45%",
             "group": {
-              "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
+              "id": "869c6d49-3b31-4a34-b0d8-d1f687772b6e",
               "name": "Молочная продукция"
             },
-            "id": "a5bc51e9-dee2-4a31-bde6-9a6db134805d",
+            "id": "2d480b0d-097c-462c-a887-bb829ef36649",
             "name": "Сыр Моцарелла",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         },
         {
           "gross": 80.0,
-          "gross_weight": 80.0,
-          "id": "9c64e07b-e6d0-4def-a3d0-f3b6759ef746",
+          "id": "6a20b058-ac6f-4152-9ea4-a57b2daafcc3",
           "name": "Колбаски Пепперони",
           "net": 75.0,
-          "net_weight": 75.0,
           "nomenclature": {
             "full_name": "Колбаски сырокопченые Пепперони острые",
             "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
+              "id": "19f74b92-c6a4-4946-86c3-cafc762c709b",
               "name": "Сырье и бакалея"
             },
-            "id": "85f80699-7f24-4e36-be40-1bd712c655f2",
+            "id": "a92fae89-ccdf-46ae-ac6d-34b76d4c68d0",
             "name": "Колбаски Пепперони",
             "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
+              "base_range": null,
               "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
+              "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+              "name": "грамм"
             }
           },
           "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
+            "base_range": null,
             "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
+            "id": "1004c517-64c2-4b3a-93cf-a43f1b18724a",
+            "name": "грамм"
           },
           "receipt": null
         }
       ]
     }
   ],
-  "storage": {
-    "225ff288-912a-4f84-b688-c260bb0d8866": {
+  "storage_key": [
+    {
       "address": "г. Красноярск, ул. Ленина, д. 1",
-      "id": "225ff288-912a-4f84-b688-c260bb0d8866",
+      "id": "f98691e7-f2a7-4e8c-a453-4e449f65bf7a",
       "name": "Главный склад"
     },
-    "89bd046c-8f89-4cee-8423-4253cc0272ee": {
+    {
       "address": "г. Красноярск, пр. Мира, д. 82",
-      "id": "89bd046c-8f89-4cee-8423-4253cc0272ee",
+      "id": "fa69e3ba-6686-4a8c-9263-52e6a10361ed",
       "name": "Производственный цех"
     },
-    "cc59ba62-0e30-4ba6-85f7-6e3cf657a8d8": {
+    {
       "address": "г. Красноярск, ул. Маркса, д. 45",
-      "id": "cc59ba62-0e30-4ba6-85f7-6e3cf657a8d8",
+      "id": "18e1a984-363a-49a1-b81c-60267ab09f1b",
       "name": "Склад ресторана №1"
     }
-  },
-  "range": {
-    "8b554fc1-895b-4f38-b6bd-3fae8a532c95": {
-      "base": {
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука"
-      },
-      "base_range": {
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука"
-      },
-      "coeff": 1,
-      "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-      "name": "штука",
-      "value": 1
-    },
-    "85102c77-67c7-4cd9-b44e-eb9cb04cab21": {
-      "base": {
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм"
-      },
-      "base_range": {
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм"
-      },
-      "coeff": 1,
-      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-      "name": "грамм",
-      "value": 1
-    },
-    "a83bb3f1-7668-4e44-8999-35621bcfc401": {
-      "base": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      },
-      "base_range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      },
-      "coeff": 1000,
-      "id": "a83bb3f1-7668-4e44-8999-35621bcfc401",
-      "name": "килограмм",
-      "value": 1000
-    },
-    "1cd289b4-289b-4698-8cd4-cd768acd4017": {
-      "base": {
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр"
-      },
-      "base_range": {
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр"
-      },
-      "coeff": 1,
-      "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-      "name": "миллилитр",
-      "value": 1
-    },
-    "4b097299-acb6-4ff4-8c8c-0ceb55b3ad6b": {
-      "base": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
-      },
-      "base_range": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
-      },
-      "coeff": 1000,
-      "id": "4b097299-acb6-4ff4-8c8c-0ceb55b3ad6b",
-      "name": "литр",
-      "value": 1000
-    }
-  },
-  "group": {
-    "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9": {
-      "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-      "name": "Сырье и бакалея"
-    },
-    "ce0a779c-c533-4d4a-9515-4504580cc55d": {
-      "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
-      "name": "Молочная продукция"
-    },
-    "de467c5a-bc1e-4aa3-b1b6-40af156b7b15": {
-      "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
-      "name": "Полуфабрикаты"
-    },
-    "61ac9041-13b4-4243-b38a-2fc44b6f1da2": {
-      "id": "61ac9041-13b4-4243-b38a-2fc44b6f1da2",
-      "name": "Готовая продукция"
-    }
-  },
-  "nomenclature": {
-    "b0b94922-8669-42dc-b4be-80cad539cfbe": {
-      "full_name": "Мука пшеничная хлебопекарная высший сорт",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "b0b94922-8669-42dc-b4be-80cad539cfbe",
-      "name": "Мука пшеничная",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "fd596aa6-c0dd-40f9-955b-ddcff7fb9e8f": {
-      "full_name": "Сахар белый кристаллический свекловичный",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "fd596aa6-c0dd-40f9-955b-ddcff7fb9e8f",
-      "name": "Сахар",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "403ecfa8-0479-423f-b004-b3e86cba1c3a": {
-      "full_name": "Масло сливочное крестьянское 82.5% ГОСТ",
-      "group": {
-        "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
-        "name": "Молочная продукция"
-      },
-      "id": "403ecfa8-0479-423f-b004-b3e86cba1c3a",
-      "name": "Сливочное масло",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "b18e6546-b497-4666-8e94-a2bb2137dee7": {
-      "full_name": "Яйцо куриное столовое пищевое категории С0",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "b18e6546-b497-4666-8e94-a2bb2137dee7",
-      "name": "Яйцо куриное",
-      "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
-      }
-    },
-    "0ab65e9d-a279-4f46-b8bb-4c8e4ae88fe6": {
-      "full_name": "Молоко пастеризованное питьевое 3.2%",
-      "group": {
-        "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
-        "name": "Молочная продукция"
-      },
-      "id": "0ab65e9d-a279-4f46-b8bb-4c8e4ae88fe6",
-      "name": "Молоко",
-      "range": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
-      }
-    },
-    "cef3a2ad-a188-4a67-9bd7-aba79c31a578": {
-      "full_name": "Ванилин пищевой ароматический кристаллический",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "cef3a2ad-a188-4a67-9bd7-aba79c31a578",
-      "name": "Ванилин",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "19fb73e4-a648-47a2-992d-b0f96814924a": {
-      "full_name": "Вафли венские хрустящие классические порционные",
-      "group": {
-        "id": "61ac9041-13b4-4243-b38a-2fc44b6f1da2",
-        "name": "Готовая продукция"
-      },
-      "id": "19fb73e4-a648-47a2-992d-b0f96814924a",
-      "name": "Вафли хрустящие",
-      "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
-      }
-    },
-    "b1a2ac45-5940-4e50-9e5a-66490ad6ae65": {
-      "full_name": "Вода питьевая очищенная",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "b1a2ac45-5940-4e50-9e5a-66490ad6ae65",
-      "name": "Вода питьевая",
-      "range": {
-        "base": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "base_range": {
-          "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-          "name": "миллилитр"
-        },
-        "coeff": 1,
-        "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-        "name": "миллилитр",
-        "value": 1
-      }
-    },
-    "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8": {
-      "full_name": "Масло оливковое нерафинированное Extra Virgin",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
-      "name": "Масло оливковое",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "843548eb-4a93-42a2-9a24-58d68d95adad": {
-      "full_name": "Дрожжи хлебопекарные сухие инстантные",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "843548eb-4a93-42a2-9a24-58d68d95adad",
-      "name": "Дрожжи сухие",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "f6344188-1027-41cf-9057-4e273baed8b9": {
-      "full_name": "Соль поваренная пищевая выварочная",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "f6344188-1027-41cf-9057-4e273baed8b9",
-      "name": "Соль пищевая",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "46d51906-0a7c-43ec-8e82-1096fcca80fa": {
-      "full_name": "Томаты протертые консервированные",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "46d51906-0a7c-43ec-8e82-1096fcca80fa",
-      "name": "Томаты протертые",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "c0a4b4eb-170f-4715-8e8f-9267ae6644ae": {
-      "full_name": "Чеснок свежий урожай",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "c0a4b4eb-170f-4715-8e8f-9267ae6644ae",
-      "name": "Чеснок свежий",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "14163b4d-38e5-4de8-a2b8-71943fabfe04": {
-      "full_name": "Базилик сушеный измельченный",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "14163b4d-38e5-4de8-a2b8-71943fabfe04",
-      "name": "Базилик сушеный",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "a5bc51e9-dee2-4a31-bde6-9a6db134805d": {
-      "full_name": "Сыр Моцарелла для пиццы 45%",
-      "group": {
-        "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
-        "name": "Молочная продукция"
-      },
-      "id": "a5bc51e9-dee2-4a31-bde6-9a6db134805d",
-      "name": "Сыр Моцарелла",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "85f80699-7f24-4e36-be40-1bd712c655f2": {
-      "full_name": "Колбаски сырокопченые Пепперони острые",
-      "group": {
-        "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-        "name": "Сырье и бакалея"
-      },
-      "id": "85f80699-7f24-4e36-be40-1bd712c655f2",
-      "name": "Колбаски Пепперони",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "94f87eda-72c7-42db-a716-66a7a0563fe6": {
-      "full_name": "Тесто дрожжевое для пиццы порционное",
-      "group": {
-        "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
-        "name": "Полуфабрикаты"
-      },
-      "id": "94f87eda-72c7-42db-a716-66a7a0563fe6",
-      "name": "Тесто для пиццы",
-      "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
-      }
-    },
-    "985b2a27-b742-47dc-a9a2-39660fd12480": {
-      "full_name": "Соус томатный фирменный для пиццы",
-      "group": {
-        "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
-        "name": "Полуфабрикаты"
-      },
-      "id": "985b2a27-b742-47dc-a9a2-39660fd12480",
-      "name": "Соус томатный фирменный",
-      "range": {
-        "base": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "base_range": {
-          "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-          "name": "грамм"
-        },
-        "coeff": 1,
-        "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-        "name": "грамм",
-        "value": 1
-      }
-    },
-    "f03befd6-6ac8-49a4-afe8-a10b27d101e0": {
-      "full_name": "Пицца Пепперони 30 см традиционное тесто",
-      "group": {
-        "id": "61ac9041-13b4-4243-b38a-2fc44b6f1da2",
-        "name": "Готовая продукция"
-      },
-      "id": "f03befd6-6ac8-49a4-afe8-a10b27d101e0",
-      "name": "Пицца Пепперони",
-      "range": {
-        "base": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "base_range": {
-          "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-          "name": "штука"
-        },
-        "coeff": 1,
-        "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-        "name": "штука",
-        "value": 1
-      }
-    }
-  },
-  "receipt": {
-    "7dea686a-48a9-4391-9a44-d89bf51b03e8": {
-      "cooking_time": 60,
-      "gross": 305.0,
-      "gross_weight": 305.0,
-      "id": "7dea686a-48a9-4391-9a44-d89bf51b03e8",
-      "name": "Тесто для пиццы",
-      "net": 305.0,
-      "net_weight": 305.0,
-      "portions": 1,
-      "rows": [
-        {
-          "gross": 180.0,
-          "gross_weight": 180.0,
-          "id": "555593e3-a1e6-466a-878e-c1d0085b8ae3",
-          "name": "Мука пшеничная",
-          "net": 180.0,
-          "net_weight": 180.0,
-          "nomenclature": {
-            "full_name": "Мука пшеничная хлебопекарная высший сорт",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "b0b94922-8669-42dc-b4be-80cad539cfbe",
-            "name": "Мука пшеничная",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 110.0,
-          "gross_weight": 110.0,
-          "id": "8dec2d72-7f48-468f-b6b2-092e3ec37bfe",
-          "name": "Вода питьевая",
-          "net": 110.0,
-          "net_weight": 110.0,
-          "nomenclature": {
-            "full_name": "Вода питьевая очищенная",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "b1a2ac45-5940-4e50-9e5a-66490ad6ae65",
-            "name": "Вода питьевая",
-            "range": {
-              "base": {
-                "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                "name": "миллилитр"
-              },
-              "base_range": {
-                "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                "name": "миллилитр"
-              },
-              "coeff": 1,
-              "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-              "name": "миллилитр",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-              "name": "миллилитр"
-            },
-            "base_range": {
-              "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-              "name": "миллилитр"
-            },
-            "coeff": 1,
-            "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-            "name": "миллилитр",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 10.0,
-          "gross_weight": 10.0,
-          "id": "ef7be65a-c55c-4711-b8dd-4dc2da06a661",
-          "name": "Масло оливковое",
-          "net": 10.0,
-          "net_weight": 10.0,
-          "nomenclature": {
-            "full_name": "Масло оливковое нерафинированное Extra Virgin",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
-            "name": "Масло оливковое",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 3.0,
-          "gross_weight": 3.0,
-          "id": "fa7bf178-76a4-4896-9305-ac1e6ce4eceb",
-          "name": "Дрожжи сухие",
-          "net": 3.0,
-          "net_weight": 3.0,
-          "nomenclature": {
-            "full_name": "Дрожжи хлебопекарные сухие инстантные",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "843548eb-4a93-42a2-9a24-58d68d95adad",
-            "name": "Дрожжи сухие",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 2.0,
-          "gross_weight": 2.0,
-          "id": "5220d32f-176b-4d97-aea8-906912c4f219",
-          "name": "Соль пищевая",
-          "net": 2.0,
-          "net_weight": 2.0,
-          "nomenclature": {
-            "full_name": "Соль поваренная пищевая выварочная",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "f6344188-1027-41cf-9057-4e273baed8b9",
-            "name": "Соль пищевая",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        }
-      ]
-    },
-    "f5a83088-9690-45e0-a66c-d4cc075ef52b": {
-      "cooking_time": 15,
-      "gross": 85.0,
-      "gross_weight": 85.0,
-      "id": "f5a83088-9690-45e0-a66c-d4cc075ef52b",
-      "name": "Соус томатный фирменный",
-      "net": 82.0,
-      "net_weight": 82.0,
-      "portions": 1,
-      "rows": [
-        {
-          "gross": 70.0,
-          "gross_weight": 70.0,
-          "id": "e99bae55-5f0f-4a4d-b4f4-44c91e82debc",
-          "name": "Томаты протертые",
-          "net": 70.0,
-          "net_weight": 70.0,
-          "nomenclature": {
-            "full_name": "Томаты протертые консервированные",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "46d51906-0a7c-43ec-8e82-1096fcca80fa",
-            "name": "Томаты протертые",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 8.0,
-          "gross_weight": 8.0,
-          "id": "0b867fde-b34c-44bc-a60d-a60f14b96830",
-          "name": "Чеснок свежий",
-          "net": 5.0,
-          "net_weight": 5.0,
-          "nomenclature": {
-            "full_name": "Чеснок свежий урожай",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "c0a4b4eb-170f-4715-8e8f-9267ae6644ae",
-            "name": "Чеснок свежий",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 5.0,
-          "gross_weight": 5.0,
-          "id": "95d52f7b-ccf5-4e69-b1a2-7195fc4d9ec7",
-          "name": "Масло оливковое",
-          "net": 5.0,
-          "net_weight": 5.0,
-          "nomenclature": {
-            "full_name": "Масло оливковое нерафинированное Extra Virgin",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
-            "name": "Масло оливковое",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 2.0,
-          "gross_weight": 2.0,
-          "id": "2a024574-c5a7-4703-815a-ae5f38d228d5",
-          "name": "Базилик сушеный",
-          "net": 2.0,
-          "net_weight": 2.0,
-          "nomenclature": {
-            "full_name": "Базилик сушеный измельченный",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "14163b4d-38e5-4de8-a2b8-71943fabfe04",
-            "name": "Базилик сушеный",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        }
-      ]
-    },
-    "58b406aa-58b6-4b4c-a283-8cdb42d630f1": {
-      "cooking_time": 15,
-      "gross": 590.0,
-      "gross_weight": 590.0,
-      "id": "58b406aa-58b6-4b4c-a283-8cdb42d630f1",
-      "name": "Пицца Пепперони",
-      "net": 582.0,
-      "net_weight": 582.0,
-      "portions": 1,
-      "rows": [
-        {
-          "gross": 305.0,
-          "gross_weight": 305.0,
-          "id": "37d7cb56-22ac-431c-a214-078f76a9e10b",
-          "name": "Тесто для пиццы",
-          "net": 305.0,
-          "net_weight": 305.0,
-          "nomenclature": {
-            "full_name": "Тесто дрожжевое для пиццы порционное",
-            "group": {
-              "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
-              "name": "Полуфабрикаты"
-            },
-            "id": "94f87eda-72c7-42db-a716-66a7a0563fe6",
-            "name": "Тесто для пиццы",
-            "range": {
-              "base": {
-                "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-                "name": "штука"
-              },
-              "base_range": {
-                "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-                "name": "штука"
-              },
-              "coeff": 1,
-              "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-              "name": "штука",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-              "name": "штука"
-            },
-            "base_range": {
-              "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-              "name": "штука"
-            },
-            "coeff": 1,
-            "id": "8b554fc1-895b-4f38-b6bd-3fae8a532c95",
-            "name": "штука",
-            "value": 1
-          },
-          "receipt": {
-            "cooking_time": 60,
-            "gross": 305.0,
-            "gross_weight": 305.0,
-            "id": "7dea686a-48a9-4391-9a44-d89bf51b03e8",
-            "name": "Тесто для пиццы",
-            "net": 305.0,
-            "net_weight": 305.0,
-            "portions": 1,
-            "rows": [
-              {
-                "gross": 180.0,
-                "gross_weight": 180.0,
-                "id": "555593e3-a1e6-466a-878e-c1d0085b8ae3",
-                "name": "Мука пшеничная",
-                "net": 180.0,
-                "net_weight": 180.0,
-                "nomenclature": {
-                  "full_name": "Мука пшеничная хлебопекарная высший сорт",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "b0b94922-8669-42dc-b4be-80cad539cfbe",
-                  "name": "Мука пшеничная",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 110.0,
-                "gross_weight": 110.0,
-                "id": "8dec2d72-7f48-468f-b6b2-092e3ec37bfe",
-                "name": "Вода питьевая",
-                "net": 110.0,
-                "net_weight": 110.0,
-                "nomenclature": {
-                  "full_name": "Вода питьевая очищенная",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "b1a2ac45-5940-4e50-9e5a-66490ad6ae65",
-                  "name": "Вода питьевая",
-                  "range": {
-                    "base": {
-                      "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                      "name": "миллилитр"
-                    },
-                    "base_range": {
-                      "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                      "name": "миллилитр"
-                    },
-                    "coeff": 1,
-                    "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                    "name": "миллилитр",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                    "name": "миллилитр"
-                  },
-                  "base_range": {
-                    "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                    "name": "миллилитр"
-                  },
-                  "coeff": 1,
-                  "id": "1cd289b4-289b-4698-8cd4-cd768acd4017",
-                  "name": "миллилитр",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 10.0,
-                "gross_weight": 10.0,
-                "id": "ef7be65a-c55c-4711-b8dd-4dc2da06a661",
-                "name": "Масло оливковое",
-                "net": 10.0,
-                "net_weight": 10.0,
-                "nomenclature": {
-                  "full_name": "Масло оливковое нерафинированное Extra Virgin",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
-                  "name": "Масло оливковое",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 3.0,
-                "gross_weight": 3.0,
-                "id": "fa7bf178-76a4-4896-9305-ac1e6ce4eceb",
-                "name": "Дрожжи сухие",
-                "net": 3.0,
-                "net_weight": 3.0,
-                "nomenclature": {
-                  "full_name": "Дрожжи хлебопекарные сухие инстантные",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "843548eb-4a93-42a2-9a24-58d68d95adad",
-                  "name": "Дрожжи сухие",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 2.0,
-                "gross_weight": 2.0,
-                "id": "5220d32f-176b-4d97-aea8-906912c4f219",
-                "name": "Соль пищевая",
-                "net": 2.0,
-                "net_weight": 2.0,
-                "nomenclature": {
-                  "full_name": "Соль поваренная пищевая выварочная",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "f6344188-1027-41cf-9057-4e273baed8b9",
-                  "name": "Соль пищевая",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              }
-            ]
-          }
-        },
-        {
-          "gross": 85.0,
-          "gross_weight": 85.0,
-          "id": "3676aa9e-4253-498c-a09f-4c54fb4a3ef7",
-          "name": "Соус томатный фирменный",
-          "net": 82.0,
-          "net_weight": 82.0,
-          "nomenclature": {
-            "full_name": "Соус томатный фирменный для пиццы",
-            "group": {
-              "id": "de467c5a-bc1e-4aa3-b1b6-40af156b7b15",
-              "name": "Полуфабрикаты"
-            },
-            "id": "985b2a27-b742-47dc-a9a2-39660fd12480",
-            "name": "Соус томатный фирменный",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": {
-            "cooking_time": 15,
-            "gross": 85.0,
-            "gross_weight": 85.0,
-            "id": "f5a83088-9690-45e0-a66c-d4cc075ef52b",
-            "name": "Соус томатный фирменный",
-            "net": 82.0,
-            "net_weight": 82.0,
-            "portions": 1,
-            "rows": [
-              {
-                "gross": 70.0,
-                "gross_weight": 70.0,
-                "id": "e99bae55-5f0f-4a4d-b4f4-44c91e82debc",
-                "name": "Томаты протертые",
-                "net": 70.0,
-                "net_weight": 70.0,
-                "nomenclature": {
-                  "full_name": "Томаты протертые консервированные",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "46d51906-0a7c-43ec-8e82-1096fcca80fa",
-                  "name": "Томаты протертые",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 8.0,
-                "gross_weight": 8.0,
-                "id": "0b867fde-b34c-44bc-a60d-a60f14b96830",
-                "name": "Чеснок свежий",
-                "net": 5.0,
-                "net_weight": 5.0,
-                "nomenclature": {
-                  "full_name": "Чеснок свежий урожай",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "c0a4b4eb-170f-4715-8e8f-9267ae6644ae",
-                  "name": "Чеснок свежий",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 5.0,
-                "gross_weight": 5.0,
-                "id": "95d52f7b-ccf5-4e69-b1a2-7195fc4d9ec7",
-                "name": "Масло оливковое",
-                "net": 5.0,
-                "net_weight": 5.0,
-                "nomenclature": {
-                  "full_name": "Масло оливковое нерафинированное Extra Virgin",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "44e747bc-0aec-4b1a-b2f1-4c49eecee8d8",
-                  "name": "Масло оливковое",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              },
-              {
-                "gross": 2.0,
-                "gross_weight": 2.0,
-                "id": "2a024574-c5a7-4703-815a-ae5f38d228d5",
-                "name": "Базилик сушеный",
-                "net": 2.0,
-                "net_weight": 2.0,
-                "nomenclature": {
-                  "full_name": "Базилик сушеный измельченный",
-                  "group": {
-                    "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-                    "name": "Сырье и бакалея"
-                  },
-                  "id": "14163b4d-38e5-4de8-a2b8-71943fabfe04",
-                  "name": "Базилик сушеный",
-                  "range": {
-                    "base": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "base_range": {
-                      "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                      "name": "грамм"
-                    },
-                    "coeff": 1,
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм",
-                    "value": 1
-                  }
-                },
-                "range": {
-                  "base": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "base_range": {
-                    "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                    "name": "грамм"
-                  },
-                  "coeff": 1,
-                  "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                  "name": "грамм",
-                  "value": 1
-                },
-                "receipt": null
-              }
-            ]
-          }
-        },
-        {
-          "gross": 120.0,
-          "gross_weight": 120.0,
-          "id": "9289d12f-04a0-4a5f-a264-17e9d462329d",
-          "name": "Сыр Моцарелла",
-          "net": 120.0,
-          "net_weight": 120.0,
-          "nomenclature": {
-            "full_name": "Сыр Моцарелла для пиццы 45%",
-            "group": {
-              "id": "ce0a779c-c533-4d4a-9515-4504580cc55d",
-              "name": "Молочная продукция"
-            },
-            "id": "a5bc51e9-dee2-4a31-bde6-9a6db134805d",
-            "name": "Сыр Моцарелла",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        },
-        {
-          "gross": 80.0,
-          "gross_weight": 80.0,
-          "id": "9c64e07b-e6d0-4def-a3d0-f3b6759ef746",
-          "name": "Колбаски Пепперони",
-          "net": 75.0,
-          "net_weight": 75.0,
-          "nomenclature": {
-            "full_name": "Колбаски сырокопченые Пепперони острые",
-            "group": {
-              "id": "1a8af65d-e118-4cc1-a77f-22d1ca8dafa9",
-              "name": "Сырье и бакалея"
-            },
-            "id": "85f80699-7f24-4e36-be40-1bd712c655f2",
-            "name": "Колбаски Пепперони",
-            "range": {
-              "base": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "base_range": {
-                "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-                "name": "грамм"
-              },
-              "coeff": 1,
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм",
-              "value": 1
-            }
-          },
-          "range": {
-            "base": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "base_range": {
-              "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-              "name": "грамм"
-            },
-            "coeff": 1,
-            "id": "85102c77-67c7-4cd9-b44e-eb9cb04cab21",
-            "name": "грамм",
-            "value": 1
-          },
-          "receipt": null
-        }
-      ]
-    }
-  }
+  ]
 }

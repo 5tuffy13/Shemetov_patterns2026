@@ -1,6 +1,6 @@
-import json
 from datetime import date, datetime, time
-from typing import Any, Dict, Optional, Type
+from typing import Dict, Type
+from Src.Core.abstract_convert_factory import abstract_convert_factory
 from Src.Core.abstract_convertor import abstract_convertor
 from Src.Core.abstract_reference import abstract_reference
 from Src.Core.exception import argument_exception
@@ -11,7 +11,7 @@ from Src.Logics.list_convertor import list_convertor
 from Src.Logics.reference_convertor import reference_convertor
 
 
-class convert_factory:
+class convert_factory(abstract_convert_factory):
     """
     Фабрика для создания и подбора конвертеров данных
     """
@@ -23,7 +23,7 @@ class convert_factory:
         self.__dictionary_convertor = dictionary_convertor(factory=self)
         self.__reference_convertor = reference_convertor(factory=self)
 
-        # Реестр привязки типов к конвертерам
+        # Реестр привязки типов данных к конвертерам
         self.__mapping: Dict[Type, abstract_convertor] = {
             int: self.__basic_convertor,
             float: self.__basic_convertor,
@@ -65,39 +65,3 @@ class convert_factory:
             "target_type",
             f"Для типа '{target_type.__name__}' конвертер не зарегистрирован!"
         )
-
-    def create_by_object(self, source: Any) -> abstract_convertor:
-        """
-        Фабричный метод подбора конвертера по экземпляру объекта.
-
-        Args:
-            source: Экземпляр объекта
-
-        Returns:
-            Экземпляр соответствующего конвертера
-        """
-        if source is None:
-            return self.__basic_convertor
-
-        return self.create(type(source))
-
-    def convert(self, source: Any) -> Any:
-        """
-        Делегирование конвертации подобранному конвертеру
-        """
-        convertor = self.create_by_object(source)
-        return convertor.convert(source)
-
-    def serialize(self, source: Any, indent: Optional[int] = None) -> str:
-        """
-        Сериализация структуры объекта в формат JSON стандарта RFC 8259
-
-        Args:
-            source: Объект для сериализации
-            indent: Число пробелов для отступа
-
-        Returns:
-            Строка в формате JSON
-        """
-        data = self.convert(source)
-        return json.dumps(data, ensure_ascii=False, indent=indent)
