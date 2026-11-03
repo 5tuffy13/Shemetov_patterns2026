@@ -13,8 +13,8 @@ from Src.Logics.basic_convertor import basic_convertor
 from Src.Logics.convert_factory import convert_factory
 from Src.Logics.datetime_convertor import datetime_convertor
 from Src.Logics.dictionary_convertor import dictionary_convertor
+from Src.Logics.domain_convertor import domain_convertor
 from Src.Logics.list_convertor import list_convertor
-from Src.Logics.reference_convertor import reference_convertor
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.receipt_model import receipt_model
 
@@ -57,15 +57,19 @@ class test_convert_factory:
         assert isinstance(conv_dt, datetime_convertor)
         assert isinstance(conv_list, list_convertor)
         assert isinstance(conv_dict, dictionary_convertor)
-        assert isinstance(conv_receipt, reference_convertor)
-        assert isinstance(conv_nom, reference_convertor)
+        assert isinstance(conv_receipt, domain_convertor)
+        assert isinstance(conv_nom, domain_convertor)
 
-    def test_fail_convert_factory_invalid_target_type(self):
+    def test_success_convert_factory_create_by_instance(self):
         """
         <summary>
-        Проверка выброса исключения при передаче не-типа в фабричный метод create
+        Проверка создания конвертера при передаче экземпляра объекта
         </summary>
         """
-        # Действие и Проверка
-        with pytest.raises(argument_exception):
-            self.factory.create("не тип данных")
+        # Действие
+        conv_num = self.factory.create(42)
+        conv_str = self.factory.create("строка")
+
+        # Проверка
+        assert isinstance(conv_num, basic_convertor)
+        assert isinstance(conv_str, basic_convertor)

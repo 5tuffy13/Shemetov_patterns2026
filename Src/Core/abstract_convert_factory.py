@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Type
+from typing import Any
 from Src.Core.abstract_convertor import abstract_convertor
 
 
@@ -9,12 +9,12 @@ class abstract_convert_factory(ABC):
     """
 
     @abstractmethod
-    def create(self, target_type: Type) -> abstract_convertor:
+    def create(self, source: Any) -> abstract_convertor:
         """
-        Фабричный метод создания конвертера для целевого типа данных.
+        Фабричный метод создания конвертера для целевого типа или объекта.
 
         Args:
-            target_type: Класс целевого объекта
+            source: Класс или экземпляр целевого объекта
 
         Returns:
             Экземпляр соответствующего конвертера
