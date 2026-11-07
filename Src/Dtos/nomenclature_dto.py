@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Models.nomenclature_model import nomenclature_model
@@ -93,3 +94,20 @@ class nomenclature_dto(abstract_dto):
             dto.range_code = source.range.id
 
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "nomenclature_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        if "full_name" in data and data["full_name"] is not None:
+            self.full_name = str(data["full_name"])
+        if "group_code" in data and data["group_code"] is not None:
+            self.group_code = str(data["group_code"])
+        if "range_code" in data and data["range_code"] is not None:
+            self.range_code = str(data["range_code"])
+        return self

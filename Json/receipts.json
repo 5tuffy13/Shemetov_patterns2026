@@ -1,0 +1,130 @@
+[
+  {
+    "cooking_time": 60,
+    "id": "158b2eb6-8400-4513-99a2-825d94c4a741",
+    "name": "Тесто для пиццы",
+    "portions": 1,
+    "rows": [
+      {
+        "gross": 180.0,
+        "id": "98e15d83-05ee-4ecc-860a-30ae48eee44f",
+        "name": "Мука пшеничная",
+        "net": 180.0,
+        "nomenclature_code": "83393fab-03d8-452f-a001-924937588d5d",
+        "receipt_code": ""
+      },
+      {
+        "gross": 110.0,
+        "id": "0f4bdbb8-ea30-4643-a9ad-2178d5dca6e3",
+        "name": "Вода питьевая",
+        "net": 110.0,
+        "nomenclature_code": "7330fac7-3d56-43fb-a984-2e2e4d9e568a",
+        "receipt_code": ""
+      },
+      {
+        "gross": 10.0,
+        "id": "e6b47a90-3213-4888-aa68-7fb942071a59",
+        "name": "Масло оливковое",
+        "net": 10.0,
+        "nomenclature_code": "00d7999b-395a-4f02-9538-e5141c7ad0dd",
+        "receipt_code": ""
+      },
+      {
+        "gross": 3.0,
+        "id": "39175346-4e95-4a11-b7ea-9cd498e92dd2",
+        "name": "Дрожжи сухие",
+        "net": 3.0,
+        "nomenclature_code": "460b9a7e-f434-4989-83e1-4e1d3cee4063",
+        "receipt_code": ""
+      },
+      {
+        "gross": 2.0,
+        "id": "e940bec6-8603-4413-9214-92660e0cd4bb",
+        "name": "Соль пищевая",
+        "net": 2.0,
+        "nomenclature_code": "36b51c39-f453-429e-8ace-e52312eeef39",
+        "receipt_code": ""
+      }
+    ]
+  },
+  {
+    "cooking_time": 15,
+    "id": "ac0352f6-74be-41bd-9bf8-c2f7335f00d0",
+    "name": "Соус томатный фирменный",
+    "portions": 1,
+    "rows": [
+      {
+        "gross": 70.0,
+        "id": "f01d5f5f-a8e4-4831-adc7-6b088e9d7ad3",
+        "name": "Томаты протертые",
+        "net": 70.0,
+        "nomenclature_code": "2701578a-1f62-4792-a56e-8c265cc7ebc2",
+        "receipt_code": ""
+      },
+      {
+        "gross": 8.0,
+        "id": "bc0a5ed4-e9ec-494e-99fa-d7a312909810",
+        "name": "Чеснок свежий",
+        "net": 5.0,
+        "nomenclature_code": "9f03aecd-a4f6-4b80-8ef5-5824346e3532",
+        "receipt_code": ""
+      },
+      {
+        "gross": 5.0,
+        "id": "9875f845-386c-4c57-921d-f01220fc041f",
+        "name": "Масло оливковое",
+        "net": 5.0,
+        "nomenclature_code": "00d7999b-395a-4f02-9538-e5141c7ad0dd",
+        "receipt_code": ""
+      },
+      {
+        "gross": 2.0,
+        "id": "0bf59f8f-c803-4370-b45e-1f241a50cb28",
+        "name": "Базилик сушеный",
+        "net": 2.0,
+        "nomenclature_code": "0d116035-3113-4deb-bd7d-f039de0feaa7",
+        "receipt_code": ""
+      }
+    ]
+  },
+  {
+    "cooking_time": 15,
+    "id": "b6926de5-d262-4553-9b12-4a0052f8cade",
+    "name": "Пицца Пепперони",
+    "portions": 1,
+    "rows": [
+      {
+        "gross": 305.0,
+        "id": "5ea5ffa8-b66f-425a-92a8-1f522f69007a",
+        "name": "Тесто для пиццы",
+        "net": 305.0,
+        "nomenclature_code": "a12e7af1-5964-428f-b40c-b940ffb45312",
+        "receipt_code": "158b2eb6-8400-4513-99a2-825d94c4a741"
+      },
+      {
+        "gross": 85.0,
+        "id": "4e1dafb6-34ab-4aa3-9899-da14c5a5448d",
+        "name": "Соус томатный фирменный",
+        "net": 82.0,
+        "nomenclature_code": "89d5ac3d-2a78-478d-bde6-90852103de7d",
+        "receipt_code": "ac0352f6-74be-41bd-9bf8-c2f7335f00d0"
+      },
+      {
+        "gross": 120.0,
+        "id": "9950d76f-1148-404f-90fd-f3e4a610c08e",
+        "name": "Сыр Моцарелла",
+        "net": 120.0,
+        "nomenclature_code": "490c2a3b-fc34-4a81-8652-662176f8de93",
+        "receipt_code": ""
+      },
+      {
+        "gross": 80.0,
+        "id": "14903f1d-cd5c-4ac2-bd60-ab84292fab46",
+        "name": "Колбаски Пепперони",
+        "net": 75.0,
+        "nomenclature_code": "189599bf-a495-4fb0-9ba1-a67ab371e655",
+        "receipt_code": ""
+      }
+    ]
+  }
+]

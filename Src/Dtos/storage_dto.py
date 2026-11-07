@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Models.storage_model import storage_model
@@ -60,3 +61,16 @@ class storage_dto(abstract_dto):
         dto.name = source.name
         dto.address = source.address
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "storage_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        if "address" in data and data["address"] is not None:
+            self.address = str(data["address"])
+        return self

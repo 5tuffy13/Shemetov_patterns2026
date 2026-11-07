@@ -1,0 +1,135 @@
+[
+  {
+    "full_name": "Мука пшеничная хлебопекарная высший сорт",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "83393fab-03d8-452f-a001-924937588d5d",
+    "name": "Мука пшеничная",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Сахар белый кристаллический свекловичный",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "7209139b-a214-42cc-a5e5-3fca806f96e9",
+    "name": "Сахар",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Масло сливочное крестьянское 82.5% ГОСТ",
+    "group_code": "10142764-88fa-4cf0-beb8-04a68ac72924",
+    "id": "97ca0ba1-3643-4737-a67d-f804f8c01b28",
+    "name": "Сливочное масло",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Яйцо куриное столовое пищевое категории С0",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "04e6841e-e097-44e3-b092-67c06739dc36",
+    "name": "Яйцо куриное",
+    "range_code": "6180c292-cf90-4867-ae36-e385f324ed3c"
+  },
+  {
+    "full_name": "Молоко пастеризованное питьевое 3.2%",
+    "group_code": "10142764-88fa-4cf0-beb8-04a68ac72924",
+    "id": "0591ab1e-f4ab-4ada-bf51-9eeb4b3200d4",
+    "name": "Молоко",
+    "range_code": "95e2dc86-6b82-4b30-bc34-c1f7a3f31ba0"
+  },
+  {
+    "full_name": "Ванилин пищевой ароматический кристаллический",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "d061580a-920d-4cfe-b340-89c8f7a170bc",
+    "name": "Ванилин",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Вафли венские хрустящие классические порционные",
+    "group_code": "ebd37f6e-a00f-48e0-9f9d-7d3bb608ae19",
+    "id": "bb3124fb-de4e-459b-9d77-5287bc13879e",
+    "name": "Вафли хрустящие",
+    "range_code": "6180c292-cf90-4867-ae36-e385f324ed3c"
+  },
+  {
+    "full_name": "Вода питьевая очищенная",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "7330fac7-3d56-43fb-a984-2e2e4d9e568a",
+    "name": "Вода питьевая",
+    "range_code": "95e2dc86-6b82-4b30-bc34-c1f7a3f31ba0"
+  },
+  {
+    "full_name": "Масло оливковое нерафинированное Extra Virgin",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "00d7999b-395a-4f02-9538-e5141c7ad0dd",
+    "name": "Масло оливковое",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Дрожжи хлебопекарные сухие инстантные",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "460b9a7e-f434-4989-83e1-4e1d3cee4063",
+    "name": "Дрожжи сухие",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Соль поваренная пищевая выварочная",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "36b51c39-f453-429e-8ace-e52312eeef39",
+    "name": "Соль пищевая",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Томаты протертые консервированные",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "2701578a-1f62-4792-a56e-8c265cc7ebc2",
+    "name": "Томаты протертые",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Чеснок свежий урожай",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "9f03aecd-a4f6-4b80-8ef5-5824346e3532",
+    "name": "Чеснок свежий",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Базилик сушеный измельченный",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "0d116035-3113-4deb-bd7d-f039de0feaa7",
+    "name": "Базилик сушеный",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Сыр Моцарелла для пиццы 45%",
+    "group_code": "10142764-88fa-4cf0-beb8-04a68ac72924",
+    "id": "490c2a3b-fc34-4a81-8652-662176f8de93",
+    "name": "Сыр Моцарелла",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Колбаски сырокопченые Пепперони острые",
+    "group_code": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
+    "id": "189599bf-a495-4fb0-9ba1-a67ab371e655",
+    "name": "Колбаски Пепперони",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Тесто дрожжевое для пиццы порционное",
+    "group_code": "1604f25a-4772-4549-8f3a-5b5d4d498496",
+    "id": "a12e7af1-5964-428f-b40c-b940ffb45312",
+    "name": "Тесто для пиццы",
+    "range_code": "6180c292-cf90-4867-ae36-e385f324ed3c"
+  },
+  {
+    "full_name": "Соус томатный фирменный для пиццы",
+    "group_code": "1604f25a-4772-4549-8f3a-5b5d4d498496",
+    "id": "89d5ac3d-2a78-478d-bde6-90852103de7d",
+    "name": "Соус томатный фирменный",
+    "range_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2"
+  },
+  {
+    "full_name": "Пицца Пепперони 30 см традиционное тесто",
+    "group_code": "ebd37f6e-a00f-48e0-9f9d-7d3bb608ae19",
+    "id": "e3df5af0-f5cf-4f1c-8eab-af4380a8e59c",
+    "name": "Пицца Пепперони",
+    "range_code": "6180c292-cf90-4867-ae36-e385f324ed3c"
+  }
+]

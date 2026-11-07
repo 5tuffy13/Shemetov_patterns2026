@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Models.range_model import range_model
@@ -79,3 +80,18 @@ class range_dto(abstract_dto):
             dto.base_code = ""
 
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "range_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        if "coeff" in data and data["coeff"] is not None:
+            self.coeff = data["coeff"]
+        if "base_code" in data and data["base_code"] is not None:
+            self.base_code = str(data["base_code"])
+        return self

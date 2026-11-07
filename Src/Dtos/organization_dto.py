@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Models.organization_model import organization_model
@@ -84,3 +85,22 @@ class organization_dto(abstract_dto):
         dto.account = source.account
         dto.ownership_form = source.ownership_form
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "organization_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        if "inn" in data and data["inn"] is not None:
+            self.inn = str(data["inn"])
+        if "bik" in data and data["bik"] is not None:
+            self.bik = str(data["bik"])
+        if "account" in data and data["account"] is not None:
+            self.account = str(data["account"])
+        if "ownership_form" in data and data["ownership_form"] is not None:
+            self.ownership_form = str(data["ownership_form"])
+        return self

@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Models.nomenclature_group_model import nomenclature_group_model
@@ -46,3 +47,14 @@ class nomenclature_group_dto(abstract_dto):
         dto.id = source.id
         dto.name = source.name
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "nomenclature_group_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        return self
