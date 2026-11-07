@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, Dict, List, Optional
 from Src.Core.abstract_convert_factory import abstract_convert_factory
 from Src.Core.abstract_convertor import abstract_convertor
 from Src.Core.exception import argument_exception
@@ -10,6 +10,7 @@ class list_convertor(abstract_convertor):
     """
 
     def __init__(self, factory: Optional[abstract_convert_factory] = None):
+        super().__init__()
         self.__factory = factory
 
     @property
@@ -49,5 +50,44 @@ class list_convertor(abstract_convertor):
             else:
                 convertor = self.__factory.create(type(item))
                 result.append(convertor.convert(item))
+
+        return result
+
+    def deserialize(
+        self,
+        source: Any,
+        target_type: Optional[type] = None,
+        context: Optional[Dict[str, Any]] = None,
+    ) -> List[Any]:
+        """
+        Десериализация списка элементов в исходные объекты
+        """
+        if source is None:
+            return []
+
+        if not isinstance(source, (list, tuple)):
+            raise argument_exception(
+                "source",
+                f"Тип '{type(source).__name__}' не является списком для десериализации!"
+            )
+
+        result = []
+        for item in source:
+            if item is None:
+                result.append(None)
+            elif target_type is not None and self.__factory is not None:
+                conv = self.__factory.create(target_type)
+                if hasattr(conv, "deserialize"):
+                    result.append(conv.deserialize(item, target_type=target_type, context=context))
+                else:
+                    result.append(item)
+            elif isinstance(item, dict) and self.__factory is not None:
+                domain_conv = getattr(self.__factory, "domain_convertor", None)
+                if domain_conv is not None:
+                    result.append(domain_conv.deserialize(item, target_type=target_type, context=context))
+                else:
+                    result.append(item)
+            else:
+                result.append(item)
 
         return result

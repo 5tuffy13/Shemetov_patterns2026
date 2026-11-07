@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Models.receipt_row_model import receipt_row_model
@@ -89,3 +90,22 @@ class receipt_row_dto(abstract_dto):
             dto.receipt_code = source.receipt.id
 
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "receipt_row_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        if "gross" in data and data["gross"] is not None:
+            self.gross = data["gross"]
+        if "net" in data and data["net"] is not None:
+            self.net = data["net"]
+        if "nomenclature_code" in data and data["nomenclature_code"] is not None:
+            self.nomenclature_code = str(data["nomenclature_code"])
+        if "receipt_code" in data and data["receipt_code"] is not None:
+            self.receipt_code = str(data["receipt_code"])
+        return self

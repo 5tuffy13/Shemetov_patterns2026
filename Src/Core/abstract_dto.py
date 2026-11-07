@@ -1,15 +1,23 @@
 from abc import ABC, abstractmethod
+from typing import Any, Dict
 from Src.Core.abstract_reference import abstract_reference
 
 
 class abstract_dto(ABC):
     """
-    Абстрактный класс для структур передачи данных
+    Базовый класс для всех структур передачи данных (DTO)
     """
 
     @abstractmethod
     def from_domain_model(self, source: abstract_reference) -> "abstract_dto":
         """
         Фабричный метод создания DTO из доменной модели
+        """
+        pass
+
+    @abstractmethod
+    def from_dict(self, data: Dict[str, Any]) -> "abstract_dto":
+        """
+        Заполнить поля DTO из переданного словаря
         """
         pass
