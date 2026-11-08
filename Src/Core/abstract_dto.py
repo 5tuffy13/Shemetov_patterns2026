@@ -8,6 +8,13 @@ class abstract_dto(ABC):
     Базовый класс для всех структур передачи данных (DTO)
     """
 
+    @property
+    def type(self) -> str:
+        """
+        Полное квалифицированное имя класса структуры DTO
+        """
+        return f"{self.__class__.__module__}.{self.__class__.__qualname__}"
+
     @abstractmethod
     def from_domain_model(self, source: abstract_reference) -> "abstract_dto":
         """

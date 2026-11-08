@@ -6,7 +6,7 @@ from Src.Core.validator import validator
 
 class abstract_reference(ABC):
     """
-    Абстрактный класс-шаблон с полями id и name
+    Абстрактный класс-шаблон с полями id, name и type
     """
 
     def __init__(self, name: str = None):
@@ -49,6 +49,13 @@ class abstract_reference(ABC):
         """
         validator.validate(new_id, str, field_name="id")
         self.__id = new_id.strip()
+
+    @property
+    def type(self) -> str:
+        """
+        Полное квалифицированное имя класса сущности
+        """
+        return f"{self.__class__.__module__}.{self.__class__.__qualname__}"
 
     def __eq__(self, value) -> bool:
         """

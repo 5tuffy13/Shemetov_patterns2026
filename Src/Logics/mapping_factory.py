@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Type
+from typing import Any, Dict, Optional, Tuple, Type
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.abstract_mapping_factory import abstract_mapping_factory
 from Src.Core.abstract_reference import abstract_reference
@@ -20,7 +20,7 @@ from Src.Models.storage_model import storage_model
 
 class mapping_factory(abstract_mapping_factory):
     """
-    Фабрика двустороннего сопоставления доменных моделей и DTO
+    Фабрика двустороннего сопоставления доменных моделей и DTO на основе реестра типов
     """
 
     _instance = None
@@ -53,6 +53,14 @@ class mapping_factory(abstract_mapping_factory):
             dto_cls: domain_cls for domain_cls, dto_cls in self.__domain_to_dto.items()
         }
 
+        # Реестр строковых типов для точного разрешения сущностей за O(1)
+        self.__type_registry: Dict[str, Tuple[Type[abstract_reference], Type[abstract_dto]]] = {}
+        for domain_cls, dto_cls in self.__domain_to_dto.items():
+            self.__type_registry[domain_cls.__name__] = (domain_cls, dto_cls)
+            self.__type_registry[dto_cls.__name__] = (domain_cls, dto_cls)
+            self.__type_registry[f"{domain_cls.__module__}.{domain_cls.__qualname__}"] = (domain_cls, dto_cls)
+            self.__type_registry[f"{dto_cls.__module__}.{dto_cls.__qualname__}"] = (domain_cls, dto_cls)
+
         self.__initialized = True
 
     def get_dto_type(self, domain_type: type) -> Optional[Type[abstract_dto]]:
@@ -67,29 +75,13 @@ class mapping_factory(abstract_mapping_factory):
         """
         return self.__dto_to_domain.get(dto_type)
 
-    def detect_dto_type(self, data: dict) -> Optional[Type[abstract_dto]]:
+    def resolve_types_by_name(self, type_name: str) -> Optional[Tuple[Type[abstract_reference], Type[abstract_dto]]]:
         """
-        Определить наиболее подходящий класс DTO по ключам словаря
+        Разрешить строковый тип в пару (domain_cls, dto_cls) за O(1)
         """
-        if not isinstance(data, dict):
+        if not isinstance(type_name, str):
             return None
-
-        if "cooking_time" in data or "portions" in data:
-            return receipt_dto
-        if "nomenclature_code" in data or "receipt_code" in data:
-            return receipt_row_dto
-        if "group_code" in data or "range_code" in data or "full_name" in data:
-            return nomenclature_dto
-        if "coeff" in data or "base_code" in data:
-            return range_dto
-        if "address" in data:
-            return storage_dto
-        if "inn" in data or "bik" in data or "account" in data:
-            return organization_dto
-        if "name" in data and len(data) <= 4:
-            return nomenclature_group_dto
-
-        return None
+        return self.__type_registry.get(type_name.strip())
 
     def to_dto(self, source: Any) -> Any:
         """
@@ -119,7 +111,7 @@ class mapping_factory(abstract_mapping_factory):
 
     def to_model(self, source: Any, context: Optional[Dict[str, Any]] = None) -> Any:
         """
-        Преобразовать DTO или структуру словаря в доменную модель с разрешением связей
+        Преобразовать DTO или структуру словаря в доменную модель по типу сущности
         """
         if source is None:
             return None
@@ -127,12 +119,15 @@ class mapping_factory(abstract_mapping_factory):
         if isinstance(source, (list, tuple)):
             return [self.to_model(item, context) for item in source]
 
-        # Если передан словарь, сначала конвертируем его в DTO
+        # Если передан словарь, определяем тип по полю type
         if isinstance(source, dict):
-            dto_cls = self.detect_dto_type(source)
-            if dto_cls is not None:
-                dto = dto_cls().from_dict(source)
-                return self.to_model(dto, context)
+            type_val = source.get("type")
+            if type_val:
+                pair = self.resolve_types_by_name(str(type_val))
+                if pair is not None:
+                    _, dto_cls = pair
+                    dto_instance = dto_cls().from_dict(source)
+                    return self.to_model(dto_instance, context)
             return source
 
         if isinstance(source, abstract_reference):

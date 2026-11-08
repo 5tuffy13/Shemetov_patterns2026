@@ -58,9 +58,9 @@ class dictionary_convertor(abstract_convertor):
         source: Any,
         target_type: Optional[type] = None,
         context: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
+    ) -> Any:
         """
-        Десериализация словаря
+        Десериализация словаря с полиморфной диспетчеризацией по фабрике
         """
         if source is None:
             return {}
@@ -71,22 +71,43 @@ class dictionary_convertor(abstract_convertor):
                 f"Тип '{type(source).__name__}' не является словарем!"
             )
 
-        result = {}
-        for key, value in source.items():
+        if context is None:
+            context = {}
+
+        # 1. Если словарь представляет собой единичную сущность со свойством type
+        if "type" in source and self.__factory is not None:
+            mf = getattr(self.__factory, "mapping_factory", None)
+            if mf is not None:
+                return mf.to_model(source, context=context)
+
+        # 2. Если словарь представляет собой контейнер коллекций (например, категории хранилища)
+        # Обрабатываем ключи в порядке разрешения зависимостей (базовые справочники -> номенклатура -> рецепты)
+        def _get_priority(key_name: str) -> int:
+            k = str(key_name).lower()
+            if any(term in k for term in ("range", "group", "storage")):
+                return 0
+            if "nomenclature" in k:
+                return 1
+            if "receipt" in k:
+                return 2
+            return 3
+
+        sorted_keys = sorted(source.keys(), key=_get_priority)
+        result: Dict[str, Any] = {}
+
+        for key in sorted_keys:
             str_key = str(key)
+            value = source[key]
+
             if value is None:
                 result[str_key] = None
-            elif isinstance(value, list) and self.__factory is not None:
+            elif isinstance(value, (list, tuple)) and self.__factory is not None:
                 list_conv = self.__factory.create(list)
-                if hasattr(list_conv, "deserialize"):
-                    result[str_key] = list_conv.deserialize(value, target_type=target_type, context=context)
-                else:
-                    result[str_key] = value
+                result[str_key] = list_conv.deserialize(value, target_type=target_type, context=context)
             elif isinstance(value, dict) and self.__factory is not None:
-                mf = getattr(self.__factory, "mapping_factory", None)
-                if mf is not None and mf.detect_dto_type(value) is not None:
-                    domain_conv = getattr(self.__factory, "domain_convertor", None)
-                    result[str_key] = domain_conv.deserialize(value, target_type=target_type, context=context)
+                if "type" in value:
+                    mf = getattr(self.__factory, "mapping_factory", None)
+                    result[str_key] = mf.to_model(value, context=context) if mf else value
                 else:
                     result[str_key] = self.deserialize(value, target_type=target_type, context=context)
             else:

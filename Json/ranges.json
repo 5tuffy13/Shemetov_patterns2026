@@ -2,31 +2,36 @@
   {
     "base_code": "",
     "coeff": 1,
-    "id": "6180c292-cf90-4867-ae36-e385f324ed3c",
-    "name": "штука"
+    "id": "94171c23-775d-4800-be58-d7c4a87c8ef2",
+    "name": "штука",
+    "type": "Src.Dtos.range_dto.range_dto"
   },
   {
     "base_code": "",
     "coeff": 1,
-    "id": "fccf2938-c839-4bb8-9eac-cb5417b997b2",
-    "name": "грамм"
+    "id": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "name": "грамм",
+    "type": "Src.Dtos.range_dto.range_dto"
   },
   {
-    "base_code": "fccf2938-c839-4bb8-9eac-cb5417b997b2",
+    "base_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
     "coeff": 1000,
-    "id": "0bd16560-fe91-4c03-ad62-24ee24d50ce8",
-    "name": "килограмм"
+    "id": "99f9e0f2-21fe-4db1-8d80-f14267f36ddf",
+    "name": "килограмм",
+    "type": "Src.Dtos.range_dto.range_dto"
   },
   {
     "base_code": "",
     "coeff": 1,
-    "id": "95e2dc86-6b82-4b30-bc34-c1f7a3f31ba0",
-    "name": "миллилитр"
+    "id": "c1ca409b-8598-4dcc-93fd-7e9702414c63",
+    "name": "миллилитр",
+    "type": "Src.Dtos.range_dto.range_dto"
   },
   {
-    "base_code": "95e2dc86-6b82-4b30-bc34-c1f7a3f31ba0",
+    "base_code": "c1ca409b-8598-4dcc-93fd-7e9702414c63",
     "coeff": 1000,
-    "id": "2b052b1d-4136-4d44-85e3-dc631ddf7bf9",
-    "name": "литр"
+    "id": "819f394b-fe0d-4e4c-8bc9-f634db4c58b3",
+    "name": "литр",
+    "type": "Src.Dtos.range_dto.range_dto"
   }
 ]

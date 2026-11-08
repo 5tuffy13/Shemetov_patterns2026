@@ -113,3 +113,27 @@ class test_mapping_factory:
         # Проверка
         assert val_int == 123
         assert val_str == "тест"
+
+    def test_success_mapping_factory_to_model_by_type_property(self):
+        """
+        <summary>
+        Проверка десериализации словаря в доменную модель по свойству type за O(1)
+        </summary>
+        """
+        # Arrange
+        data = {
+            "type": "Src.Dtos.range_dto.range_dto",
+            "id": "test-id-123",
+            "name": "килограмм",
+            "coeff": 1000,
+            "base_code": ""
+        }
+
+        # Act
+        model = self.factory.to_model(data)
+
+        # Assert
+        assert isinstance(model, range_model)
+        assert model.id == "test-id-123"
+        assert model.name == "килограмм"
+        assert model.coeff == 1000

@@ -1,17 +1,20 @@
 [
   {
     "address": "г. Красноярск, ул. Ленина, д. 1",
-    "id": "24114e6e-5154-4964-bf57-cd8e55968ad0",
-    "name": "Главный склад"
+    "id": "990276fb-b37b-44a9-84e9-5d9db3b3c9a7",
+    "name": "Главный склад",
+    "type": "Src.Dtos.storage_dto.storage_dto"
   },
   {
     "address": "г. Красноярск, пр. Мира, д. 82",
-    "id": "1fa9cda9-c372-40f8-ad63-035610163306",
-    "name": "Производственный цех"
+    "id": "930a05e1-86e2-4b4a-a574-f3f9b736bc2c",
+    "name": "Производственный цех",
+    "type": "Src.Dtos.storage_dto.storage_dto"
   },
   {
     "address": "г. Красноярск, ул. Маркса, д. 45",
-    "id": "065d1804-6bd7-45ed-a6bd-40698e97b455",
-    "name": "Склад ресторана №1"
+    "id": "d77e3cdc-85f0-4e15-86f2-70ac794c9918",
+    "name": "Склад ресторана №1",
+    "type": "Src.Dtos.storage_dto.storage_dto"
   }
 ]

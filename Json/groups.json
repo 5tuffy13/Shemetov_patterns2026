@@ -1,18 +1,22 @@
 [
   {
-    "id": "b90ca4e7-b10a-47a1-aa16-d7441eae70f9",
-    "name": "Сырье и бакалея"
+    "id": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "name": "Сырье и бакалея",
+    "type": "Src.Dtos.nomenclature_group_dto.nomenclature_group_dto"
   },
   {
-    "id": "10142764-88fa-4cf0-beb8-04a68ac72924",
-    "name": "Молочная продукция"
+    "id": "1b05dd94-1779-462a-89a2-5817fc193fc5",
+    "name": "Молочная продукция",
+    "type": "Src.Dtos.nomenclature_group_dto.nomenclature_group_dto"
   },
   {
-    "id": "1604f25a-4772-4549-8f3a-5b5d4d498496",
-    "name": "Полуфабрикаты"
+    "id": "84b453b7-3f7a-4e35-a690-df769b1244d2",
+    "name": "Полуфабрикаты",
+    "type": "Src.Dtos.nomenclature_group_dto.nomenclature_group_dto"
   },
   {
-    "id": "ebd37f6e-a00f-48e0-9f9d-7d3bb608ae19",
-    "name": "Готовая продукция"
+    "id": "5015bb91-be98-4292-9244-c9401c0cf68f",
+    "name": "Готовая продукция",
+    "type": "Src.Dtos.nomenclature_group_dto.nomenclature_group_dto"
   }
 ]
