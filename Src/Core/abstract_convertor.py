@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, Optional
 from Src.Core.validator import validator
 
 
 class abstract_convertor(ABC):
     """
-    Абстрактный класс конвертера данных для сериализации
+    Абстрактный класс конвертера данных для сериализации и десериализации
     """
 
     def __init__(self):
@@ -29,9 +29,9 @@ class abstract_convertor(ABC):
             self.set_exception(ex)
             return {field: None}
 
-    def deserialize(self, source: dict) -> object:
+    def deserialize(self, source: Any, target_type: Optional[type] = None) -> Any:
         """
-        Десериализовать словарь в исходный объект
+        Десериализовать представление данных в целевой объект
         """
         pass
 

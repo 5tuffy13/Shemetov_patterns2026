@@ -16,7 +16,7 @@ from Src.Logics.reference_convertor import reference_convertor
 
 class convert_factory(abstract_convert_factory):
     """
-    Фабрика для создания и подбора конвертеров данных
+    Фабрика для создания и подбора специализированных конвертеров данных
     """
 
     _instance = None
@@ -37,7 +37,7 @@ class convert_factory(abstract_convert_factory):
         self.__datetime_convertor = datetime_convertor()
         self.__mapping_factory = mapping_factory()
         self.__domain_convertor = domain_convertor(self, self.__mapping_factory)
-        self.__list_convertor = list_convertor(factory=self)
+        self.__list_convertor = list_convertor(convert_factory=self, mapping_factory=self.__mapping_factory)
         self.__dictionary_convertor = dictionary_convertor(factory=self)
         self.__reference_convertor = reference_convertor(factory=self)
 
@@ -67,6 +67,14 @@ class convert_factory(abstract_convert_factory):
     @property
     def domain_convertor(self) -> domain_convertor:
         return self.__domain_convertor
+
+    @property
+    def list_convertor(self) -> list_convertor:
+        return self.__list_convertor
+
+    @property
+    def dictionary_convertor(self) -> dictionary_convertor:
+        return self.__dictionary_convertor
 
     @property
     def reference_convertor(self) -> reference_convertor:

@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Dict, List
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Dtos.receipt_row_dto import receipt_row_dto
@@ -78,3 +78,26 @@ class receipt_dto(abstract_dto):
         dto.rows = [row_builder.from_domain_model(row) for row in source.rows]
 
         return dto
+
+    def from_dict(self, data: Dict[str, Any]) -> "receipt_dto":
+        """
+        Заполнить свойства DTO из словаря
+        """
+        validator.validate_type(data, dict, field_name="data")
+        if "id" in data and data["id"] is not None:
+            self.id = str(data["id"])
+        if "name" in data and data["name"] is not None:
+            self.name = str(data["name"])
+        if "portions" in data and data["portions"] is not None:
+            self.portions = int(data["portions"])
+        if "cooking_time" in data and data["cooking_time"] is not None:
+            self.cooking_time = int(data["cooking_time"])
+        if "rows" in data and isinstance(data["rows"], list):
+            parsed_rows = []
+            for r in data["rows"]:
+                if isinstance(r, dict):
+                    parsed_rows.append(receipt_row_dto().from_dict(r))
+                elif isinstance(r, receipt_row_dto):
+                    parsed_rows.append(r)
+            self.rows = parsed_rows
+        return self

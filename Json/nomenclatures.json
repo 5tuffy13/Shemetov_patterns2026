@@ -1,0 +1,154 @@
+[
+  {
+    "full_name": "Мука пшеничная хлебопекарная высший сорт",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "2253ea98-dc8a-4d4c-901e-715b3af0e367",
+    "name": "Мука пшеничная",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Сахар белый кристаллический свекловичный",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "f440d805-d166-406d-8371-53b0454e5509",
+    "name": "Сахар",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Масло сливочное крестьянское 82.5% ГОСТ",
+    "group_code": "1b05dd94-1779-462a-89a2-5817fc193fc5",
+    "id": "f64283b6-f951-40d6-9e82-ae654b18946d",
+    "name": "Сливочное масло",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Яйцо куриное столовое пищевое категории С0",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "a52f2c45-24d9-40ff-b0da-a2d1365fb031",
+    "name": "Яйцо куриное",
+    "range_code": "94171c23-775d-4800-be58-d7c4a87c8ef2",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Молоко пастеризованное питьевое 3.2%",
+    "group_code": "1b05dd94-1779-462a-89a2-5817fc193fc5",
+    "id": "0c1fc9bc-7aaf-47a6-a040-90e1b0c2980e",
+    "name": "Молоко",
+    "range_code": "c1ca409b-8598-4dcc-93fd-7e9702414c63",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Ванилин пищевой ароматический кристаллический",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "bbabe941-6b4a-4c1f-8b95-e7ab28a25e27",
+    "name": "Ванилин",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Вафли венские хрустящие классические порционные",
+    "group_code": "5015bb91-be98-4292-9244-c9401c0cf68f",
+    "id": "d09aec5c-b105-498d-a117-5f2eea69cc00",
+    "name": "Вафли хрустящие",
+    "range_code": "94171c23-775d-4800-be58-d7c4a87c8ef2",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Вода питьевая очищенная",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "3d80438e-e86f-4fe0-9f59-18ea9dc84a24",
+    "name": "Вода питьевая",
+    "range_code": "c1ca409b-8598-4dcc-93fd-7e9702414c63",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Масло оливковое нерафинированное Extra Virgin",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "7e51280c-d35f-416f-9ffb-ea95e3bcd814",
+    "name": "Масло оливковое",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Дрожжи хлебопекарные сухие инстантные",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "363a65df-917f-4706-829a-73cfee13c835",
+    "name": "Дрожжи сухие",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Соль поваренная пищевая выварочная",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "223f96dc-53a4-40c1-b328-0ed2795f6913",
+    "name": "Соль пищевая",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Томаты протертые консервированные",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "5e86821f-dcf8-41f9-a6d1-d3c5bfdb8900",
+    "name": "Томаты протертые",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Чеснок свежий урожай",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "bc175350-4bb0-4b67-9a79-5da9e98d282b",
+    "name": "Чеснок свежий",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Базилик сушеный измельченный",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "79ec9100-8f99-47bf-8df8-afe4ad3dad8e",
+    "name": "Базилик сушеный",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Сыр Моцарелла для пиццы 45%",
+    "group_code": "1b05dd94-1779-462a-89a2-5817fc193fc5",
+    "id": "b466543b-0d0d-485c-8601-6355a38bbd15",
+    "name": "Сыр Моцарелла",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Колбаски сырокопченые Пепперони острые",
+    "group_code": "112f8734-a841-4cb5-999a-8a37b0290ae6",
+    "id": "8f9585ae-f0c0-45cd-9192-fb31683c95f0",
+    "name": "Колбаски Пепперони",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Тесто дрожжевое для пиццы порционное",
+    "group_code": "84b453b7-3f7a-4e35-a690-df769b1244d2",
+    "id": "3908078a-1533-43ed-ab43-ea190246b85d",
+    "name": "Тесто для пиццы",
+    "range_code": "94171c23-775d-4800-be58-d7c4a87c8ef2",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Соус томатный фирменный для пиццы",
+    "group_code": "84b453b7-3f7a-4e35-a690-df769b1244d2",
+    "id": "adb1ca17-2240-4691-8bb3-d60cbe0d5dfd",
+    "name": "Соус томатный фирменный",
+    "range_code": "e857cc83-35f5-435d-a408-dfc1b3702023",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  },
+  {
+    "full_name": "Пицца Пепперони 30 см традиционное тесто",
+    "group_code": "5015bb91-be98-4292-9244-c9401c0cf68f",
+    "id": "c1ed3b0c-7cf9-4d20-aca0-8a689ba4ef5d",
+    "name": "Пицца Пепперони",
+    "range_code": "94171c23-775d-4800-be58-d7c4a87c8ef2",
+    "type": "Src.Dtos.nomenclature_dto.nomenclature_dto"
+  }
+]
