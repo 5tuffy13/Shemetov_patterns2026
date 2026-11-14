@@ -1,15 +1,14 @@
 import json
-import os
 from pathlib import Path
 from Src.Core.abstract_manager import abstract_manager
-from Src.Core.validator import validator, operation_exception, argument_exception
+from Src.Core.validator import validator, operation_exception
+from Src.Logics.convertor import convertor
 from Src.Models.settings_model import settings_model
-from Src.Models.organization_model import organization_model
 
 
 class settings_manager(abstract_manager):
     """
-    Менеджер для работы с настройками приложения (Singleton)
+    Менеджер настроек приложения на базе десериализатора (Singleton)
     """
 
     __default_file_name: str = "settings.json"
@@ -35,7 +34,6 @@ class settings_manager(abstract_manager):
         if path.is_file():
             return path
 
-        # Корень репозитория (Src/Logics -> ../..)
         repo_root = Path(__file__).resolve().parent.parent.parent
         target_path = repo_root / file_name
         if target_path.is_file():
@@ -70,40 +68,22 @@ class settings_manager(abstract_manager):
 
     def convert(self) -> bool:
         """
-        Обработка загруженных сырых данных и заполнение модели settings_model
+        Десериализация настроек через общий фасад convertor
         """
         if not isinstance(self._data, dict):
             raise operation_exception("Некорректная структура данных настроек: ожидается словарь (JSON-объект)")
 
+        company_data = self._data.get("company") or self._data.get("organization")
+        if not company_data or not isinstance(company_data, dict):
+            raise operation_exception("В настройках отсутствует обязательная секция 'company'")
+
         try:
-            company_data = self._data.get("company") or self._data.get("organization")
-            if not company_data or not isinstance(company_data, dict):
-                raise operation_exception("В настройках отсутствует обязательная секция 'company'")
+            worker = convertor()
+            restored = worker.deserialize(self._data, target_type=settings_model)
+            if not isinstance(restored, settings_model):
+                raise operation_exception("Не удалось преобразовать настройки в settings_model")
 
-            org = organization_model(
-                name=str(company_data.get("name", "")),
-                inn=str(company_data.get("inn", "")),
-                bik=str(company_data.get("bik", "")),
-                account=str(company_data.get("account", "")),
-                ownership_form=str(company_data.get("ownership_form", company_data.get("ownership", ""))),
-            )
-            self.__settings.company = org
-
-            boss = self._data.get("boss_name")
-            if boss is not None:
-                self.__settings.boss_name = str(boss)
-
-            accountant = self._data.get("account_name")
-            if accountant is not None:
-                self.__settings.account_name = str(accountant)
-
-            if "is_first_start" in self._data:
-                self.__settings.is_first_start = bool(self._data["is_first_start"])
-
-            if "response_format" in self._data:
-                fmt_raw = self._data["response_format"]
-                self.__settings.response_format = fmt_raw
-
+            self.__settings = restored
             return True
         except Exception as ex:
             raise operation_exception(f"Ошибка при конвертации настроек: {ex}")

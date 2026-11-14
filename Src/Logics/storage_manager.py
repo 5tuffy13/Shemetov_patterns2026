@@ -617,6 +617,141 @@ class storage_manager(abstract_manager):
             return None
         return self.get_by_id(category_key, identifier) or self.get_by_name(category_key, identifier)
 
+    @classmethod
+    def get_model_type(cls, category_key: str) -> Optional[Type[abstract_reference]]:
+        """
+        Получить тип модели по ключу категории
+        """
+        mapping = {
+            cls.storage_key(): storage_model,
+            cls.range_key(): range_model,
+            cls.group_key(): nomenclature_group_model,
+            cls.nomenclature_key(): nomenclature_model,
+            cls.receipt_key(): receipt_model,
+        }
+        resolved = cls().resolve_category(category_key)
+        return mapping.get(resolved)
+
+    def get_all(self, category_key: str) -> List[abstract_reference]:
+        """
+        Получить список всех сущностей указанной категории
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved or resolved not in self._data:
+            return []
+        return list(self._data[resolved].values())
+
+    def can_delete(self, category_key: str, identifier: str) -> tuple[bool, str]:
+        """
+        Проверка ссылочной целостности перед удалением или изменением сущности
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            return False, f"Категория '{category_key}' не найдена"
+
+        entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
+        if not entity:
+            return False, f"Элемент '{identifier}' не найден в категории '{resolved}'"
+
+        target_id = entity.id
+
+        # 1. Проверка единицы измерения (range_model)
+        if resolved == self.range_key():
+            for r in self.ranges:
+                if r.id != target_id and r.base_range is not None and r.base_range.id == target_id:
+                    return False, f"Единица измерения '{entity.name}' используется как базовая для '{r.name}'"
+            for n in self.nomenclatures:
+                if n.range is not None and n.range.id == target_id:
+                    return False, f"Единица измерения '{entity.name}' используется в номенклатуре '{n.name}'"
+            for rcp in self.receipts:
+                for row in rcp.rows:
+                    if row.range is not None and row.range.id == target_id:
+                        return False, f"Единица измерения '{entity.name}' используется в рецепте '{rcp.name}'"
+
+        # 2. Проверка группы номенклатуры (group_model)
+        elif resolved == self.group_key():
+            for n in self.nomenclatures:
+                if n.group is not None and n.group.id == target_id:
+                    return False, f"Группа номенклатуры '{entity.name}' используется в номенклатуре '{n.name}'"
+
+        # 3. Проверка номенклатуры (nomenclature_model)
+        elif resolved == self.nomenclature_key():
+            for rcp in self.receipts:
+                for row in rcp.rows:
+                    if row.nomenclature is not None and row.nomenclature.id == target_id:
+                        return False, f"Номенклатура '{entity.name}' используется в рецепте '{rcp.name}'"
+
+        # 4. Проверка технологической карты (receipt_model)
+        elif resolved == self.receipt_key():
+            for rcp in self.receipts:
+                if rcp.id == target_id:
+                    continue
+                for row in rcp.rows:
+                    if row.receipt is not None and row.receipt.id == target_id:
+                        return False, f"Технологическая карта '{entity.name}' используется как полуфабрикат в рецепте '{rcp.name}'"
+
+        return True, ""
+
+    def delete(self, category_key: str, identifier: str) -> bool:
+        """
+        Удаление сущности из хранилища с гарантией ссылочной целостности
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+
+        allowed, reason = self.can_delete(resolved, identifier)
+        if not allowed:
+            raise operation_exception(f"Ошибка удаления: {reason}")
+
+        entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
+        if not entity:
+            raise operation_exception(f"Элемент '{identifier}' не найден в категории '{resolved}'!")
+
+        del self._data[resolved][entity.id]
+        if entity.name in self._name_index[resolved]:
+            del self._name_index[resolved][entity.name]
+
+        return True
+
+    def add(self, category_key: str, item: abstract_reference) -> None:
+        """
+        Полиморфное добавление сущности в указанную категорию хранилища
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+        expected_type = self.get_model_type(resolved)
+        self._register_item(resolved, item, expected_type)
+
+    def update(self, category_key: str, identifier: str, new_item: abstract_reference) -> None:
+        """
+        Обновление сущности в хранилище с контролем целостности и уникальности
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+
+        entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
+        if not entity:
+            raise operation_exception(f"Элемент '{identifier}' не найден в категории '{resolved}'!")
+
+        if new_item.id != entity.id:
+            allowed, reason = self.can_delete(resolved, identifier)
+            if not allowed:
+                raise operation_exception(f"Запрещено изменять код (id) сущности, так как {reason}")
+
+        if new_item.name != entity.name:
+            if new_item.name in self._name_index[resolved]:
+                raise operation_exception(f"Элемент с наименованием '{new_item.name}' уже зарегистрирован!")
+
+        del self._data[resolved][entity.id]
+        if entity.name in self._name_index[resolved]:
+            del self._name_index[resolved][entity.name]
+
+        expected_type = self.get_model_type(resolved)
+        self._register_item(resolved, new_item, expected_type)
+
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
     # -------------------------------------------------------------------------
