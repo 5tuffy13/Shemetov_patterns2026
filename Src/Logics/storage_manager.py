@@ -620,17 +620,18 @@ class storage_manager(abstract_manager):
     @classmethod
     def get_model_type(cls, category_key: str) -> Optional[Type[abstract_reference]]:
         """
-        Получить тип модели по ключу категории
+        Динамическое определение типа модели через рефлексию подклассов abstract_reference
         """
-        mapping = {
-            cls.storage_key(): storage_model,
-            cls.range_key(): range_model,
-            cls.group_key(): nomenclature_group_model,
-            cls.nomenclature_key(): nomenclature_model,
-            cls.receipt_key(): receipt_model,
-        }
         resolved = cls().resolve_category(category_key)
-        return mapping.get(resolved)
+        if not resolved:
+            return None
+
+        token = resolved.lower().replace("_model", "").replace("_key", "")
+        expected_names = {resolved.lower(), f"{token}_model", f"nomenclature_{token}_model"}
+        for model_cls in abstract_reference.__subclasses__():
+            if model_cls.__name__.lower() in expected_names:
+                return model_cls
+        return None
 
     def get_all(self, category_key: str) -> List[abstract_reference]:
         """
@@ -643,8 +644,10 @@ class storage_manager(abstract_manager):
 
     def can_delete(self, category_key: str, identifier: str) -> tuple[bool, str]:
         """
-        Проверка ссылочной целостности перед удалением или изменением сущности
+        Проверка ссылочной целостности через специализированный сервис reference_service (SRP)
         """
+        from Src.Logics.reference_service import reference_service
+
         resolved = self.resolve_category(category_key)
         if not resolved:
             return False, f"Категория '{category_key}' не найдена"
@@ -653,44 +656,7 @@ class storage_manager(abstract_manager):
         if not entity:
             return False, f"Элемент '{identifier}' не найден в категории '{resolved}'"
 
-        target_id = entity.id
-
-        # 1. Проверка единицы измерения (range_model)
-        if resolved == self.range_key():
-            for r in self.ranges:
-                if r.id != target_id and r.base_range is not None and r.base_range.id == target_id:
-                    return False, f"Единица измерения '{entity.name}' используется как базовая для '{r.name}'"
-            for n in self.nomenclatures:
-                if n.range is not None and n.range.id == target_id:
-                    return False, f"Единица измерения '{entity.name}' используется в номенклатуре '{n.name}'"
-            for rcp in self.receipts:
-                for row in rcp.rows:
-                    if row.range is not None and row.range.id == target_id:
-                        return False, f"Единица измерения '{entity.name}' используется в рецепте '{rcp.name}'"
-
-        # 2. Проверка группы номенклатуры (group_model)
-        elif resolved == self.group_key():
-            for n in self.nomenclatures:
-                if n.group is not None and n.group.id == target_id:
-                    return False, f"Группа номенклатуры '{entity.name}' используется в номенклатуре '{n.name}'"
-
-        # 3. Проверка номенклатуры (nomenclature_model)
-        elif resolved == self.nomenclature_key():
-            for rcp in self.receipts:
-                for row in rcp.rows:
-                    if row.nomenclature is not None and row.nomenclature.id == target_id:
-                        return False, f"Номенклатура '{entity.name}' используется в рецепте '{rcp.name}'"
-
-        # 4. Проверка технологической карты (receipt_model)
-        elif resolved == self.receipt_key():
-            for rcp in self.receipts:
-                if rcp.id == target_id:
-                    continue
-                for row in rcp.rows:
-                    if row.receipt is not None and row.receipt.id == target_id:
-                        return False, f"Технологическая карта '{entity.name}' используется как полуфабрикат в рецепте '{rcp.name}'"
-
-        return True, ""
+        return reference_service(self).can_delete(entity.id)
 
     def delete(self, category_key: str, identifier: str) -> bool:
         """
@@ -702,7 +668,7 @@ class storage_manager(abstract_manager):
 
         allowed, reason = self.can_delete(resolved, identifier)
         if not allowed:
-            raise operation_exception(f"Ошибка удаления: {reason}")
+            raise operation_exception(reason)
 
         entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
         if not entity:
