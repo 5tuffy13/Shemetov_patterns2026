@@ -14,7 +14,7 @@ class abstract_reference(ABC):
         Инициализация: генерация id и опциональная установка наименования
         """
         self.__id = uuid.uuid4()
-        if name is not None:
+        if name is not None and str(name).strip() != "":
             self.name = name
 
     @property

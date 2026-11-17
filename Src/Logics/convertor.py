@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Type
 from Src.Core.abstract_convert_factory import abstract_convert_factory
+from Src.Core.abstract_dto import abstract_dto
+from Src.Core.abstract_reference import abstract_reference
 from Src.Core.validator import validator
 from Src.Logics.convert_factory import convert_factory
 
@@ -56,6 +58,10 @@ class convertor:
                 clean_str.startswith("[") and clean_str.endswith("]")
             ):
                 data = json.loads(clean_str)
+
+        # Если явно передан тип целевой доменной модели
+        if target_type is not None and issubclass(target_type, (abstract_reference, abstract_dto)):
+            return self.__factory.domain_convertor.deserialize(data, target_type=target_type, context=context)
 
         conv = self.__factory.create(type(data))
         return conv.deserialize(data, target_type=target_type, context=context)

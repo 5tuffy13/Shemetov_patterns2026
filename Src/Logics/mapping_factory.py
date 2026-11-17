@@ -8,6 +8,7 @@ from Src.Dtos.organization_dto import organization_dto
 from Src.Dtos.range_dto import range_dto
 from Src.Dtos.receipt_dto import receipt_dto
 from Src.Dtos.receipt_row_dto import receipt_row_dto
+from Src.Dtos.settings_dto import settings_dto
 from Src.Dtos.storage_dto import storage_dto
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
@@ -15,6 +16,7 @@ from Src.Models.organization_model import organization_model
 from Src.Models.range_model import range_model
 from Src.Models.receipt_model import receipt_model
 from Src.Models.receipt_row_model import receipt_row_model
+from Src.Models.settings_model import settings_model
 from Src.Models.storage_model import storage_model
 
 
@@ -46,6 +48,7 @@ class mapping_factory(abstract_mapping_factory):
             organization_model: organization_dto,
             receipt_row_model: receipt_row_dto,
             receipt_model: receipt_dto,
+            settings_model: settings_dto,
         }
 
         # Обратное сопоставление: Класс DTO -> Доменная модель
@@ -128,6 +131,12 @@ class mapping_factory(abstract_mapping_factory):
                     _, dto_cls = pair
                     dto_instance = dto_cls().from_dict(source)
                     return self.to_model(dto_instance, context)
+
+            # Если словарь содержит поля настроек
+            if "company" in source or "boss_name" in source:
+                dto_instance = settings_dto().from_dict(source)
+                return self.to_model(dto_instance, context)
+
             return source
 
         if isinstance(source, abstract_reference):
@@ -138,7 +147,8 @@ class mapping_factory(abstract_mapping_factory):
         # 1. Единица измерения
         if isinstance(source, range_dto):
             model = range_model(name=source.name, coeff=source.coeff)
-            model.id = source.id
+            if source.id and str(source.id).strip():
+                model.id = source.id
             if source.base_code and context and source.base_code in context:
                 model.base_range = context[source.base_code]
             else:
@@ -151,7 +161,8 @@ class mapping_factory(abstract_mapping_factory):
         # 2. Склад
         if isinstance(source, storage_dto):
             model = storage_model(name=source.name, address=source.address)
-            model.id = source.id
+            if source.id and str(source.id).strip():
+                model.id = source.id
             if context is not None:
                 context[model.id] = model
                 context[model.name] = model
@@ -160,7 +171,8 @@ class mapping_factory(abstract_mapping_factory):
         # 3. Группа номенклатуры
         if isinstance(source, nomenclature_group_dto):
             model = nomenclature_group_model(name=source.name)
-            model.id = source.id
+            if source.id and str(source.id).strip():
+                model.id = source.id
             if context is not None:
                 context[model.id] = model
                 context[model.name] = model
@@ -168,13 +180,15 @@ class mapping_factory(abstract_mapping_factory):
 
         # 4. Организация
         if isinstance(source, organization_dto):
-            model = organization_model()
-            model.id = source.id
-            model.name = source.name
-            model.inn = source.inn
-            model.bik = source.bik
-            model.account = source.account
-            model.ownership_form = source.ownership_form
+            model = organization_model(
+                name=source.name,
+                inn=source.inn,
+                bik=source.bik,
+                account=source.account,
+                ownership_form=source.ownership_form,
+            )
+            if source.id and str(source.id).strip():
+                model.id = source.id
             if context is not None:
                 context[model.id] = model
             return model
@@ -189,7 +203,8 @@ class mapping_factory(abstract_mapping_factory):
                 group=group_obj,
                 range=range_obj,
             )
-            model.id = source.id
+            if source.id and str(source.id).strip():
+                model.id = source.id
             if context is not None:
                 context[model.id] = model
                 context[model.name] = model
@@ -205,7 +220,8 @@ class mapping_factory(abstract_mapping_factory):
                 gross=source.gross,
                 net=source.net,
             )
-            row.id = source.id
+            if source.id and str(source.id).strip():
+                row.id = source.id
             if source.name:
                 row.name = source.name
             return row
@@ -224,10 +240,27 @@ class mapping_factory(abstract_mapping_factory):
                 cooking_time=source.cooking_time,
                 rows=restored_rows,
             )
-            model.id = source.id
+            if source.id and str(source.id).strip():
+                model.id = source.id
             if context is not None:
                 context[model.id] = model
                 context[model.name] = model
+            return model
+
+        # 8. Настройки приложения
+        if isinstance(source, settings_dto):
+            model = settings_model(name=source.name or "Настройки")
+            if source.id and str(source.id).strip():
+                model.id = source.id
+            if source.boss_name:
+                model.boss_name = source.boss_name
+            if source.account_name:
+                model.account_name = source.account_name
+            model.first_start = source.is_first_start
+            if source.response_format:
+                model.response_format = source.response_format
+            if source.company is not None:
+                model.company = self.to_model(source.company, context)
             return model
 
         return source

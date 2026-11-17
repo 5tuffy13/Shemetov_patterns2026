@@ -617,6 +617,107 @@ class storage_manager(abstract_manager):
             return None
         return self.get_by_id(category_key, identifier) or self.get_by_name(category_key, identifier)
 
+    @classmethod
+    def get_model_type(cls, category_key: str) -> Optional[Type[abstract_reference]]:
+        """
+        Динамическое определение типа модели через рефлексию подклассов abstract_reference
+        """
+        resolved = cls().resolve_category(category_key)
+        if not resolved:
+            return None
+
+        token = resolved.lower().replace("_model", "").replace("_key", "")
+        expected_names = {resolved.lower(), f"{token}_model", f"nomenclature_{token}_model"}
+        for model_cls in abstract_reference.__subclasses__():
+            if model_cls.__name__.lower() in expected_names:
+                return model_cls
+        return None
+
+    def get_all(self, category_key: str) -> List[abstract_reference]:
+        """
+        Получить список всех сущностей указанной категории
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved or resolved not in self._data:
+            return []
+        return list(self._data[resolved].values())
+
+    def can_delete(self, category_key: str, identifier: str) -> tuple[bool, str]:
+        """
+        Проверка ссылочной целостности через специализированный сервис reference_service (SRP)
+        """
+        from Src.Logics.reference_service import reference_service
+
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            return False, f"Категория '{category_key}' не найдена"
+
+        entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
+        if not entity:
+            return False, f"Элемент '{identifier}' не найден в категории '{resolved}'"
+
+        return reference_service(self).can_delete(entity.id)
+
+    def delete(self, category_key: str, identifier: str) -> bool:
+        """
+        Удаление сущности из хранилища с гарантией ссылочной целостности
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+
+        allowed, reason = self.can_delete(resolved, identifier)
+        if not allowed:
+            raise operation_exception(reason)
+
+        entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
+        if not entity:
+            raise operation_exception(f"Элемент '{identifier}' не найден в категории '{resolved}'!")
+
+        del self._data[resolved][entity.id]
+        if entity.name in self._name_index[resolved]:
+            del self._name_index[resolved][entity.name]
+
+        return True
+
+    def add(self, category_key: str, item: abstract_reference) -> None:
+        """
+        Полиморфное добавление сущности в указанную категорию хранилища
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+        expected_type = self.get_model_type(resolved)
+        self._register_item(resolved, item, expected_type)
+
+    def update(self, category_key: str, identifier: str, new_item: abstract_reference) -> None:
+        """
+        Обновление сущности в хранилище с контролем целостности и уникальности
+        """
+        resolved = self.resolve_category(category_key)
+        if not resolved:
+            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+
+        entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
+        if not entity:
+            raise operation_exception(f"Элемент '{identifier}' не найден в категории '{resolved}'!")
+
+        if new_item.id != entity.id:
+            allowed, reason = self.can_delete(resolved, identifier)
+            if not allowed:
+                raise operation_exception(f"Запрещено изменять код (id) сущности, так как {reason}")
+
+        if new_item.name != entity.name:
+            if new_item.name in self._name_index[resolved]:
+                raise operation_exception(f"Элемент с наименованием '{new_item.name}' уже зарегистрирован!")
+
+        del self._data[resolved][entity.id]
+        if entity.name in self._name_index[resolved]:
+            del self._name_index[resolved][entity.name]
+
+        expected_type = self.get_model_type(resolved)
+        self._register_item(resolved, new_item, expected_type)
+
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
     # -------------------------------------------------------------------------

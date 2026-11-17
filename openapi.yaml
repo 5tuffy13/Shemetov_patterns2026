@@ -1,0 +1,228 @@
+openapi: 3.0.0
+info:
+  title: Patterns 2026 REST API
+  version: "1.0"
+  description: REST API для управления доменными моделями, отчетами и хранилищем
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /api/reports/formats:
+    get:
+      summary: Получить список всех форматов для построения отчетов
+      description: Возвращает массив всех поддерживаемых форматов отчетов в формате JSON.
+      operationId: main.get_reports_formats
+      responses:
+        '200':
+          description: Список доступных форматов отчетов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example: ["CSV", "MARKDOWN", "JSON", "HTML", "XML", "TXT"]
+
+  /api/get_formats:
+    get:
+      summary: Получить список форматов (текстовый вид)
+      operationId: main.get_formats
+      responses:
+        '200':
+          description: Строка форматов через запятую
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /api/get_entities:
+    get:
+      summary: Получить список доменных категорий
+      operationId: main.get_entities
+      responses:
+        '200':
+          description: Список категорий хранилища
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /api/get_default_report:
+    get:
+      summary: Получить отчет по сущности в формате по умолчанию
+      operationId: main.get_default_report
+      parameters:
+        - name: entity
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: unique_code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешно сгенерированный отчет
+        '400':
+          description: Ошибка параметров запроса
+        '404':
+          description: Сущность не найдена
+
+  /api/report/{entity_type}/{entity_id}:
+    get:
+      summary: Сформировать отчет по формату, типу сущности и идентификатору
+      operationId: main.get_entity_report
+      parameters:
+        - name: entity_type
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: entity_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Сформированный отчет
+        '400':
+          description: Некорректный формат отчета
+        '404':
+          description: Сущность не найдена
+
+  /api/entities/{entity}:
+    get:
+      summary: Получить список всех сущностей указанной категории
+      operationId: main.get_entities_list
+      parameters:
+        - name: entity
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Наименование категории (range_model, storage_key, group_model, nomenclature_model, receipt_model)
+      responses:
+        '200':
+          description: Список объектов категории в формате JSON
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '404':
+          description: Категория не найдена
+    post:
+      summary: Добавить новую сущность в категорию
+      operationId: main.post_entity
+      parameters:
+        - name: entity
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Сущность успешно добавлена
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Ошибка валидации данных или параметров
+
+  /api/entities/{entity}/{id}:
+    get:
+      summary: Получить сущность по идентификатору
+      operationId: main.get_entity_by_id
+      parameters:
+        - name: entity
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Данные сущности в формате JSON
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Сущность не найдена
+    put:
+      summary: Обновить поля сущности
+      operationId: main.put_entity
+      parameters:
+        - name: entity
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Сущность успешно обновлена
+        '400':
+          description: Ошибка валидации данных
+        '404':
+          description: Сущность не найдена
+        '409':
+          description: Запрещено изменять код (id) сущности из-за связанных данных
+    delete:
+      summary: Удалить сущность с проверкой ссылочной целостности
+      operationId: main.delete_entity
+      parameters:
+        - name: entity
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Сущность успешно удалена
+        '404':
+          description: Сущность не найдена
+        '409':
+          description: Запрещено удалять сущность, так как с ней связаны другие сущности

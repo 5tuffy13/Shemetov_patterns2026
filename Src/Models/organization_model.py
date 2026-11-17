@@ -19,10 +19,19 @@ class organization_model(abstract_reference):
         Инициализация организации
         """
         super().__init__(name)
-        self.inn = inn
-        self.bik = bik
-        self.account = account
-        self.ownership_form = ownership_form
+        self.__inn: str = ""
+        self.__bik: str = ""
+        self.__account: str = ""
+        self.__ownership_form: str = ""
+
+        if inn != "":
+            self.inn = inn
+        if bik != "":
+            self.bik = bik
+        if account != "":
+            self.account = account
+        if ownership_form != "":
+            self.ownership_form = ownership_form
 
     @property
     def inn(self) -> str:
