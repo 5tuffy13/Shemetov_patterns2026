@@ -12,6 +12,9 @@ from Src.Logics.convertor import convertor
 from Src.Logics.report_factory import report_factory
 from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
+from Src.Dtos.filter_dto import filter_dto
+from Src.Logics.prototype import prototype
+from Src.Logics.osv_service import osv_service
 
 # Подключение Connexion и Swagger UI
 try:
@@ -247,6 +250,48 @@ def delete_entity(entity_type: str, entity_id: str):
 
     storage.delete(category, entity_id)
     return jsonify({"success": True, "message": f"Сущность '{entity_id}' успешно удалена"}), 200
+
+
+# -----------------------------------------------------------------------------
+# Эндпоинты фильтрации через Прототип и Оборотно-сальдовой ведомости (ОСВ)
+# -----------------------------------------------------------------------------
+
+
+@app.route("/api/filter/<domain>", methods=["POST"])
+def post_filter_domain(domain: str):
+    """
+    Фильтрация доменных сущностей с использованием паттерна Прототип
+    """
+    category = storage.resolve_category(domain)
+    if not category:
+        return jsonify({"error": f"Категория '{domain}' не найдена"}), 404
+
+    data = request.get_json(silent=True) or {}
+    try:
+        filter_obj = filter_dto.from_dict(data)
+    except Exception as ex:
+        return jsonify({"error": f"Некорректный формат фильтра: {ex}"}), 400
+
+    items = storage.get_all(category)
+    pr = prototype(items).clone(filter_obj)
+    serialized = [conv.factory.domain_convertor.convert(item) for item in pr.data]
+    return jsonify(serialized), 200
+
+
+@app.route("/api/osv/filter", methods=["POST"])
+def post_osv_filter():
+    """
+    Формирование Оборотно-сальдовой ведомости (ОСВ) с фильтрацией через Прототип
+    """
+    data = request.get_json(silent=True) or {}
+    try:
+        filter_obj = filter_dto.from_dict(data) if data else None
+    except Exception as ex:
+        return jsonify({"error": f"Некорректный формат фильтра: {ex}"}), 400
+
+    osv_svc = osv_service(storage)
+    rows = osv_svc.build(filter_obj)
+    return jsonify([row.to_dict() for row in rows]), 200
 
 
 if __name__ == "__main__":

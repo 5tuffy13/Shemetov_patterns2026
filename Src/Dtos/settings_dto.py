@@ -1,8 +1,10 @@
-from typing import Any, Dict, Optional
+from typing import TYPE_CHECKING, Any, Dict, Optional
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.validator import validator
 from Src.Dtos.organization_dto import organization_dto
-from Src.Models.settings_model import settings_model
+
+if TYPE_CHECKING:
+    from Src.Models.settings_model import settings_model
 
 
 class settings_dto(abstract_dto):
@@ -86,10 +88,12 @@ class settings_dto(abstract_dto):
         validator.validate_type(value, str, field_name="response_format")
         self.__response_format = value.strip()
 
-    def from_domain_model(self, source: settings_model) -> "settings_dto":
+    def from_domain_model(self, source: Any) -> "settings_dto":
         """
         Создать DTO из доменной модели настроек
         """
+        from Src.Models.settings_model import settings_model
+
         validator.validate_type(source, settings_model, field_name="source")
 
         dto = settings_dto()
