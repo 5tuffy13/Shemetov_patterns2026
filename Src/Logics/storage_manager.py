@@ -22,6 +22,8 @@ from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.settings_model import settings_model
 from Src.Models.receipt_row_model import receipt_row_model
 from Src.Models.receipt_model import receipt_model
+from Src.Models.transaction_model import transaction_model
+import datetime
 from Src.Logics.settings_manager import settings_manager
 
 
@@ -107,6 +109,13 @@ class storage_manager(abstract_manager):
         Ключ категории технологических карт
         """
         return "receipt_model"
+
+    @staticmethod
+    def transaction_key() -> str:
+        """
+        Ключ категории складских транзакций
+        """
+        return "transaction_model" 
 
     @staticmethod
     def domains() -> dict:
@@ -461,12 +470,64 @@ class storage_manager(abstract_manager):
 
         receipts_seed = [receipt_dough, receipt_sauce, receipt_pizza]
 
+        # 6. Складские транзакции (движения товаров)
+        tx_flour_1 = transaction_model(
+            name="Поступление муки",
+            storage=storage_main,
+            nomenclature=nom_flour,
+            range_item=unit_gram,
+            value=50000.0,
+            period=datetime.datetime(2026, 11, 1, 9, 0, 0),
+        )
+        tx_flour_2 = transaction_model(
+            name="Расход муки на выпечку",
+            storage=storage_main,
+            nomenclature=nom_flour,
+            range_item=unit_gram,
+            value=-12000.0,
+            period=datetime.datetime(2026, 11, 10, 14, 0, 0),
+        )
+        tx_sugar_1 = transaction_model(
+            name="Поступление сахара",
+            storage=storage_main,
+            nomenclature=nom_sugar,
+            range_item=unit_gram,
+            value=20000.0,
+            period=datetime.datetime(2026, 11, 2, 10, 30, 0),
+        )
+        tx_sugar_2 = transaction_model(
+            name="Списание сахара",
+            storage=storage_main,
+            nomenclature=nom_sugar,
+            range_item=unit_gram,
+            value=-5000.0,
+            period=datetime.datetime(2026, 11, 12, 16, 0, 0),
+        )
+        tx_butter_1 = transaction_model(
+            name="Поступление масла",
+            storage=storage_main,
+            nomenclature=nom_butter,
+            range_item=unit_gram,
+            value=15000.0,
+            period=datetime.datetime(2026, 11, 3, 11, 0, 0),
+        )
+        tx_eggs_1 = transaction_model(
+            name="Поступление яиц",
+            storage=storage_main,
+            nomenclature=nom_egg,
+            range_item=unit_piece,
+            value=300.0,
+            period=datetime.datetime(2026, 11, 4, 8, 30, 0),
+        )
+        transactions_seed = [tx_flour_1, tx_flour_2, tx_sugar_1, tx_sugar_2, tx_butter_1, tx_eggs_1]
+
         return {
             storage_manager.range_key(): ranges_seed,
             storage_manager.storage_key(): storages_seed,
             storage_manager.group_key(): groups_seed,
             storage_manager.nomenclature_key(): nomenclatures_seed,
             storage_manager.receipt_key(): receipts_seed,
+            storage_manager.transaction_key(): transactions_seed,
         }
 
     # -------------------------------------------------------------------------
@@ -541,6 +602,20 @@ class storage_manager(abstract_manager):
         Добавить технологическую карту в хранилище с проверкой уникальности
         """
         self._register_item(self.receipt_key(), item, receipt_model)
+
+    def add_transaction(self, item: transaction_model) -> None:
+        """
+        Добавить складскую транзакцию в хранилище
+        """
+        validator.validate(item, transaction_model, field_name="transaction")
+        self._register_item(self.transaction_key(), item, transaction_model)
+
+    @property
+    def transactions(self) -> List[transaction_model]:
+        """
+        Список всех зарегистрированных складских транзакций
+        """
+        return list(self._data.get(self.transaction_key(), {}).values())
 
     # -------------------------------------------------------------------------
     # Быстрый поиск за O(1) по id и наименованию
@@ -752,6 +827,8 @@ class storage_manager(abstract_manager):
                     self.add_nomenclature(item)
                 elif category == self.receipt_key():
                     self.add_receipt(item)
+                elif category == self.transaction_key():
+                    self.add_transaction(item)
 
         self.is_first_start = False
         self.is_loaded = True

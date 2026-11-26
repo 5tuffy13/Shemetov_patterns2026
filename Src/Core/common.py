@@ -2,8 +2,6 @@ from typing import Any, List
 from Src.Core.abstract_reference import abstract_reference
 from Src.Core.exception import argument_exception
 from Src.Core.validator import validator
-from Src.Dtos.entity_description_header_dto import entity_description_header_dto
-from Src.Dtos.entity_description_table_dto import entity_description_table_dto
 
 
 class common:
@@ -38,7 +36,6 @@ class common:
                 except Exception:
                     continue
 
-                # Исключение списков и словарей при запросе скалярных свойств
                 if is_common and (isinstance(value, (dict, list, set, tuple))):
                     continue
 
@@ -47,7 +44,7 @@ class common:
         return result
 
     @staticmethod
-    def get_entity_header(source: abstract_reference) -> List[entity_description_header_dto]:
+    def get_entity_header(source: abstract_reference) -> List[Any]:
         """
         Получить строковое описание скалярных полей доменной сущности (заголовочная часть).
 
@@ -59,6 +56,8 @@ class common:
         """
         if source is None:
             raise argument_exception("source", "Некорректно передан объект сущности!")
+
+        from Src.Dtos.entity_description_header_dto import entity_description_header_dto
 
         result: List[entity_description_header_dto] = []
         field_names = common.get_fields(source, is_common=True)
@@ -75,7 +74,7 @@ class common:
         return result
 
     @staticmethod
-    def get_entity_table(source: abstract_reference) -> List[entity_description_table_dto]:
+    def get_entity_table(source: abstract_reference) -> List[Any]:
         """
         Получить табличную часть для агрегата.
         Ищет коллекционные свойства (списки дочерних строк), формируя DTO для каждой строки.
@@ -89,10 +88,11 @@ class common:
         if source is None:
             raise argument_exception("source", "Некорректно передан объект сущности!")
 
+        from Src.Dtos.entity_description_table_dto import entity_description_table_dto
+
         result: List[entity_description_table_dto] = []
         field_names = common.get_fields(source, is_common=False)
 
-        # Поиск первого непустого свойства-списка
         list_field = None
         for name in field_names:
             val = getattr(source, name, None)

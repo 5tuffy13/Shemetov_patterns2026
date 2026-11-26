@@ -8,3 +8,6 @@ from Src.Dtos.organization_dto import organization_dto
 from Src.Dtos.receipt_row_dto import receipt_row_dto
 from Src.Dtos.receipt_dto import receipt_dto
 from Src.Dtos.settings_dto import settings_dto
+from Src.Dtos.filter_type_enum import filter_type_enum
+from Src.Dtos.filter_item_dto import filter_item_dto
+from Src.Dtos.filter_dto import filter_dto

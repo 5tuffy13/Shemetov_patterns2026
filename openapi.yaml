@@ -226,3 +226,101 @@ paths:
           description: Сущность не найдена
         '409':
           description: Запрещено удалять сущность, так как с ней связаны другие сущности
+
+  /api/filter/{domain}:
+    post:
+      summary: Фильтрация сущностей указанной категории через Прототип
+      operationId: main.post_filter_domain
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Категория доменных сущностей (range, group, storage, nomenclature, receipt)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field_name:
+                        type: string
+                      filter_type:
+                        type: string
+                        example: "LIKE"
+                      value:
+                        type: string
+                        example: "мука"
+      responses:
+        '200':
+          description: Отфильтрованный список доменных сущностей
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '400':
+          description: Некорректный формат фильтра
+        '404':
+          description: Категория не найдена
+
+  /api/osv/filter:
+    post:
+      summary: Формирование Оборотно-сальдовой ведомости с фильтрацией через Прототип
+      operationId: main.post_osv_filter
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field_name:
+                        type: string
+                      filter_type:
+                        type: string
+                      value:
+                        type: string
+      responses:
+        '200':
+          description: Сформированные строки Оборотно-сальдовой ведомости
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    storage_name:
+                      type: string
+                    storage_id:
+                      type: string
+                    nomenclature_name:
+                      type: string
+                    nomenclature_id:
+                      type: string
+                    range_name:
+                      type: string
+                    start_balance:
+                      type: number
+                    income:
+                      type: number
+                    outcome:
+                      type: number
+                    end_balance:
+                      type: number
+        '400':
+          description: Ошибка параметров фильтрации

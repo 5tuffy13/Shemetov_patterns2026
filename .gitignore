@@ -191,3 +191,7 @@ cython_debug/
 .DS_Store
 
 
+
+# Local infra
+_infra/
+
