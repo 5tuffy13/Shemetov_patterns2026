@@ -324,3 +324,208 @@ paths:
                       type: number
         '400':
           description: Ошибка параметров фильтрации
+  /api/logs:
+    get:
+      summary: Получить записи журнала событий в формате JSON
+      operationId: main.get_logs
+      parameters:
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [ERROR, INFO, DEBUG]
+        - name: subsystem
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            default: period
+            enum: [period, subsystem, level, event_type, message]
+        - name: sort_direction
+          in: query
+          required: false
+          schema:
+            type: string
+            default: DESC
+            enum: [ASC, DESC]
+      responses:
+        '200':
+          description: Список записей журнала событий
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogEntry'
+        '400':
+          description: Некорректные параметры запроса журнала
+
+  /api/logs/filter:
+    post:
+      summary: Фильтрация и сортировка записей журнала событий через Прототип
+      operationId: main.post_logs_filter
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogQuery'
+      responses:
+        '200':
+          description: Отфильтрованный и отсортированный список записей журнала
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogEntry'
+        '400':
+          description: Ошибка параметров фильтрации или сортировки
+
+  /api/logs/export:
+    get:
+      summary: Экспорт записей журнала событий в указанном формате
+      operationId: main.get_logs_export
+      parameters:
+        - name: format
+          in: query
+          required: false
+          schema:
+            type: string
+            default: TXT
+            enum: [JSON, TXT, CSV, MARKDOWN]
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [ERROR, INFO, DEBUG]
+        - name: subsystem
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            default: period
+        - name: sort_direction
+          in: query
+          required: false
+          schema:
+            type: string
+            default: DESC
+      responses:
+        '200':
+          description: Выгруженный журнал событий в выбранном формате
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogEntry'
+            text/plain:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+            text/markdown:
+              schema:
+                type: string
+        '400':
+          description: Неподдерживаемый формат или некорректные параметры запроса
+    post:
+      summary: Экспорт отфильтрованного журнала событий в указанном формате
+      operationId: main.post_logs_export
+      parameters:
+        - name: format
+          in: query
+          required: false
+          schema:
+            type: string
+            default: TXT
+            enum: [JSON, TXT, CSV, MARKDOWN]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogQuery'
+      responses:
+        '200':
+          description: Выгруженный журнал событий в выбранном формате
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogEntry'
+            text/plain:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+            text/markdown:
+              schema:
+                type: string
+        '400':
+          description: Неподдерживаемый формат или некорректные параметры запроса
+
+components:
+  schemas:
+    LogEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        period:
+          type: string
+          format: date-time
+        subsystem:
+          type: string
+        level:
+          type: string
+          enum: [ERROR, INFO, DEBUG]
+        event_type:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+    FilterItem:
+      type: object
+      properties:
+        field_name:
+          type: string
+          example: level
+        filter_type:
+          type: string
+          example: EQUALS
+        value:
+          type: string
+          example: ERROR
+    LogQuery:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterItem'
+        sort_by:
+          type: string
+          default: period
+          enum: [period, subsystem, level, event_type, message]
+        sort_direction:
+          type: string
+          default: DESC
+          enum: [ASC, DESC]

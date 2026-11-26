@@ -11,3 +11,6 @@ from Src.Dtos.settings_dto import settings_dto
 from Src.Dtos.filter_type_enum import filter_type_enum
 from Src.Dtos.filter_item_dto import filter_item_dto
 from Src.Dtos.filter_dto import filter_dto
+from Src.Dtos.log_entry_dto import log_entry_dto
+from Src.Dtos.log_format_enum import log_format_enum
+from Src.Dtos.log_query_dto import log_query_dto

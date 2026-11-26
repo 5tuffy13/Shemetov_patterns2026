@@ -7,3 +7,4 @@ from Src.Models.settings_model import settings_model
 from Src.Models.receipt_row_model import receipt_row_model
 from Src.Models.receipt_model import receipt_model
 from Src.Models.transaction_model import transaction_model
+from Src.Models.log_entry_model import log_entry_model

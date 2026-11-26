@@ -1,0 +1,200 @@
+[
+  {
+    "id": "d5bdf3ad-e34e-4161-be6f-ccae52699486",
+    "period": "2026-11-26T09:45:24.800207",
+    "subsystem": "settings_manager",
+    "level": "INFO",
+    "event_type": "load_settings",
+    "message": "Загружены настройки из файла 'settings.json'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "8cda38a0-e218-410c-9c2b-a970777d1533",
+    "period": "2026-11-26T09:45:24.801310",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "storage_loaded",
+    "message": "Хранилище инициализировано: категорий=6, записей=40",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "4e7dccb9-1aeb-4524-bb0a-20b8fee67dcf",
+    "period": "2026-11-26T09:45:24.834924",
+    "subsystem": "settings_manager",
+    "level": "INFO",
+    "event_type": "change_settings",
+    "message": "Обновлены настройки приложения (формат ответа: MARKDOWN)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "b7787f87-623b-4a60-afc9-10eee3d0bf0a",
+    "period": "2026-11-26T09:45:24.835120",
+    "subsystem": "settings_manager",
+    "level": "ERROR",
+    "event_type": "settings_error",
+    "message": "Ошибка загрузки настроек 'missing_config_sample.json': файл не найден (missing_config_sample.json)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "6b053db3-7e83-43a1-9bcc-3672bca76a12",
+    "period": "2026-11-26T09:45:24.835222",
+    "subsystem": "warehouse",
+    "level": "INFO",
+    "event_type": "transaction_created",
+    "message": "Проведена транзакция id=50bfa0ad-6707-4759-8a40-6ea62f64b1ad: склад='Главный склад', номенклатура='Сахар', объем=2500.0",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "e1cfa84d-a99d-48e0-a5aa-6018b5155b8b",
+    "period": "2026-11-26T09:45:24.835726",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос GET /api/entities/storage",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "5e578d72-f7b9-48f0-9388-c5293d6bc090",
+    "period": "2026-11-26T09:45:24.836120",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "GET /api/entities/storage -> 200 (0.39 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "20918fdb-1404-4505-8dcd-a3e060cf4c78",
+    "period": "2026-11-26T09:45:24.836630",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос POST /api/entities/storage",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "b973d8cf-6dec-46a4-aa66-dd4b5382f5fc",
+    "period": "2026-11-26T09:45:24.837239",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "add_entity",
+    "message": "Добавлена сущность в категорию 'storage_key': id=8e67a1a1-d4a6-4f15-aa34-248ea335fa3c, name='Временный склад поставки'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "48d73932-f269-469b-b125-c6a298f1166c",
+    "period": "2026-11-26T09:45:24.837365",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "POST /api/entities/storage -> 201 (0.75 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "a4dcc467-2066-4482-872c-a91bbdea9741",
+    "period": "2026-11-26T09:45:24.837751",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос PUT /api/entities/storage/8e67a1a1-d4a6-4f15-aa34-248ea335fa3c",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "f7fd24f9-8afd-496e-8b91-dcda21ce6c99",
+    "period": "2026-11-26T09:45:24.838333",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "update_entity",
+    "message": "Обновлена сущность в категории 'storage_key': id=8e67a1a1-d4a6-4f15-aa34-248ea335fa3c, name='Склад поставки обновленный'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "32817e60-256b-4fce-bff3-df7d7d64fb26",
+    "period": "2026-11-26T09:45:24.838452",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "PUT /api/entities/storage/8e67a1a1-d4a6-4f15-aa34-248ea335fa3c -> 200 (0.7 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "4ca29cb3-77b8-4582-8067-53a8c380d715",
+    "period": "2026-11-26T09:45:24.838806",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос DELETE /api/entities/storage/8e67a1a1-d4a6-4f15-aa34-248ea335fa3c",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "8b686da9-eca5-4b16-8fba-e1a386dfcfb2",
+    "period": "2026-11-26T09:45:24.843910",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "delete_entity",
+    "message": "Удалена сущность из категории 'storage_key': id=8e67a1a1-d4a6-4f15-aa34-248ea335fa3c, name='Склад поставки обновленный'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "904ad636-a33e-4f60-b670-bd3a1380df93",
+    "period": "2026-11-26T09:45:24.844052",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "DELETE /api/entities/storage/8e67a1a1-d4a6-4f15-aa34-248ea335fa3c -> 200 (5.24 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "3e0eeba8-334a-46ae-b7c4-54b361641dcb",
+    "period": "2026-11-26T09:45:24.844513",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос DELETE /api/entities/nomenclature_model/369a1641-dc93-4d39-82d7-ed77ebb2680e",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "ae5183bd-47bd-4c96-9002-25b74c08c411",
+    "period": "2026-11-26T09:45:24.846353",
+    "subsystem": "web_api",
+    "level": "ERROR",
+    "event_type": "http_request_completed",
+    "message": "DELETE /api/entities/nomenclature_model/369a1641-dc93-4d39-82d7-ed77ebb2680e -> 409 (1.84 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "a9656cf2-6d7c-4a75-89ee-5f8577c8ffdc",
+    "period": "2026-11-26T09:45:24.846731",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос POST /api/osv/filter",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "da71d31c-77f5-4eb9-9e03-6fbcd06dd3a2",
+    "period": "2026-11-26T09:45:24.846896",
+    "subsystem": "warehouse",
+    "level": "INFO",
+    "event_type": "osv_built",
+    "message": "Сформирована ОСВ: строк=4, период=-..-",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "a370ec1d-f162-48b6-8ef1-683c86170ad8",
+    "period": "2026-11-26T09:45:24.847038",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "POST /api/osv/filter -> 200 (0.31 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "f57888ff-509b-41d9-853f-b497c626f2fe",
+    "period": "2026-11-26T09:45:24.847330",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос GET /api/logs/export",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  }
+]

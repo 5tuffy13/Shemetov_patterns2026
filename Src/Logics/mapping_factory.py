@@ -1,7 +1,9 @@
+import datetime
 from typing import Any, Dict, Optional, Tuple, Type
 from Src.Core.abstract_dto import abstract_dto
 from Src.Core.abstract_mapping_factory import abstract_mapping_factory
 from Src.Core.abstract_reference import abstract_reference
+from Src.Dtos.log_entry_dto import log_entry_dto
 from Src.Dtos.nomenclature_dto import nomenclature_dto
 from Src.Dtos.nomenclature_group_dto import nomenclature_group_dto
 from Src.Dtos.organization_dto import organization_dto
@@ -10,6 +12,7 @@ from Src.Dtos.receipt_dto import receipt_dto
 from Src.Dtos.receipt_row_dto import receipt_row_dto
 from Src.Dtos.settings_dto import settings_dto
 from Src.Dtos.storage_dto import storage_dto
+from Src.Models.log_entry_model import log_entry_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.organization_model import organization_model
@@ -49,6 +52,7 @@ class mapping_factory(abstract_mapping_factory):
             receipt_row_model: receipt_row_dto,
             receipt_model: receipt_dto,
             settings_model: settings_dto,
+            log_entry_model: log_entry_dto,
         }
 
         # Обратное сопоставление: Класс DTO -> Доменная модель
@@ -261,6 +265,22 @@ class mapping_factory(abstract_mapping_factory):
                 model.response_format = source.response_format
             if source.company is not None:
                 model.company = self.to_model(source.company, context)
+            return model
+
+        # 9. Запись журнала событий
+        if isinstance(source, log_entry_dto):
+            parsed_period = datetime.datetime.fromisoformat(source.period) if source.period else None
+            model = log_entry_model(
+                subsystem=source.subsystem or "system",
+                level=source.level,
+                message=source.message or "-",
+                period=parsed_period,
+                event_type=source.event_type,
+            )
+            if source.id and str(source.id).strip():
+                model.id = source.id
+            if context is not None:
+                context[model.id] = model
             return model
 
         return source
