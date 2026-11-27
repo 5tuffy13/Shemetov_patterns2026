@@ -1,8 +1,11 @@
 import json
 from pathlib import Path
 from Src.Core.abstract_manager import abstract_manager
+from Src.Core.event_type_enum import event_type_enum
+from Src.Core.log_level_enum import log_level_enum
 from Src.Core.validator import validator, operation_exception
 from Src.Logics.convertor import convertor
+from Src.Logics.observer import observer
 from Src.Models.settings_model import settings_model
 
 
@@ -51,6 +54,14 @@ class settings_manager(abstract_manager):
         resolved_path = self._resolve_file_path(inner_file_name)
         if not resolved_path.is_file():
             self.is_loaded = False
+            observer().notify(
+                event_type_enum.SETTINGS_ERROR,
+                {
+                    "subsystem": "settings_manager",
+                    "level": log_level_enum.ERROR,
+                    "message": f"Ошибка загрузки настроек '{inner_file_name}': файл не найден ({resolved_path})",
+                },
+            )
             raise operation_exception(
                 f"Ошибка при загрузке и обработке файла: {inner_file_name}. Детали: Файл не найден: {resolved_path}"
             )
@@ -60,8 +71,24 @@ class settings_manager(abstract_manager):
                 self._data = json.load(file)
             self._file_name = str(resolved_path)
             self.is_loaded = self.convert()
+            observer().notify(
+                event_type_enum.LOAD_SETTINGS,
+                {
+                    "subsystem": "settings_manager",
+                    "level": log_level_enum.INFO,
+                    "message": f"Загружены настройки из файла '{resolved_path.name}'",
+                },
+            )
         except Exception as ex:
             self.is_loaded = False
+            observer().notify(
+                event_type_enum.SETTINGS_ERROR,
+                {
+                    "subsystem": "settings_manager",
+                    "level": log_level_enum.ERROR,
+                    "message": f"Ошибка загрузки настроек '{inner_file_name}': {ex}",
+                },
+            )
             raise operation_exception(
                 f"Ошибка при загрузке и обработке файла: {inner_file_name}. Детали: {ex}"
             )
@@ -87,6 +114,22 @@ class settings_manager(abstract_manager):
             return True
         except Exception as ex:
             raise operation_exception(f"Ошибка при конвертации настроек: {ex}")
+
+    def update_settings(self, new_settings: settings_model) -> None:
+        """
+        Применить новую модель настроек приложения и оповестить наблюдателей
+        """
+        validator.validate_type(new_settings, settings_model, field_name="new_settings")
+        self.__settings = new_settings
+        self.is_loaded = True
+        observer().notify(
+            event_type_enum.CHANGE_SETTINGS,
+            {
+                "subsystem": "settings_manager",
+                "level": log_level_enum.INFO,
+                "message": f"Обновлены настройки приложения (формат ответа: {new_settings.response_format.name})",
+            },
+        )
 
     @property
     def settings(self) -> settings_model:

@@ -1,6 +1,9 @@
 import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from Src.Core.event_type_enum import event_type_enum
+from Src.Core.log_level_enum import log_level_enum
 from Src.Core.validator import validator
+from Src.Logics.observer import observer
 from Src.Dtos.filter_dto import filter_dto
 from Src.Dtos.filter_type_enum import filter_type_enum
 from Src.Dtos.osv_row_dto import osv_row_dto
@@ -27,85 +30,106 @@ class osv_service:
         """
         Формирование оборотно-сальдовой ведомости с применением фильтрации через Прототип
         """
-        source_transactions = transactions
-        if source_transactions is None:
-            if self.__storage is not None:
-                source_transactions = self.__storage.transactions
-            else:
-                source_transactions = []
-
-        # Выделение диапазона дат из фильтра (если передан)
-        start_date, end_date, domain_filter = self._parse_period_filters(filter_instance)
-
-        # 1. Применение доменных фильтров через Прототип
-        tx_prototype = prototype(source_transactions)
-        filtered_prototype = tx_prototype.clone(domain_filter) if domain_filter else tx_prototype
-
-        # 2. Группировка транзакций по ключу (склад, номенклатура)
-        # ключ: (storage_id, nomenclature_id) -> данные группы
-        groups: Dict[Tuple[str, str], Dict[str, Any]] = {}
-
-        for tx in filtered_prototype.data:
-            if not isinstance(tx, transaction_model):
-                continue
-
-            storage_id = tx.storage.id if tx.storage else ""
-            storage_name = tx.storage.name if tx.storage else "Не указан"
-            nom_id = tx.nomenclature.id if tx.nomenclature else ""
-            nom_name = tx.nomenclature.name if tx.nomenclature else "Не указана"
-            range_name = tx.range.name if tx.range else ""
-
-            group_key = (storage_id, nom_id)
-            if group_key not in groups:
-                groups[group_key] = {
-                    "storage_id": storage_id,
-                    "storage_name": storage_name,
-                    "nomenclature_id": nom_id,
-                    "nomenclature_name": nom_name,
-                    "range_name": range_name,
-                    "start_balance": 0.0,
-                    "income": 0.0,
-                    "outcome": 0.0,
-                }
-
-            entry = groups[group_key]
-            val = tx.value
-            tx_period = tx.period
-
-            # Если задан период: до периода -> сальдо, в периоде -> обороты
-            if start_date is not None and tx_period < start_date:
-                entry["start_balance"] += val
-            elif end_date is not None and tx_period > end_date:
-                # Транзакции позже окончания периода не включаются в обороты
-                continue
-            else:
-                if val > 0:
-                    entry["income"] += val
+        try:
+            source_transactions = transactions
+            if source_transactions is None:
+                if self.__storage is not None:
+                    source_transactions = self.__storage.transactions
                 else:
-                    entry["outcome"] += abs(val)
+                    source_transactions = []
 
-        # 3. Формирование результирующих DTO строк ведомости
-        result: List[osv_row_dto] = []
-        for entry in groups.values():
-            start_bal = entry["start_balance"]
-            inc = entry["income"]
-            outc = entry["outcome"]
-            end_bal = start_bal + inc - outc
+            # Выделение диапазона дат из фильтра (если передан)
+            start_date, end_date, domain_filter = self._parse_period_filters(filter_instance)
 
-            row = osv_row_dto(
-                storage_name=entry["storage_name"],
-                storage_id=entry["storage_id"],
-                nomenclature_name=entry["nomenclature_name"],
-                nomenclature_id=entry["nomenclature_id"],
-                range_name=entry["range_name"],
-                start_balance=start_bal,
-                income=inc,
-                outcome=outc,
-                end_balance=end_bal,
+            # 1. Применение доменных фильтров через Прототип
+            tx_prototype = prototype(source_transactions)
+            filtered_prototype = tx_prototype.clone(domain_filter) if domain_filter else tx_prototype
+
+            # 2. Группировка транзакций по ключу (склад, номенклатура)
+            # ключ: (storage_id, nomenclature_id) -> данные группы
+            groups: Dict[Tuple[str, str], Dict[str, Any]] = {}
+
+            for tx in filtered_prototype.data:
+                if not isinstance(tx, transaction_model):
+                    continue
+
+                storage_id = tx.storage.id if tx.storage else ""
+                storage_name = tx.storage.name if tx.storage else "Не указан"
+                nom_id = tx.nomenclature.id if tx.nomenclature else ""
+                nom_name = tx.nomenclature.name if tx.nomenclature else "Не указана"
+                range_name = tx.range.name if tx.range else ""
+
+                group_key = (storage_id, nom_id)
+                if group_key not in groups:
+                    groups[group_key] = {
+                        "storage_id": storage_id,
+                        "storage_name": storage_name,
+                        "nomenclature_id": nom_id,
+                        "nomenclature_name": nom_name,
+                        "range_name": range_name,
+                        "start_balance": 0.0,
+                        "income": 0.0,
+                        "outcome": 0.0,
+                    }
+
+                entry = groups[group_key]
+                val = tx.value
+                tx_period = tx.period
+
+                # Если задан период: до периода -> сальдо, в периоде -> обороты
+                if start_date is not None and tx_period < start_date:
+                    entry["start_balance"] += val
+                elif end_date is not None and tx_period > end_date:
+                    # Транзакции позже окончания периода не включаются в обороты
+                    continue
+                else:
+                    if val > 0:
+                        entry["income"] += val
+                    else:
+                        entry["outcome"] += abs(val)
+
+            # 3. Формирование результирующих DTO строк ведомости
+            result: List[osv_row_dto] = []
+            for entry in groups.values():
+                start_bal = entry["start_balance"]
+                inc = entry["income"]
+                outc = entry["outcome"]
+                end_bal = start_bal + inc - outc
+
+                row = osv_row_dto(
+                    storage_name=entry["storage_name"],
+                    storage_id=entry["storage_id"],
+                    nomenclature_name=entry["nomenclature_name"],
+                    nomenclature_id=entry["nomenclature_id"],
+                    range_name=entry["range_name"],
+                    start_balance=start_bal,
+                    income=inc,
+                    outcome=outc,
+                    end_balance=end_bal,
+                )
+                result.append(row)
+
+            start_str = start_date.isoformat() if start_date else "-"
+            end_str = end_date.isoformat() if end_date else "-"
+            observer().notify(
+                event_type_enum.OSV_BUILT,
+                {
+                    "subsystem": "warehouse",
+                    "level": log_level_enum.INFO,
+                    "message": f"Сформирована ОСВ: строк={len(result)}, период={start_str}..{end_str}",
+                },
             )
-            result.append(row)
-
-        return result
+            return result
+        except Exception as ex:
+            observer().notify(
+                event_type_enum.OSV_ERROR,
+                {
+                    "subsystem": "warehouse",
+                    "level": log_level_enum.ERROR,
+                    "message": f"Ошибка формирования ОСВ: {ex}",
+                },
+            )
+            raise
 
     def _parse_period_filters(
         self, filter_instance: Optional[filter_dto]

@@ -1,20 +1,31 @@
 import sys
+import time
 from pathlib import Path
-from flask import Flask, jsonify, request
+from flask import Flask, g, jsonify, request
 
 repo_root = Path(__file__).resolve().parent
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
+from Src.Core.event_type_enum import event_type_enum
 from Src.Core.exception import operation_exception
+from Src.Core.log_level_enum import log_level_enum
+from Src.Core.sort_direction_enum import sort_direction_enum
+from Src.Dtos.filter_dto import filter_dto
+from Src.Dtos.filter_item_dto import filter_item_dto
+from Src.Dtos.filter_type_enum import filter_type_enum
+from Src.Dtos.log_format_enum import log_format_enum
+from Src.Dtos.log_query_dto import log_query_dto
 from Src.Dtos.report_type_enum import report_type_enum
 from Src.Logics.convertor import convertor
+from Src.Logics.log_formatter_factory import log_formatter_factory
+from Src.Logics.log_service import log_service
+from Src.Logics.observer import observer
+from Src.Logics.osv_service import osv_service
+from Src.Logics.prototype import prototype
 from Src.Logics.report_factory import report_factory
 from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
-from Src.Dtos.filter_dto import filter_dto
-from Src.Logics.prototype import prototype
-from Src.Logics.osv_service import osv_service
 
 # Подключение Connexion и Swagger UI
 try:
@@ -25,7 +36,10 @@ try:
 except Exception:
     app = Flask(__name__)
 
-# Инициализация синглтонов хранилища, настроек и конвертора
+# Инициализация сервиса логирования, настроек, хранилища и конвертора
+log_svc = log_service()
+log_fmt_factory = log_formatter_factory()
+
 settings = settings_manager()
 try:
     settings.load()
@@ -36,6 +50,41 @@ storage = storage_manager()
 storage.first_start()
 factory = report_factory(settings)
 conv = convertor()
+
+
+@app.before_request
+def log_http_request_started():
+    """
+    Фиксация начала обработки входящего HTTP-запроса
+    """
+    g.request_started_at = time.perf_counter()
+    observer().notify(
+        event_type_enum.HTTP_REQUEST_STARTED,
+        {
+            "subsystem": "web_api",
+            "level": log_level_enum.DEBUG,
+            "message": f"Входящий запрос {request.method} {request.path}",
+        },
+    )
+
+
+@app.after_request
+def log_http_request_completed(response):
+    """
+    Фиксация завершения HTTP-запроса с кодом ответа и длительностью
+    """
+    started_at = getattr(g, "request_started_at", None)
+    elapsed_ms = round((time.perf_counter() - started_at) * 1000, 2) if started_at is not None else 0.0
+    level = log_level_enum.ERROR if response.status_code >= 400 else log_level_enum.INFO
+    observer().notify(
+        event_type_enum.HTTP_REQUEST_COMPLETED,
+        {
+            "subsystem": "web_api",
+            "level": level,
+            "message": f"{request.method} {request.path} -> {response.status_code} ({elapsed_ms} ms)",
+        },
+    )
+    return response
 
 
 # -----------------------------------------------------------------------------
@@ -292,6 +341,118 @@ def post_osv_filter():
     osv_svc = osv_service(storage)
     rows = osv_svc.build(filter_obj)
     return jsonify([row.to_dict() for row in rows]), 200
+
+
+# -----------------------------------------------------------------------------
+# Эндпоинты журнала событий (Логирование)
+# -----------------------------------------------------------------------------
+
+
+def _build_log_query_from_args() -> log_query_dto:
+    """
+    Сборка параметров запроса журнала из query-параметров HTTP-запроса
+    """
+    filter_obj = filter_dto()
+
+    level_arg = request.args.get("level")
+    if level_arg is not None and level_arg.strip():
+        lvl = log_level_enum.from_string(level_arg)
+        filter_obj.add_item(filter_item_dto("level", filter_type_enum.EQUALS, lvl.value))
+
+    subsystem_arg = request.args.get("subsystem")
+    if subsystem_arg is not None and subsystem_arg.strip():
+        filter_obj.add_item(filter_item_dto("subsystem", filter_type_enum.LIKE, subsystem_arg.strip()))
+
+    sort_by_arg = request.args.get("sort_by", "period")
+    if not sort_by_arg.strip():
+        sort_by_arg = "period"
+
+    sort_dir_arg = request.args.get("sort_direction", "DESC")
+    sort_dir = sort_direction_enum.from_string(sort_dir_arg)
+
+    return log_query_dto(
+        filter_obj=filter_obj if len(filter_obj) > 0 else None,
+        sort_by=sort_by_arg,
+        sort_direction=sort_dir,
+    )
+
+
+@app.route("/api/logs", methods=["GET"])
+def get_logs():
+    """
+    Получить записи журнала событий в формате JSON с опциональной фильтрацией и сортировкой
+    """
+    try:
+        query = _build_log_query_from_args()
+        entries = log_svc.query(query)
+        formatter = log_fmt_factory.create(log_format_enum.JSON)
+        return formatter.create_response(entries, "logs")
+    except Exception as ex:
+        return jsonify({"error": f"Некорректные параметры запроса журнала: {ex}"}), 400
+
+
+@app.route("/api/logs/filter", methods=["POST"])
+def post_logs_filter():
+    """
+    Фильтрация и сортировка записей журнала событий через Прототип
+    """
+    raw_data = request.get_json(silent=True)
+    if raw_data is None:
+        raw_data = {}
+    if not isinstance(raw_data, dict):
+        return jsonify({"error": "Требуется JSON-объект в теле запроса"}), 400
+
+    try:
+        query = log_query_dto.from_dict(raw_data)
+        entries = log_svc.query(query)
+        formatter = log_fmt_factory.create(log_format_enum.JSON)
+        return formatter.create_response(entries, "logs")
+    except Exception as ex:
+        return jsonify({"error": f"Некорректные параметры фильтрации журнала: {ex}"}), 400
+
+
+@app.route("/api/logs/export", methods=["GET"])
+def get_logs_export():
+    """
+    Экспорт записей журнала событий в указанном формате (TXT, CSV, MARKDOWN, JSON)
+    """
+    try:
+        format_arg = request.args.get("format") if "format" in request.args else "TXT"
+        fmt_enum = log_format_enum.from_string(format_arg)
+        formatter = log_fmt_factory.create(fmt_enum)
+        query = _build_log_query_from_args()
+        entries = log_svc.query(query)
+        return formatter.create_response(entries, "logs")
+    except Exception as ex:
+        return jsonify({"error": f"Ошибка экспорта журнала: {ex}"}), 400
+
+
+@app.route("/api/logs/export", methods=["POST"])
+def post_logs_export():
+    """
+    Экспорт отфильтрованных записей журнала событий в указанном формате
+    """
+    raw_data = request.get_json(silent=True)
+    if raw_data is None:
+        raw_data = {}
+    if not isinstance(raw_data, dict):
+        return jsonify({"error": "Требуется JSON-объект в теле запроса"}), 400
+
+    try:
+        if "format" in request.args:
+            format_arg = request.args.get("format")
+        elif "format" in raw_data:
+            format_arg = raw_data.get("format")
+        else:
+            format_arg = "TXT"
+
+        fmt_enum = log_format_enum.from_string(format_arg)
+        formatter = log_fmt_factory.create(fmt_enum)
+        query = log_query_dto.from_dict(raw_data) if raw_data else _build_log_query_from_args()
+        entries = log_svc.query(query)
+        return formatter.create_response(entries, "logs")
+    except Exception as ex:
+        return jsonify({"error": f"Ошибка экспорта журнала: {ex}"}), 400
 
 
 if __name__ == "__main__":

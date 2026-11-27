@@ -1,0 +1,26 @@
+﻿Период;Подсистема;Уровень;Тип события;Сообщение
+2026-11-26T09:58:04.191418;web_api;DEBUG;http_request_started;Входящий запрос GET /api/logs/export
+2026-11-26T09:58:04.190199;web_api;INFO;http_request_completed;GET /api/logs/export -> 200 (0.36 ms)
+2026-11-26T09:58:04.189866;web_api;DEBUG;http_request_started;Входящий запрос GET /api/logs/export
+2026-11-26T09:58:04.188405;web_api;INFO;http_request_completed;GET /api/logs/export -> 200 (0.89 ms)
+2026-11-26T09:58:04.187514;web_api;DEBUG;http_request_started;Входящий запрос GET /api/logs/export
+2026-11-26T09:58:04.186589;web_api;ERROR;http_request_completed;DELETE /api/entities/storage/non-existent-id -> 404 (0.21 ms)
+2026-11-26T09:58:04.186395;web_api;DEBUG;http_request_started;Входящий запрос DELETE /api/entities/storage/non-existent-id
+2026-11-26T09:58:04.185423;web_api;INFO;http_request_completed;POST /api/osv/filter -> 200 (0.31 ms)
+2026-11-26T09:58:04.185295;warehouse;INFO;osv_built;Сформирована ОСВ: строк=4, период=-..-
+2026-11-26T09:58:04.185128;web_api;DEBUG;http_request_started;Входящий запрос POST /api/osv/filter
+2026-11-26T09:58:04.183769;web_api;INFO;http_request_completed;DELETE /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6 -> 200 (6.56 ms)
+2026-11-26T09:58:04.183634;storage_manager;INFO;delete_entity;Удалена сущность из категории 'storage_key': id=de4cbfbb-26d5-4232-aea6-e89e03118bb6, name='Склад демонстрационный 2'
+2026-11-26T09:58:04.177262;web_api;DEBUG;http_request_started;Входящий запрос DELETE /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6
+2026-11-26T09:58:04.175762;web_api;INFO;http_request_completed;PUT /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6 -> 200 (1.06 ms)
+2026-11-26T09:58:04.175558;storage_manager;INFO;update_entity;Обновлена сущность в категории 'storage_key': id=de4cbfbb-26d5-4232-aea6-e89e03118bb6, name='Склад демонстрационный 2'
+2026-11-26T09:58:04.174727;web_api;DEBUG;http_request_started;Входящий запрос PUT /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6
+2026-11-26T09:58:04.173118;web_api;INFO;http_request_completed;POST /api/entities/storage -> 201 (0.85 ms)
+2026-11-26T09:58:04.172933;storage_manager;INFO;add_entity;Добавлена сущность в категорию 'storage_key': id=de4cbfbb-26d5-4232-aea6-e89e03118bb6, name='Склад демонстрационный'
+2026-11-26T09:58:04.172282;web_api;DEBUG;http_request_started;Входящий запрос POST /api/entities/storage
+2026-11-26T09:58:04.171200;web_api;INFO;http_request_completed;GET /api/entities/storage -> 200 (0.43 ms)
+2026-11-26T09:58:04.170777;web_api;DEBUG;http_request_started;Входящий запрос GET /api/entities/storage
+2026-11-26T09:58:04.169189;web_api;INFO;http_request_completed;GET /api/reports/formats -> 200 (0.22 ms)
+2026-11-26T09:58:04.169033;web_api;DEBUG;http_request_started;Входящий запрос GET /api/reports/formats
+2026-11-26T09:57:56.806908;storage_manager;INFO;storage_loaded;Хранилище инициализировано: категорий=6, записей=40
+2026-11-26T09:57:56.805844;settings_manager;INFO;load_settings;Загружены настройки из файла 'settings.json'

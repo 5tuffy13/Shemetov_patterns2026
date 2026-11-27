@@ -1,0 +1,191 @@
+[
+  {
+    "id": "a7170ad4-408b-4b1f-99a5-024d1b05d30d",
+    "period": "2026-11-26T09:58:04.187514",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос GET /api/logs/export",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "143e947d-203a-4fbe-ad30-71bd50855f08",
+    "period": "2026-11-26T09:58:04.186589",
+    "subsystem": "web_api",
+    "level": "ERROR",
+    "event_type": "http_request_completed",
+    "message": "DELETE /api/entities/storage/non-existent-id -> 404 (0.21 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "17842e4c-bdeb-419a-b3b9-67730c737c88",
+    "period": "2026-11-26T09:58:04.186395",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос DELETE /api/entities/storage/non-existent-id",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "7754f9d3-5b9b-4846-9712-14f36c8e2086",
+    "period": "2026-11-26T09:58:04.185423",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "POST /api/osv/filter -> 200 (0.31 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "1a32fa1e-c84a-4577-b761-236f02cc163a",
+    "period": "2026-11-26T09:58:04.185295",
+    "subsystem": "warehouse",
+    "level": "INFO",
+    "event_type": "osv_built",
+    "message": "Сформирована ОСВ: строк=4, период=-..-",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "5f5e66ec-f784-4d0d-b54f-62fcffb2801e",
+    "period": "2026-11-26T09:58:04.185128",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос POST /api/osv/filter",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "3209bd4f-3552-4a54-87d0-6b5d80e38be9",
+    "period": "2026-11-26T09:58:04.183769",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "DELETE /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6 -> 200 (6.56 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "02e57f55-8588-4d1a-ac8d-0dc85c2257ce",
+    "period": "2026-11-26T09:58:04.183634",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "delete_entity",
+    "message": "Удалена сущность из категории 'storage_key': id=de4cbfbb-26d5-4232-aea6-e89e03118bb6, name='Склад демонстрационный 2'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "3a8d7650-ec99-4a43-8a7d-354bb214f9ad",
+    "period": "2026-11-26T09:58:04.177262",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос DELETE /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "b88f0e48-f7ad-480a-90b6-fbc2c119794d",
+    "period": "2026-11-26T09:58:04.175762",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "PUT /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6 -> 200 (1.06 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "d97ea854-8b45-41e4-b5ca-4bf3a980949e",
+    "period": "2026-11-26T09:58:04.175558",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "update_entity",
+    "message": "Обновлена сущность в категории 'storage_key': id=de4cbfbb-26d5-4232-aea6-e89e03118bb6, name='Склад демонстрационный 2'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "a5bdb5df-b4a7-4bc0-bb84-ff84da0710f5",
+    "period": "2026-11-26T09:58:04.174727",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос PUT /api/entities/storage/de4cbfbb-26d5-4232-aea6-e89e03118bb6",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "b684a226-c335-4edf-b2c7-f0d713729225",
+    "period": "2026-11-26T09:58:04.173118",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "POST /api/entities/storage -> 201 (0.85 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "5cae8607-ff4d-4498-ba82-55d23e518dcb",
+    "period": "2026-11-26T09:58:04.172933",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "add_entity",
+    "message": "Добавлена сущность в категорию 'storage_key': id=de4cbfbb-26d5-4232-aea6-e89e03118bb6, name='Склад демонстрационный'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "77d3d2d0-d32d-4efa-92be-bf72391c0aca",
+    "period": "2026-11-26T09:58:04.172282",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос POST /api/entities/storage",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "0eb1cd87-2b85-4c47-bd4c-1a69a84b891a",
+    "period": "2026-11-26T09:58:04.171200",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "GET /api/entities/storage -> 200 (0.43 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "e43985ec-0783-4c56-8011-4e4571fe21ec",
+    "period": "2026-11-26T09:58:04.170777",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос GET /api/entities/storage",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "5fa39d63-1c86-4a1c-b79f-b0270a978e40",
+    "period": "2026-11-26T09:58:04.169189",
+    "subsystem": "web_api",
+    "level": "INFO",
+    "event_type": "http_request_completed",
+    "message": "GET /api/reports/formats -> 200 (0.22 ms)",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "5f6e3cd6-1a0f-4b46-973e-096b84f2ae6e",
+    "period": "2026-11-26T09:58:04.169033",
+    "subsystem": "web_api",
+    "level": "DEBUG",
+    "event_type": "http_request_started",
+    "message": "Входящий запрос GET /api/reports/formats",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "69fb9127-6bf7-4542-af84-5399e2e83085",
+    "period": "2026-11-26T09:57:56.806908",
+    "subsystem": "storage_manager",
+    "level": "INFO",
+    "event_type": "storage_loaded",
+    "message": "Хранилище инициализировано: категорий=6, записей=40",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  },
+  {
+    "id": "4016ba99-0d24-40df-a656-6b98363cf5e6",
+    "period": "2026-11-26T09:57:56.805844",
+    "subsystem": "settings_manager",
+    "level": "INFO",
+    "event_type": "load_settings",
+    "message": "Загружены настройки из файла 'settings.json'",
+    "type": "Src.Dtos.log_entry_dto.log_entry_dto"
+  }
+]

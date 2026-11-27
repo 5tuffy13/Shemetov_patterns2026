@@ -1,3 +1,5 @@
+import datetime
+from enum import Enum
 from typing import Any, List, Optional
 from Src.Core.abstract_prototype import abstract_prototype
 from Src.Core.abstract_reference import abstract_reference
@@ -142,12 +144,63 @@ class prototype(abstract_prototype):
 
         return None
 
+    def _parse_datetime_value(self, raw_value: str) -> Optional[datetime.datetime]:
+        """
+        Разбор строковой даты и времени в объект datetime
+        """
+        clean_str = raw_value.strip()
+        if not clean_str:
+            return None
+
+        try:
+            return datetime.datetime.fromisoformat(clean_str)
+        except ValueError:
+            pass
+
+        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d", "%d.%m.%Y %H:%M:%S", "%d.%m.%Y"):
+            try:
+                return datetime.datetime.strptime(clean_str, fmt)
+            except ValueError:
+                pass
+        return None
+
     def _compare_values(self, actual: Any, expected: Any, op: filter_type_enum) -> bool:
         """
         Сравнение фактического значения с ожидаемым согласно операции фильтра
         """
         if actual is None:
             return False
+
+        if isinstance(actual, Enum):
+            expected_clean = str(expected.value if isinstance(expected, Enum) else expected).strip().lower()
+            actual_val = str(actual.value).strip().lower()
+            actual_name = str(actual.name).strip().lower()
+            if op == filter_type_enum.EQUALS:
+                return actual_val == expected_clean or actual_name == expected_clean
+            if op == filter_type_enum.LIKE:
+                return expected_clean in actual_val or expected_clean in actual_name
+            return False
+
+        if isinstance(actual, datetime.datetime) and op != filter_type_enum.LIKE:
+            parsed_expected = None
+            if isinstance(expected, datetime.datetime):
+                parsed_expected = expected
+            elif isinstance(expected, datetime.date):
+                parsed_expected = datetime.datetime.combine(expected, datetime.time.min)
+            elif isinstance(expected, str):
+                parsed_expected = self._parse_datetime_value(expected)
+
+            if parsed_expected is not None:
+                if op == filter_type_enum.EQUALS:
+                    return actual == parsed_expected
+                if op == filter_type_enum.GREATER:
+                    return actual > parsed_expected
+                if op == filter_type_enum.LESS:
+                    return actual < parsed_expected
+                if op == filter_type_enum.GREATER_OR_EQUAL:
+                    return actual >= parsed_expected
+                if op == filter_type_enum.LESS_OR_EQUAL:
+                    return actual <= parsed_expected
 
         # Приведение к строкам для текстовых операций
         actual_str = str(actual).strip()

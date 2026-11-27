@@ -13,6 +13,9 @@ if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
 from Src.Core.abstract_manager import abstract_manager
+from Src.Core.event_type_enum import event_type_enum
+from Src.Core.log_level_enum import log_level_enum
+from Src.Logics.observer import observer
 from Src.Core.abstract_reference import abstract_reference
 from Src.Core.validator import validator, argument_exception, operation_exception
 from Src.Models.storage_model import storage_model
@@ -559,49 +562,89 @@ class storage_manager(abstract_manager):
 
         # Проверка уникальности по идентификатору за O(1)
         if item_id in self._data[category_key]:
-            raise operation_exception(
-                f"Ошибка добавления: элемент с id='{item_id}' уже существует в категории '{category_key}'!"
+            msg = f"Ошибка добавления: элемент с id='{item_id}' уже существует в категории '{category_key}'!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
             )
+            raise operation_exception(msg)
 
         # Проверка уникальности по наименованию за O(1)
         if item_name in self._name_index[category_key]:
-            raise operation_exception(
-                f"Ошибка добавления: элемент с наименованием '{item_name}' уже зарегистрирован в категории '{category_key}'!"
+            msg = f"Ошибка добавления: элемент с наименованием '{item_name}' уже зарегистрирован в категории '{category_key}'!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
             )
+            raise operation_exception(msg)
 
         # Регистрация в основном реестре и вторичном индексе
         self._data[category_key][item_id] = item
         self._name_index[category_key][item_name] = item_id
+
+    def _notify_entity_added(self, category_key: str, item: abstract_reference) -> None:
+        """
+        Оповестить наблюдателей о регистрации сущности или складской транзакции
+        """
+        if category_key == self.transaction_key() and isinstance(item, transaction_model):
+            storage_name = item.storage.name if item.storage else "-"
+            nom_name = item.nomenclature.name if item.nomenclature else "-"
+            observer().notify(
+                event_type_enum.TRANSACTION_CREATED,
+                {
+                    "subsystem": "warehouse",
+                    "level": log_level_enum.INFO,
+                    "message": (
+                        f"Проведена транзакция id={item.id}: склад='{storage_name}', "
+                        f"номенклатура='{nom_name}', объем={item.value}"
+                    ),
+                },
+            )
+            return
+
+        observer().notify(
+            event_type_enum.ADD_ENTITY,
+            {
+                "subsystem": "storage_manager",
+                "level": log_level_enum.INFO,
+                "message": f"Добавлена сущность в категорию '{category_key}': id={item.id}, name='{item.name}'",
+            },
+        )
 
     def add_storage(self, item: storage_model) -> None:
         """
         Добавить склад в хранилище с проверкой уникальности
         """
         self._register_item(self.storage_key(), item, storage_model)
+        self._notify_entity_added(self.storage_key(), item)
 
     def add_range(self, item: range_model) -> None:
         """
         Добавить единицу измерения в хранилище с проверкой уникальности
         """
         self._register_item(self.range_key(), item, range_model)
+        self._notify_entity_added(self.range_key(), item)
 
     def add_group(self, item: nomenclature_group_model) -> None:
         """
         Добавить группу номенклатуры в хранилище с проверкой уникальности
         """
         self._register_item(self.group_key(), item, nomenclature_group_model)
+        self._notify_entity_added(self.group_key(), item)
 
     def add_nomenclature(self, item: nomenclature_model) -> None:
         """
         Добавить номенклатуру в хранилище с проверкой уникальности
         """
         self._register_item(self.nomenclature_key(), item, nomenclature_model)
+        self._notify_entity_added(self.nomenclature_key(), item)
 
     def add_receipt(self, item: receipt_model) -> None:
         """
         Добавить технологическую карту в хранилище с проверкой уникальности
         """
         self._register_item(self.receipt_key(), item, receipt_model)
+        self._notify_entity_added(self.receipt_key(), item)
 
     def add_transaction(self, item: transaction_model) -> None:
         """
@@ -609,6 +652,7 @@ class storage_manager(abstract_manager):
         """
         validator.validate(item, transaction_model, field_name="transaction")
         self._register_item(self.transaction_key(), item, transaction_model)
+        self._notify_entity_added(self.transaction_key(), item)
 
     @property
     def transactions(self) -> List[transaction_model]:
@@ -739,20 +783,42 @@ class storage_manager(abstract_manager):
         """
         resolved = self.resolve_category(category_key)
         if not resolved:
-            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+            msg = f"Категория '{category_key}' не зарегистрирована в хранилище!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+            )
+            raise operation_exception(msg)
 
         allowed, reason = self.can_delete(resolved, identifier)
         if not allowed:
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": reason},
+            )
             raise operation_exception(reason)
 
         entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
         if not entity:
-            raise operation_exception(f"Элемент '{identifier}' не найден в категории '{resolved}'!")
+            msg = f"Элемент '{identifier}' не найден в категории '{resolved}'!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+            )
+            raise operation_exception(msg)
 
         del self._data[resolved][entity.id]
         if entity.name in self._name_index[resolved]:
             del self._name_index[resolved][entity.name]
 
+        observer().notify(
+            event_type_enum.DELETE_ENTITY,
+            {
+                "subsystem": "storage_manager",
+                "level": log_level_enum.INFO,
+                "message": f"Удалена сущность из категории '{resolved}': id={entity.id}, name='{entity.name}'",
+            },
+        )
         return True
 
     def add(self, category_key: str, item: abstract_reference) -> None:
@@ -761,9 +827,15 @@ class storage_manager(abstract_manager):
         """
         resolved = self.resolve_category(category_key)
         if not resolved:
-            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+            msg = f"Категория '{category_key}' не зарегистрирована в хранилище!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+            )
+            raise operation_exception(msg)
         expected_type = self.get_model_type(resolved)
         self._register_item(resolved, item, expected_type)
+        self._notify_entity_added(resolved, item)
 
     def update(self, category_key: str, identifier: str, new_item: abstract_reference) -> None:
         """
@@ -771,20 +843,40 @@ class storage_manager(abstract_manager):
         """
         resolved = self.resolve_category(category_key)
         if not resolved:
-            raise operation_exception(f"Категория '{category_key}' не зарегистрирована в хранилище!")
+            msg = f"Категория '{category_key}' не зарегистрирована в хранилище!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+            )
+            raise operation_exception(msg)
 
         entity = self.get_by_id(resolved, identifier) or self.get_by_name(resolved, identifier)
         if not entity:
-            raise operation_exception(f"Элемент '{identifier}' не найден в категории '{resolved}'!")
+            msg = f"Элемент '{identifier}' не найден в категории '{resolved}'!"
+            observer().notify(
+                event_type_enum.STORAGE_ERROR,
+                {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+            )
+            raise operation_exception(msg)
 
         if new_item.id != entity.id:
             allowed, reason = self.can_delete(resolved, identifier)
             if not allowed:
-                raise operation_exception(f"Запрещено изменять код (id) сущности, так как {reason}")
+                msg = f"Запрещено изменять код (id) сущности, так как {reason}"
+                observer().notify(
+                    event_type_enum.STORAGE_ERROR,
+                    {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+                )
+                raise operation_exception(msg)
 
         if new_item.name != entity.name:
             if new_item.name in self._name_index[resolved]:
-                raise operation_exception(f"Элемент с наименованием '{new_item.name}' уже зарегистрирован!")
+                msg = f"Элемент с наименованием '{new_item.name}' уже зарегистрирован!"
+                observer().notify(
+                    event_type_enum.STORAGE_ERROR,
+                    {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+                )
+                raise operation_exception(msg)
 
         del self._data[resolved][entity.id]
         if entity.name in self._name_index[resolved]:
@@ -792,6 +884,14 @@ class storage_manager(abstract_manager):
 
         expected_type = self.get_model_type(resolved)
         self._register_item(resolved, new_item, expected_type)
+        observer().notify(
+            event_type_enum.UPDATE_ENTITY,
+            {
+                "subsystem": "storage_manager",
+                "level": log_level_enum.INFO,
+                "message": f"Обновлена сущность в категории '{resolved}': id={new_item.id}, name='{new_item.name}'",
+            },
+        )
 
     # -------------------------------------------------------------------------
     # Логика загрузки, конвертации и первого старта
@@ -814,24 +914,34 @@ class storage_manager(abstract_manager):
         Выполнение логики первого старта системы: наполнение хранилища первичными данными
         (склады, единицы измерения, группы, ингредиенты и блюдо рецепта).
         """
+        category_types: Dict[str, Type[abstract_reference]] = {
+            self.storage_key(): storage_model,
+            self.range_key(): range_model,
+            self.group_key(): nomenclature_group_model,
+            self.nomenclature_key(): nomenclature_model,
+            self.receipt_key(): receipt_model,
+            self.transaction_key(): transaction_model,
+        }
         seed_data = self.create_seed_data()
+        total_items = 0
         for category, items in seed_data.items():
+            expected_type = category_types.get(category)
+            if expected_type is None:
+                continue
             for item in items:
-                if category == self.storage_key():
-                    self.add_storage(item)
-                elif category == self.range_key():
-                    self.add_range(item)
-                elif category == self.group_key():
-                    self.add_group(item)
-                elif category == self.nomenclature_key():
-                    self.add_nomenclature(item)
-                elif category == self.receipt_key():
-                    self.add_receipt(item)
-                elif category == self.transaction_key():
-                    self.add_transaction(item)
+                self._register_item(category, item, expected_type)
+                total_items += 1
 
         self.is_first_start = False
         self.is_loaded = True
+        observer().notify(
+            event_type_enum.STORAGE_LOADED,
+            {
+                "subsystem": "storage_manager",
+                "level": log_level_enum.INFO,
+                "message": f"Хранилище инициализировано: категорий={len(seed_data)}, записей={total_items}",
+            },
+        )
 
     def convert(self, is_first: Optional[bool] = None) -> bool:
         """
@@ -872,7 +982,12 @@ class storage_manager(abstract_manager):
             target_path = Path(clean_path)
             if not target_path.is_file():
                 self.is_loaded = False
-                raise operation_exception(f"Файл данных не найден: {clean_path}")
+                msg = f"Файл данных не найден: {clean_path}"
+                observer().notify(
+                    event_type_enum.STORAGE_ERROR,
+                    {"subsystem": "storage_manager", "level": log_level_enum.ERROR, "message": msg},
+                )
+                raise operation_exception(msg)
             self._file_name = str(target_path)
             self.is_loaded = self.convert()
         else:
